@@ -6,7 +6,7 @@
 #    By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/20 14:04:55 by jkaller           #+#    #+#              #
-#    Updated: 2024/05/21 23:24:45 by jkaller          ###   ########.fr        #
+#    Updated: 2024/05/21 23:54:27 by jkaller          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ MLXFLAGS = -L ./libs/mlx_linux -lmlx -lXext -lX11
 LIBS = ./libs/libft/libft.a
 
 # Source files
-SRCS = main.c $(wildcard src/error/*.c) $(wildcard src/parser/*.c) $(wildcard src/free/*.c) $(wildcard src/utils/*.c)
+SRCS = src/main.c $(wildcard src/error/*.c) $(wildcard src/parser/*.c) $(wildcard src/free/*.c) $(wildcard src/utils/*.c)
 
 # Object files
 OBJS = $(SRCS:.c=.o)

@@ -6,11 +6,11 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:39:45 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/21 23:24:06 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/05/21 23:54:35 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/miniRT.h"
+#include "../include/miniRT.h"
 
 int	main(int argc, char **argv)
 {
