@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   print_structs.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 18:39:45 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/21 23:24:06 by jkaller          ###   ########.fr       */
+/*   Created: 2024/05/21 23:13:40 by jkaller           #+#    #+#             */
+/*   Updated: 2024/05/21 23:14:58 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/miniRT.h"
+#include "../../include/miniRT.h"
 
-int	main(int argc, char **argv)
+void	print_double_pointer(char **double_pointer)
 {
-	if (argc != 2)
-		error_message("Error: Wrong number of arguments\n");
-	parse_input(argv[1]);
-	// if (check_input(argv[1]) == EXIT_SUCCESS)
-	// 	parse_input(argv[1]);
-	return (0);
+	int	i;
+
+	i = 0;
+	while (double_pointer[i] != NULL)
+	{
+		ft_printf("%s\n", double_pointer[i]);
+		i++;
+	}
 }

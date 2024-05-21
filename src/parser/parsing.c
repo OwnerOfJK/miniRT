@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 18:39:45 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/21 23:24:06 by jkaller          ###   ########.fr       */
+/*   Created: 2024/05/21 22:14:18 by jkaller           #+#    #+#             */
+/*   Updated: 2024/05/21 23:52:29 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/miniRT.h"
+#include "../../include/miniRT.h"
 
-int	main(int argc, char **argv)
+void	parse_input(char *file_path)
 {
-	if (argc != 2)
-		error_message("Error: Wrong number of arguments\n");
-	parse_input(argv[1]);
-	// if (check_input(argv[1]) == EXIT_SUCCESS)
-	// 	parse_input(argv[1]);
-	return (0);
+	char	**object_configs;
+
+	object_configs = NULL;
+	object_configs = check_config(file_path);
+	print_double_pointer(object_configs);
+	free_double_pointer(object_configs);
 }

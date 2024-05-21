@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 18:39:45 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/21 23:24:06 by jkaller          ###   ########.fr       */
+/*   Created: 2024/05/21 21:50:43 by jkaller           #+#    #+#             */
+/*   Updated: 2024/05/21 21:56:16 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/miniRT.h"
+#include "../../include/miniRT.h"
 
-int	main(int argc, char **argv)
+//this function should also free whatever needs to be freed
+
+void	error_message(char *error_message)
 {
-	if (argc != 2)
-		error_message("Error: Wrong number of arguments\n");
-	parse_input(argv[1]);
-	// if (check_input(argv[1]) == EXIT_SUCCESS)
-	// 	parse_input(argv[1]);
-	return (0);
+	//free stuff
+	ft_putstr_fd(error_message, 2);
+	exit(EXIT_FAILURE);
 }
