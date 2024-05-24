@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 20:23:55 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/05/24 20:51:29 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/05/24 20:58:11 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,19 @@ t_vector	v_cross(t_vector u, t_vector v)
 	return (w);
 }
 
+/*
+	inverts the vector u
+	return -n (-x, -y, -z)
+*/
 t_vector	v_neg(t_vector u)
 {
 	return (v_scalar(u, -1.0));
+}
+
+/*
+	return the lenght of the vector v
+*/
+double	v_lenght(t_vector v)
+{
+	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
 }
