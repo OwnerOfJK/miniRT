@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/24 19:10:12 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/05/24 20:52:26 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,17 @@ void		error_message(char *error_message);
 char		**check_config(char *file_path);
 void		check_information(char **object_configs);
 
-/*math operations*/
+/*math utils*/
 t_vector	v_add(t_vector u, t_vector v);
 t_vector	v_sub(t_vector u, t_vector v);
 t_vector	v_mult(t_vector u, t_vector v);
 double		v_dot(t_vector u, t_vector v);
+t_vector	v_scalar(t_vector u, double t);
+int			v_compare(t_vector u, t_vector v);
+t_vector	v_init(double x, double y, double z);
+t_vector	v_cross(t_vector u, t_vector v);
+t_vector	v_neg(t_vector u);
+
 
 /* Utils */
 void		print_double_pointer(char **double_pointer);
@@ -61,6 +67,7 @@ void		free_double_pointer(char **double_pointer);
 
 
 /*debug utils*/
-//need to delete later ?
+//need to delete later
 void		vec_print(t_vector vec);
+
 #endif

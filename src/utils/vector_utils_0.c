@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 18:46:59 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/05/24 19:08:59 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/05/24 20:22:23 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,16 @@ t_vector	v_mult(t_vector u, t_vector v)
 double	v_dot(t_vector u, t_vector v)
 {
 	return (u.x * v.x + u.y * v.y + u.z * v.z);
+}
+
+/*
+	multiplication of a vector and a scalar
+	(t * v)
+*/
+t_vector	v_scalar(t_vector u, double t)
+{
+	u.x *= t;
+	u.y *= t;
+	u.z *= t;
+	return (u);
 }
