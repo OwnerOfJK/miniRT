@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/24 21:19:53 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/05/24 21:22:23 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,50 +44,53 @@ typedef struct s_vector
 }	t_vector;
 
 
-/*
-	pos : point in the plane
-	diameter : radius of the sphere
-	color: color of the plane
+// /*
+// 	pos : point in the plane
+// 	diameter : radius of the sphere
+// 	color: color of the plane
 
-	//param we get from file
-	position orientation color 
-*/
-typedef struct s_plane
-{
+// 	//param we get from file
+// 	position orientation color 
+// */
+// typedef struct s_plane
+// {
 
-	t_vector	pos;
-	double		diameter;
-	t_color		color;
-}	t_plane;
+// 	t_vector	pos;
+// 	double		diameter;
+// 	t_color		color;
+// }	t_plane;
 
-/*
-	pos : center of the sphere
-	color: color of the sphere
+// /*
+// 	pos : center of the sphere
+// 	color: color of the sphere
 
-	//param we get from file
-	 position diameter color
-*/
-typedef struct s_sphere
-{
-	t_vector	pos;
-	t_color		color;
-}	t_sphere;
+// 	//param we get from file
+// 	 position diameter color
+// */
+// typedef struct s_sphere
+// {
+// 	t_vector	pos;
+// 	t_color		color;
+// }	t_sphere;
 
-/*
-	color: color of the cylinder
-
-
-	//param we get from file
-	position orientation diameter height color 
-*/
-typedef struct s_cylinder
-{
-	//
-	t_color	color;
-
-} t_cylinder;
+// /*
+// 	color: color of the cylinder
 
 
+// 	//param we get from file
+// 	position orientation diameter height color 
+// */
+// typedef struct s_cylinder
+// {
+
+// 	t_color	color;
+
+// } t_cylinder;
+
+// typedef struct s_camera
+// {
+
+// } t_camera;
 
 
 /* Parsing */
