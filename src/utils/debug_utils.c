@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_structs.c                                    :+:      :+:    :+:   */
+/*   debug_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/21 23:13:40 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/24 18:54:42 by ecarlier         ###   ########.fr       */
+/*   Created: 2024/05/24 18:54:51 by ecarlier          #+#    #+#             */
+/*   Updated: 2024/05/24 18:56:41 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*CAN DELETE LATER*/
+
 #include "../../include/miniRT.h"
 
-void	print_double_pointer(char **double_pointer)
+void	vec_print(t_vector vec)
 {
-	int	i;
-
-	i = 0;
-	while (double_pointer[i] != NULL)
-	{
-		ft_printf("%s\n", double_pointer[i]);
-		i++;
-	}
+	printf("Vec: (x, y, z) = (%.4lf, %.4lf, %.4lf)\n", vec.x, vec.y, vec.z);
 }
