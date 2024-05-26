@@ -6,11 +6,31 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 23:03:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/22 00:52:39 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/05/26 16:42:52 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniRT.h"
+
+char	*remove_spaces(char *line)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (line[i] != '\0')
+	{
+		if (line[i] != ' ')
+		{
+			line[j] = line[i];
+			j++;
+		}
+		i++;
+	}
+	line[j] = '\0';
+	return (line);
+}
 
 char	**parse_to_double_pointer(int fd, int config_len)
 {
@@ -31,7 +51,7 @@ char	**parse_to_double_pointer(int fd, int config_len)
 		if (ft_strcmp(line, "\n") != 0 && line[0] != '#')
 		{
 			line[ft_strlen(line) - 1] = '\0';
-			object_configs[line_count++] = line;
+			object_configs[line_count++] = remove_spaces(line);
 		}
 		else
 			free(line);
@@ -66,7 +86,7 @@ char	**check_config(char *file_path)
 	check_file_type(file_path);
 	config_len = get_config_len(file_path);
 	object_configs = parse_to_double_pointer(fd, config_len);
-	//check_information(object_configs); //this is next
+	check_information(object_configs); //this is next
 	close(fd);
 	return (object_configs);
 }
