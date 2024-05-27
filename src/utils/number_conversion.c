@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   number_conversion.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 18:39:45 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/27 16:09:53 by jkaller          ###   ########.fr       */
+/*   Created: 2024/05/27 17:55:19 by jkaller           #+#    #+#             */
+/*   Updated: 2024/05/27 17:55:39 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/miniRT.h"
+#include "../../include/miniRT.h"
 
-int	main(int argc, char **argv)
+char	*find_and_extract_double(char *str, int pos)
 {
-	t_input	*input;
+	char	*double_value;
+	int		i;
+	int		count;
 
-	if (argc != 2)
-		error_message("Error: Wrong number of arguments\n");
-	input = parse_input(argv[1]);
-	// if (check_input(argv[1]) == EXIT_SUCCESS)
-	// 	parse_input(argv[1]);
-	return (0);
+	double_value = malloc(sizeof(char) * 4);
+	i = 0;
+	count = 0;
+	while (str[i] != '.' && str[i] != '\0')
+	{
+		i++;
+		if (str[i] == '.')
+		{
+			count++;
+			if (count < pos)
+				i++;
+		}
+	}
+	double_value = ft_strncpy(double_value, &str[i - 1], 3);
+	return (double_value);
 }

@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/27 15:45:21 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/05/27 17:50:17 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@
 # include "../libs/mlx_linux/mlx.h"
 
 /* Data Structures */
-
 typedef struct s_color
 {
 	unsigned char	r;
@@ -47,11 +46,11 @@ typedef struct s_vector
 ∗ ambient lighting ratio in range [0.0,1.0]: 0.2
 ∗ R,G,B colors in range [0-255]: 255, 255, 255
 */
-typedef struct s_ambientLightning
+typedef struct s_alightning
 {
-	//ambient lighting ratio
+	double		ratio;
 	t_color		color;
-}	t_ambientLightning;
+}	t_alightning;
 
 /*
 ∗ x,y,z coordinates of the view point: -50.0,0,20
@@ -62,43 +61,78 @@ typedef struct s_ambientLightning
 typedef struct s_camera
 {
 	t_vector	pos;
-	t_vector	orientation;
-	double		fov;
+	t_vector	orientation_vector;
+	int			fov;
 }	t_camera;
 
+/*
+∗ x,y,z coordinates of the light point: -40.0,50.0,0.0
+∗ the light brightness ratio in range [0.0,1.0]: 0.6
+∗ (unused in mandatory part)R,G,B colors in range [0-255]: 10, 0, 255
+*/
 typedef struct s_light
 {
 	t_vector	pos;
+	double		brightness;
 }	t_light;
 
+/*
+∗ x,y,z coordinates of the sphere center: 0.0,0.0,20.6
+∗ the sphere diameter: 12.6
+∗ R,G,B colors in range [0-255]: 10, 0, 255
+*/
 typedef struct s_sphere
 {
-	t_vector	pos;
-	t_color		color;
+	t_vector		pos;
+	double			diameter;
+	t_color			color;
+	struct s_sphere	*next;
 }	t_sphere;
 
+/*
+∗ x,y,z coordinates of a point in the plane: 0.0,0.0,-10.0
+∗ 3d normalized normal vector. In range [-1,1] for each x,y,z axis: 0.0,1.0,0.0
+∗ R,G,B colors in range [0-255]: 0,0,225
+*/
 typedef struct s_cylinder
 {
-	t_vector	pos;
-	t_color		color;
+	t_vector			pos;
+	t_vector			normal_vector;
+	t_color				color;
+	struct s_cylinder	*next;
 }	t_cylinder;
 
+/*
+∗ x,y,z coordinates of the center of the cylinder: 50.0,0.0,20.6
+∗ 3d normalized vector of axis of cylinder. In range [-1,1] for each x,y,z axis:
+0.0,0.0,1.0
+∗ the cylinder diameter: 14.2
+∗ the cylinder height: 21.42
+∗ R,G,B colors in range [0,255]: 10, 0, 255
+*/
 typedef struct s_plane
 {
-	t_vector	pos;
-	double		diameter;
-	t_color		color;
+	t_vector		pos;
+	t_vector		axis_vector;
+	double			diameter;
+	double			height;
+	t_color			color;
+	struct s_plane	*next;
 }	t_plane;
 
 typedef struct s_input
 {
-	double	x;
-	double	y;
-	double	z;
+	t_alightning		*alightning;
+	t_camera			*camera;
+	t_light				*light;
+	t_sphere			*sphere;
+	t_cylinder			*cylinder;
+	t_plane				*plane;
 }	t_input;
 
 /* Parsing */
-void		parse_input(char *file_path);
+t_input			*parse_input(char *file_path);
+t_alightning    *parse_alightning(char **object_configs);
 
 /* Error Handling */
 void		error_message(char *error_message);
@@ -120,11 +154,11 @@ double		v_lenght(t_vector v);
 /* Utils */
 void		print_double_pointer(char **double_pointer);
 int			get_config_len(char *file_path);
+char		**find_index(char** object_configs, char *index, int len);
+char		*find_and_extract_double(char *str, int pos);
 
 /* Free Memory */
 void		free_double_pointer(char **double_pointer);
-
-
 
 /*debug utils*/
 //need to delete later

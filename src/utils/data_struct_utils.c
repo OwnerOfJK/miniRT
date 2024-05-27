@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 23:20:16 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/22 00:47:25 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/05/27 17:55:26 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,18 @@ int	get_config_len(char *file_path)
 		error_message("Error: Empty file.\n");
 	close(fd);
 	return (config_len);
+}
+
+char	**find_index(char** object_configs, char *index, int len)
+{
+	while (*object_configs)
+	{
+		if (!ft_strncmp(*object_configs, index, len))
+		{
+			ft_printf("%s\n", *object_configs);
+			return (object_configs);
+		}
+		object_configs++;
+	}
+	return (NULL);
 }
