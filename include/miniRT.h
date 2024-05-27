@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/24 21:22:23 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/05/27 16:29:00 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,15 @@
 # ifndef PI
 #  define PI 3.14159265358979323846
 # endif
+
+# ifndef WIDTH
+#  define WIDTH 800
+# endif
+
+# ifndef HEIGHT
+#  define HEIGHT 800
+# endif
+
 
 /* Internal Libraries */
 # include "../libs/libft/libft.h"
@@ -91,15 +100,41 @@ typedef struct s_vector
 // {
 
 // } t_camera;
+/*
+	mlx_ptr; mlx pointer
+	*win_ptr; mlx window pointer
+*/
+typedef	struct s_graphics
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_length;
+	int		endian;
 
+}	t_graphics;
+
+typedef struct s_data
+{
+	t_graphics display;
+} t_data;
+
+/*init*/
+
+void	launching_mlx(t_data *data);
 
 /* Parsing */
 void		parse_input(char *file_path);
+
+
 
 /* Error Handling */
 void		error_message(char *error_message);
 char		**check_config(char *file_path);
 void		check_information(char **object_configs);
+void		malloc_error(void);
 
 /*math utils*/
 t_vector	v_add(t_vector u, t_vector v);

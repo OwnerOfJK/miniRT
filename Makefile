@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+         #
+#    By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/20 14:04:55 by jkaller           #+#    #+#              #
-#    Updated: 2024/05/21 23:54:27 by jkaller          ###   ########.fr        #
+#    Updated: 2024/05/27 15:20:42 by ecarlier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra -Imlx -g
 
 # MLX flags for linking mlx_linux library
-MLXFLAGS = -L ./libs/mlx_linux -lmlx -lXext -lX11
+MLXFLAGS = -L ./libs/mlx_linux -lmlx -lXext -lX11 -lm
 
 # Library files
 LIBS = ./libs/libft/libft.a

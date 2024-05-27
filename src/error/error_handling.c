@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:50:43 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/21 21:56:16 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/05/27 15:51:26 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,3 +20,5 @@ void	error_message(char *error_message)
 	ft_putstr_fd(error_message, 2);
 	exit(EXIT_FAILURE);
 }
+
+
