@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:50:43 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/27 17:12:26 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/05/27 18:53:35 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,6 @@ void	error_free(t_data *data, char *error_message)
 	exit(EXIT_FAILURE);
 }
 
-// void	destroy_mlx(t_data **data)
-// {
-
-// }
 
 int	clean_exit(t_data *data)
 {

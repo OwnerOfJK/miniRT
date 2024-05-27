@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 20:23:55 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/05/24 20:58:11 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/05/27 19:32:09 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_vector	v_neg(t_vector u)
 /*
 	return the lenght of the vector v
 */
-double	v_lenght(t_vector v)
+double	v_length(t_vector v)
 {
 	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
 }

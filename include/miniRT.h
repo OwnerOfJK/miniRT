@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/27 18:47:57 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/05/27 19:34:41 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,8 @@ typedef struct s_input
 	double	z;
 }	t_input;
 
-/* Parsing */
-void		parse_input(char *file_path);
 
-typedef	struct s_graphics
+typedef struct s_graphics
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
@@ -124,22 +122,25 @@ typedef	struct s_graphics
 
 typedef struct s_data
 {
-	t_graphics display;
-} t_data;
+	t_graphics	display;
+}	t_data;
+
+/* Parsing */
+void		parse_input(char *file_path);
 
 /*init*/
 
-void	launching_mlx(t_data *data);
-int	key_handler(int keysym, t_data *data);
-void	event_init(t_data *data);
+void		launching_mlx(t_data *data);
+int			key_handler(int keysym, t_data *data);
+void		event_init(t_data *data);
 
 /* Error Handling */
-void	error_message(char *error_message);
-void	error_free(t_data *data, char *error_message);
+void		error_message(char *error_message);
+void		error_free(t_data *data, char *error_message);
 char		**check_config(char *file_path);
 void		check_information(char **object_configs);
 void		malloc_error(void);
-int		clean_exit(t_data *data);
+int			clean_exit(t_data *data);
 
 /*math utils*/
 t_vector	v_add(t_vector u, t_vector v);
@@ -151,7 +152,8 @@ int			v_compare(t_vector u, t_vector v);
 t_vector	v_init(double x, double y, double z);
 t_vector	v_cross(t_vector u, t_vector v);
 t_vector	v_neg(t_vector u);
-double		v_lenght(t_vector v);
+double		v_length(t_vector v);
+t_vector	v_normalize(t_vector v);
 
 /* Utils */
 void		print_double_pointer(char **double_pointer);
