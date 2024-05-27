@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/28 01:36:31 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/05/28 01:55:56 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,20 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <X11/keysym.h>
 
 # ifndef PI
 #  define PI 3.14159265358979323846
 # endif
+
+# ifndef WIDTH
+#  define WIDTH 800
+# endif
+
+# ifndef HEIGHT
+#  define HEIGHT 800
+# endif
+
 
 /* Internal Libraries */
 # include "../libs/libft/libft.h"
@@ -41,6 +51,12 @@ typedef struct s_vector
 	double	y;
 	double	z;
 }	t_vector;
+
+typedef struct s_ray
+{
+	t_vector	origin;
+	t_vector	direction;
+}	t_ray;
 
 /*
 ∗ ambient lighting ratio in range [0.0,1.0]: 0.2
@@ -139,6 +155,24 @@ typedef struct s_input
 	t_cylinder			*cylinder;
 }	t_input;
 
+
+typedef struct s_graphics
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_length;
+	int		endian;
+
+}	t_graphics;
+
+typedef struct s_data
+{
+	t_graphics	display;
+}	t_data;
+
 /* Parsing */
 t_input			*parse_input(char *file_path);
 t_alightning    *parse_alightning(char **object_configs);
@@ -156,10 +190,19 @@ t_plane			*ft_lstnew_plane(char *str);
 t_cylinder		*ft_lstnew_cylinder(char *str);
 void			ft_lstadd_back_miniRT(t_base_node **lst, t_base_node *new);
 
+/*init*/
+
+void		launching_mlx(t_data *data);
+int			key_handler(int keysym, t_data *data);
+void		event_init(t_data *data);
+
 /* Error Handling */
 void		error_message(char *error_message);
+void		error_free(t_data *data, char *error_message);
 char		**check_config(char *file_path);
 void		check_information(char **object_configs);
+void		malloc_error(void);
+int			clean_exit(t_data *data);
 
 /*math utils*/
 t_vector	v_add(t_vector u, t_vector v);
@@ -171,7 +214,8 @@ int			v_compare(t_vector u, t_vector v);
 t_vector	v_init(double x, double y, double z);
 t_vector	v_cross(t_vector u, t_vector v);
 t_vector	v_neg(t_vector u);
-double		v_lenght(t_vector v);
+double		v_length(t_vector v);
+t_vector	v_normalize(t_vector v);
 
 /* Utils */
 void		print_double_pointer(char **double_pointer);
@@ -181,6 +225,10 @@ char		*find_and_extract_double(char *str, int pos);
 
 /* Free Memory */
 void		free_double_pointer(char **double_pointer);
+
+/* Rendering */
+void		render_scene(t_data *data);
+void		my_mlx_pixel_put(t_graphics *img, int x, int y, int color);
 
 /*debug utils*/
 //need to delete later

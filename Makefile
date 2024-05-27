@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+         #
+#    By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/20 14:04:55 by jkaller           #+#    #+#              #
-#    Updated: 2024/05/27 15:25:15 by jkaller          ###   ########.fr        #
+#    Updated: 2024/05/27 19:43:57 by ecarlier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ MLXFLAGS = -L ./libs/mlx_linux -lmlx -lXext -lX11 -lm
 LIBS = ./libs/libft/libft.a
 
 # Source files
-SRCS = src/main.c $(wildcard src/error/*.c) $(wildcard src/parser/*.c) $(wildcard src/free/*.c) $(wildcard src/utils/*.c)
+SRCS = src/main.c $(wildcard src/error/*.c) $(wildcard src/parser/*.c) $(wildcard src/free/*.c) $(wildcard src/utils/*.c) $(wildcard src/raytracing/*.c)
 
 # Object files
 OBJS = $(SRCS:.c=.o)
