@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 23:20:16 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/27 17:55:26 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/05/27 20:42:45 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,7 @@ char	**find_index(char** object_configs, char *index, int len)
 	while (*object_configs)
 	{
 		if (!ft_strncmp(*object_configs, index, len))
-		{
-			ft_printf("%s\n", *object_configs);
 			return (object_configs);
-		}
 		object_configs++;
 	}
 	return (NULL);

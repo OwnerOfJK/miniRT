@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 23:01:11 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/26 16:43:09 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/05/27 20:46:21 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,5 @@ void	check_information(char **object_configs)
 	//check square
 	//check cylinder
 	//check triangle
+	return ;
 }

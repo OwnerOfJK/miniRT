@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 23:03:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/27 15:28:03 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/05/27 20:59:36 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,26 @@
 char	*remove_spaces(char *line)
 {
 	int	i;
-	int	j;
+	int	write;
+	int	space_seen;
 
 	i = 0;
-	j = 0;
-	while (line[i] != '\0')
+	write = 0;
+	space_seen = 0;
+	while (line[i])
 	{
-		if (line[i] != ' ')
+		if (ft_isspace(line[i]))
+			space_seen = 1;
+		else
 		{
-			line[j] = line[i];
-			j++;
+			if (space_seen && !ft_isspace(line[i]))
+				line[write++] = ' ';
+			line[write++] = line[i];
+			space_seen = 0;
 		}
 		i++;
 	}
-	line[j] = '\0';
+	line[write] = '\0';
 	return (line);
 }
 
