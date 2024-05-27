@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/27 17:50:17 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/05/27 21:35:12 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_vector
 typedef struct s_alightning
 {
 	double		ratio;
-	t_color		color;
+	t_color		*color;
 }	t_alightning;
 
 /*
@@ -133,6 +133,7 @@ typedef struct s_input
 /* Parsing */
 t_input			*parse_input(char *file_path);
 t_alightning    *parse_alightning(char **object_configs);
+t_color			*parse_to_color(char *str);
 
 /* Error Handling */
 void		error_message(char *error_message);
