@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/27 16:55:44 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/05/27 17:11:11 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <X11/keysym.h>
 
 # ifndef PI
 #  define PI 3.14159265358979323846
@@ -124,6 +125,8 @@ typedef struct s_data
 /*init*/
 
 void	launching_mlx(t_data *data);
+int	key_handler(int keysym, t_data *data);
+void	event_init(t_data *data);
 
 /* Parsing */
 void		parse_input(char *file_path);
@@ -136,6 +139,7 @@ void	error_free(t_data *data, char *error_message);
 char		**check_config(char *file_path);
 void		check_information(char **object_configs);
 void		malloc_error(void);
+int		clean_exit(t_data *data);
 
 /*math utils*/
 t_vector	v_add(t_vector u, t_vector v);

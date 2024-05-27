@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:50:43 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/27 16:57:46 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/05/27 17:12:26 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@
 
 void	error_message(char *error_message)
 {
-
 	//free stuff
-	//destroy_mlx(t_data **data)
 	ft_putstr_fd(error_message, 2);
 	exit(EXIT_FAILURE);
 }
@@ -26,7 +24,9 @@ void	error_message(char *error_message)
 void	error_free(t_data *data, char *error_message)
 {
 	(void)data;
-	ft_putstr_fd(error_message, 2);
+	//destroy_mlx(t_data **data)
+	if (error_message)
+		ft_putstr_fd(error_message, 2);
 	exit(EXIT_FAILURE);
 }
 
@@ -34,3 +34,12 @@ void	error_free(t_data *data, char *error_message)
 // {
 
 // }
+
+int	clean_exit(t_data *data)
+{
+	mlx_destroy_image(data->display.mlx_ptr, data->display.img);
+	mlx_destroy_window(data->display.mlx_ptr, data->display.win_ptr);
+	mlx_destroy_display(data->display.mlx_ptr);
+	free(data->display.mlx_ptr);
+	exit(1);
+}

@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:33:24 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/05/27 16:57:28 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/05/27 17:14:40 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,23 @@ void	launching_mlx(t_data *data)
 		error_free(data, "Error malloc mlx address");
 
 	//mlx_hook(data->display.win_ptr, DestroyNotify, StructureNotifyMask, quit, world);
+	event_init(data);
 	mlx_loop(data->display.mlx_ptr);
 
 }
 
-// void	event_init(t_data *data)
-// {
-// 	mlx_hook(f->win_ptr, 02, (1L << 0), key_handler, f);
-// 	mlx_hook(f->win_ptr, 04, (1L << 2), mouse_handler, f);
-// //	mlx_hook(f->win_ptr, 17, (1L << 17), clean_exit, f);
+void	event_init(t_data *data)
+{
+	mlx_hook(data->display.win_ptr, 02, (1L << 0), key_handler, data);
+	//mlx_hook(data->display.win_ptr, 04, (1L << 2), mouse_handler, data);
+	mlx_hook(data->display.win_ptr, 17, (1L << 17), clean_exit, data);
 
-// }
+}
+
+int	key_handler(int keysym, t_data *data)
+{
+	if (keysym == XK_Escape)
+		clean_exit(data);
+	printf("The %d key has been pressed\n\n", keysym);
+	return (0);
+}
