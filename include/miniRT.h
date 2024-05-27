@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/27 16:29:00 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/05/27 16:55:44 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,8 @@ void		parse_input(char *file_path);
 
 
 /* Error Handling */
-void		error_message(char *error_message);
+void	error_message(char *error_message);
+void	error_free(t_data *data, char *error_message);
 char		**check_config(char *file_path);
 void		check_information(char **object_configs);
 void		malloc_error(void);
