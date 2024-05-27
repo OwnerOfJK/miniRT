@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/27 17:11:11 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/05/27 18:33:33 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,6 @@ int			get_config_len(char *file_path);
 
 /* Free Memory */
 void		free_double_pointer(char **double_pointer);
-
 
 
 /*debug utils*/
