@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/27 21:35:12 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/05/28 00:02:05 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@
 /* Data Structures */
 typedef struct s_color
 {
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
+	double	r;
+	double	g;
+	double	b;
 }	t_color;
 
 typedef struct s_vector
@@ -60,9 +60,9 @@ typedef struct s_alightning
 */
 typedef struct s_camera
 {
-	t_vector	pos;
-	t_vector	orientation_vector;
-	int			fov;
+	t_vector	*pos;
+	t_vector	*orientation_vector;
+	double		fov;
 }	t_camera;
 
 /*
@@ -72,7 +72,7 @@ typedef struct s_camera
 */
 typedef struct s_light
 {
-	t_vector	pos;
+	t_vector	*pos;
 	double		brightness;
 }	t_light;
 
@@ -83,7 +83,7 @@ typedef struct s_light
 */
 typedef struct s_sphere
 {
-	t_vector		pos;
+	t_vector		*pos;
 	double			diameter;
 	t_color			color;
 	struct s_sphere	*next;
@@ -96,8 +96,8 @@ typedef struct s_sphere
 */
 typedef struct s_cylinder
 {
-	t_vector			pos;
-	t_vector			normal_vector;
+	t_vector			*pos;
+	t_vector			*normal_vector;
 	t_color				color;
 	struct s_cylinder	*next;
 }	t_cylinder;
@@ -112,8 +112,8 @@ typedef struct s_cylinder
 */
 typedef struct s_plane
 {
-	t_vector		pos;
-	t_vector		axis_vector;
+	t_vector		*pos;
+	t_vector		*axis_vector;
 	double			diameter;
 	double			height;
 	t_color			color;
@@ -133,7 +133,10 @@ typedef struct s_input
 /* Parsing */
 t_input			*parse_input(char *file_path);
 t_alightning    *parse_alightning(char **object_configs);
+t_camera		*parse_camera(char **object_configs);
+t_light			*parse_light(char **object_configs);
 t_color			*parse_to_color(char *str);
+t_vector		*parse_to_pos(char *str);
 
 /* Error Handling */
 void		error_message(char *error_message);
@@ -164,5 +167,7 @@ void		free_double_pointer(char **double_pointer);
 /*debug utils*/
 //need to delete later
 void		vec_print(t_vector vec);
+void		print_input(t_input *input);
+
 
 #endif

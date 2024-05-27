@@ -5,11 +5,11 @@
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
       "request": "launch",
-      "args": [],
+      "args": ["scenes/mandatory/spheres.rt"],
       "stopAtEntry": false,
       "externalConsole": false,
       "cwd": "/home/jkaller/Desktop/HomeOf42/Core_Curriculum_Projects/Rank04/miniRT",
-      "program": "/home/jkaller/Desktop/HomeOf42/Core_Curriculum_Projects/Rank04/miniRT/build/Debug/outDebug",
+      "program": "/home/jkaller/Desktop/HomeOf42/Core_Curriculum_Projects/Rank04/miniRT/miniRT",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
