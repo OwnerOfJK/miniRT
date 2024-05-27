@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:24:47 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/28 00:01:24 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/05/28 01:45:07 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ t_alightning	*parse_alightning(char **object_configs)
 	char			*tmp;
 	char			*save_pointer;
 
+	if (object_configs == NULL)
+		return (NULL);
 	alightning = malloc(sizeof(t_alightning));
 	if (alightning == NULL)
 		error_message("Error: Memory allocation failed.\n");
@@ -40,6 +42,8 @@ t_camera	*parse_camera(char **object_configs)
 	char		*tmp;
 	char		*save_pointer;
 
+	if (object_configs == NULL)
+		return (NULL);
 	camera = malloc(sizeof(t_camera));
 	if (camera == NULL)
 		error_message("Error: Memory allocation failed.\n");
@@ -64,6 +68,8 @@ t_light	*parse_light(char **object_configs)
 	char			*tmp;
 	char			*save_pointer;
 
+	if (object_configs == NULL)
+		return (NULL);
 	light = malloc(sizeof(t_light));
 	if (light == NULL)
 		error_message("Error: Memory allocation failed.\n");
@@ -76,4 +82,58 @@ t_light	*parse_light(char **object_configs)
 	if (token != NULL)
 		light->brightness = ft_atod(token);
 	return (light);
+}
+
+t_sphere	*parse_sphere(char **object_configs)
+{
+	t_sphere		*sphere_head;
+	t_sphere		*new_sphere;
+
+	sphere_head = NULL;
+	if (object_configs == NULL)
+		return (NULL);
+	while (find_index(object_configs, "sp", 2) != NULL)
+	{
+		new_sphere = ft_lstnew_sphere(*object_configs);
+		ft_lstadd_back_miniRT((t_base_node **)&sphere_head,
+			(t_base_node *)new_sphere);
+		object_configs++;
+	}
+	return (sphere_head);
+}
+
+t_plane	*parse_plane(char **object_configs)
+{
+	t_plane		*plane_head;
+	t_plane		*new_plane;
+
+	plane_head = NULL;
+	if (object_configs == NULL)
+		return (NULL);
+	while (find_index(object_configs, "pl", 2) != NULL)
+	{
+		new_plane = ft_lstnew_plane(*object_configs);
+		ft_lstadd_back_miniRT((t_base_node **)&plane_head,
+			(t_base_node *)new_plane);
+		object_configs++;
+	}
+	return (plane_head);
+}
+
+t_cylinder	*parse_cylinder(char **object_configs)
+{
+	t_cylinder		*cylinder_head;
+	t_cylinder		*new_cylinder;
+
+	cylinder_head = NULL;
+	if (object_configs == NULL)
+		return (NULL);
+	while (find_index(object_configs, "cy", 2) != NULL)
+	{
+		new_cylinder = ft_lstnew_cylinder(*object_configs);
+		ft_lstadd_back_miniRT((t_base_node **)&cylinder_head,
+			(t_base_node *)new_cylinder);
+		object_configs++;
+	}
+	return (cylinder_head);
 }
