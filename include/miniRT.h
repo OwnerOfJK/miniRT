@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/27 19:34:41 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/05/27 20:33:46 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,12 @@ typedef struct s_vector
 	double	y;
 	double	z;
 }	t_vector;
+
+typedef struct s_ray
+{
+	t_vector	origin;
+	t_vector	direction;
+}	t_ray;
 
 /*
 ∗ ambient lighting ratio in range [0.0,1.0]: 0.2
@@ -162,6 +168,9 @@ int			get_config_len(char *file_path);
 /* Free Memory */
 void		free_double_pointer(char **double_pointer);
 
+/* Rendering */
+void		render_scene(t_data *data);
+void		my_mlx_pixel_put(t_graphics *img, int x, int y, int color);
 
 /*debug utils*/
 //need to delete later

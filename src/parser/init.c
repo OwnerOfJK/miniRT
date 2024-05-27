@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:33:24 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/05/27 17:14:40 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/05/27 20:51:03 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 
 #include "../../include/miniRT.h"
 
+// t_ray	*init_ray(void)
+// {
+// 	t_ray	*ray;
+
+// 	ray = malloc(sizeof(t_ray));
+// 	ray->origin = malloc(sizeof(t_vector));
+// 	ray->direction = malloc(sizeof(t_vector));
+// 	return (ray);
+// }
 
 void	launching_mlx(t_data *data)
 {
@@ -33,6 +42,7 @@ void	launching_mlx(t_data *data)
 		error_free(data, "Error malloc mlx address");
 
 	//mlx_hook(data->display.win_ptr, DestroyNotify, StructureNotifyMask, quit, world);
+	render_scene(data);
 	event_init(data);
 	mlx_loop(data->display.mlx_ptr);
 
@@ -51,5 +61,6 @@ int	key_handler(int keysym, t_data *data)
 	if (keysym == XK_Escape)
 		clean_exit(data);
 	printf("The %d key has been pressed\n\n", keysym);
+	render_scene(data);
 	return (0);
 }
