@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 23:03:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/26 16:42:52 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/05/27 15:28:03 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ char	**check_config(char *file_path)
 	check_file_type(file_path);
 	config_len = get_config_len(file_path);
 	object_configs = parse_to_double_pointer(fd, config_len);
-	check_information(object_configs); //this is next
+	check_information(object_configs);
 	close(fd);
 	return (object_configs);
 }

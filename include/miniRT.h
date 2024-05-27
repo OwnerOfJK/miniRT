@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/24 21:22:23 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/05/27 15:45:21 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,55 +43,59 @@ typedef struct s_vector
 	double	z;
 }	t_vector;
 
+/*
+∗ ambient lighting ratio in range [0.0,1.0]: 0.2
+∗ R,G,B colors in range [0-255]: 255, 255, 255
+*/
+typedef struct s_ambientLightning
+{
+	//ambient lighting ratio
+	t_color		color;
+}	t_ambientLightning;
 
-// /*
-// 	pos : point in the plane
-// 	diameter : radius of the sphere
-// 	color: color of the plane
+/*
+∗ x,y,z coordinates of the view point: -50.0,0,20
+∗ 3d normalized orientation vector. In range [-1,1] for each x,y,z axis:
+0.0,0.0,1.0
+∗ FOV : Horizontal field of view in degrees in range [0,180]: 70
+*/
+typedef struct s_camera
+{
+	t_vector	pos;
+	t_vector	orientation;
+	double		fov;
+}	t_camera;
 
-// 	//param we get from file
-// 	position orientation color 
-// */
-// typedef struct s_plane
-// {
+typedef struct s_light
+{
+	t_vector	pos;
+}	t_light;
 
-// 	t_vector	pos;
-// 	double		diameter;
-// 	t_color		color;
-// }	t_plane;
+typedef struct s_sphere
+{
+	t_vector	pos;
+	t_color		color;
+}	t_sphere;
 
-// /*
-// 	pos : center of the sphere
-// 	color: color of the sphere
+typedef struct s_cylinder
+{
+	t_vector	pos;
+	t_color		color;
+}	t_cylinder;
 
-// 	//param we get from file
-// 	 position diameter color
-// */
-// typedef struct s_sphere
-// {
-// 	t_vector	pos;
-// 	t_color		color;
-// }	t_sphere;
+typedef struct s_plane
+{
+	t_vector	pos;
+	double		diameter;
+	t_color		color;
+}	t_plane;
 
-// /*
-// 	color: color of the cylinder
-
-
-// 	//param we get from file
-// 	position orientation diameter height color 
-// */
-// typedef struct s_cylinder
-// {
-
-// 	t_color	color;
-
-// } t_cylinder;
-
-// typedef struct s_camera
-// {
-
-// } t_camera;
-
+typedef struct s_input
+{
+	double	x;
+	double	y;
+	double	z;
+}	t_input;
 
 /* Parsing */
 void		parse_input(char *file_path);
