@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/27 15:45:21 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/05/27 18:47:57 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,20 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <X11/keysym.h>
 
 # ifndef PI
 #  define PI 3.14159265358979323846
 # endif
+
+# ifndef WIDTH
+#  define WIDTH 800
+# endif
+
+# ifndef HEIGHT
+#  define HEIGHT 800
+# endif
+
 
 /* Internal Libraries */
 # include "../libs/libft/libft.h"
@@ -100,10 +110,36 @@ typedef struct s_input
 /* Parsing */
 void		parse_input(char *file_path);
 
+typedef	struct s_graphics
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_length;
+	int		endian;
+
+}	t_graphics;
+
+typedef struct s_data
+{
+	t_graphics display;
+} t_data;
+
+/*init*/
+
+void	launching_mlx(t_data *data);
+int	key_handler(int keysym, t_data *data);
+void	event_init(t_data *data);
+
 /* Error Handling */
-void		error_message(char *error_message);
+void	error_message(char *error_message);
+void	error_free(t_data *data, char *error_message);
 char		**check_config(char *file_path);
 void		check_information(char **object_configs);
+void		malloc_error(void);
+int		clean_exit(t_data *data);
 
 /*math utils*/
 t_vector	v_add(t_vector u, t_vector v);
@@ -123,7 +159,6 @@ int			get_config_len(char *file_path);
 
 /* Free Memory */
 void		free_double_pointer(char **double_pointer);
-
 
 
 /*debug utils*/
