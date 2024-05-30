@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/30 20:42:41 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/05/30 21:08:08 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,13 @@
 #  define WIDTH 800
 # endif
 
+# ifndef EPSILON
+#  define EPSILON 0.0001
+# endif
+
 # ifndef HEIGHT
 #  define HEIGHT 800
 # endif
-
 
 /* Internal Libraries */
 # include "../libs/libft/libft.h"

@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 18:42:22 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/05/30 20:57:46 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/05/30 21:06:32 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ double	calc_delta(double a, double b, double c)
 
 /*
 /!\ NEED TESTING
+
+updates t1 and t2 with intersections values
+
+
 a (x*x) + bx + c = 0
 
 if a is 0 and b > 1 -> it's not a quadratic function
