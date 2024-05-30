@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/28 16:49:39 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/05/30 20:42:41 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,11 @@ typedef struct s_vector
 	double	z;
 }	t_vector;
 
+/*
+
+origin : starting point
+direction : where it points
+*/
 typedef struct s_ray
 {
 	t_vector	origin;
@@ -66,14 +71,14 @@ typedef struct s_ray
 	t1 The first root
 	t2 The second root
 */
-typedef struct s_discr
+typedef struct s_equat2
 {
 	double	a;
 	double	b;
 	double	c;
 	double	t1;
 	double	t2;
-} t_discr;
+}	t_equat2;
 
 /*
 ∗ ambient lighting ratio in range [0.0,1.0]: 0.2
@@ -232,6 +237,8 @@ t_vector		v_cross(t_vector u, t_vector v);
 t_vector		v_neg(t_vector u);
 double			v_length(t_vector v);
 t_vector		v_normalize(t_vector v);
+double			calc_delta(double a, double b, double c);
+double			solve_quadratic(t_equat2 *eq);
 
 /* Utils */
 void			print_double_pointer(char **double_pointer);
