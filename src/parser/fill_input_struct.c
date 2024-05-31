@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:24:47 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/28 01:45:07 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/05/31 13:35:04 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_alightning	*parse_alightning(char **object_configs)
 		alightning->ratio = ft_atod(token);
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
-		alightning->color = parse_to_color(token);
+		alightning->color = parse_color(token);
 	return (alightning);
 }
 
@@ -51,10 +51,10 @@ t_camera	*parse_camera(char **object_configs)
 	token = ft_strtok_r(tmp, " ", &save_pointer);
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
-		camera->pos = parse_to_pos(token);
+		camera->pos = parse_coordinate(token);
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
-		camera->orientation_vector = parse_to_pos(token);
+		camera->orientation_vector = parse_vector(token);
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	camera->fov = ft_atod(token);
 	free(tmp);
@@ -77,7 +77,7 @@ t_light	*parse_light(char **object_configs)
 	token = ft_strtok_r(tmp, " ", &save_pointer);
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
-		light->pos = parse_to_pos(token);
+		light->pos = parse_coordinate(token);
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
 		light->brightness = ft_atod(token);

@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:55:19 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/27 23:43:29 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/05/31 13:34:16 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*find_and_extract_double(char *str, int pos)
 	return (double_value);
 }
 
-t_color	*parse_to_color(char *str)
+t_color	*parse_color(char *str)
 {
 	t_color	*color;
 	char	*token;
@@ -59,26 +59,52 @@ t_color	*parse_to_color(char *str)
 	return (color);
 }
 
-t_vector	*parse_to_pos(char *str)
+t_vector	*parse_coordinate(char *str)
 {
-	t_vector	*pos;
+	t_vector	*coordinate;
 	char		*token;
 	char		*tmp;
 	char		*save_pointer;
 
-	pos = malloc(sizeof(t_vector));
-	if (pos == NULL)
+	coordinate = malloc(sizeof(t_vector));
+	if (coordinate == NULL)
 		error_message("Error: Memory allocation failed.\n");
 	tmp = ft_strdup(str);
 	token = ft_strtok_r(tmp, ",", &save_pointer);
 	if (token != NULL)
-		pos->x = ft_atod(token);
+		coordinate->x = ft_atod(token);
 	token = ft_strtok_r(NULL, ",", &save_pointer);
 	if (token != NULL)
-		pos->y = ft_atod(token);
+		coordinate->y = ft_atod(token);
 	token = ft_strtok_r(NULL, ",", &save_pointer);
 	if (token != NULL)
-		pos->z = ft_atod(token);
+		coordinate->z = ft_atod(token);
+	coordinate->w = 1;
 	free(tmp);
-	return (pos);
+	return (coordinate);
+}
+
+t_vector	*parse_vector(char *str)
+{
+	t_vector	*vector;
+	char		*token;
+	char		*tmp;
+	char		*save_pointer;
+
+	vector = malloc(sizeof(t_vector));
+	if (vector == NULL)
+		error_message("Error: Memory allocation failed.\n");
+	tmp = ft_strdup(str);
+	token = ft_strtok_r(tmp, ",", &save_pointer);
+	if (token != NULL)
+		vector->x = ft_atod(token);
+	token = ft_strtok_r(NULL, ",", &save_pointer);
+	if (token != NULL)
+		vector->y = ft_atod(token);
+	token = ft_strtok_r(NULL, ",", &save_pointer);
+	if (token != NULL)
+		vector->z = ft_atod(token);
+	vector->w = 0;
+	free(tmp);
+	return (vector);
 }

@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/28 01:55:56 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/05/31 13:35:42 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 #  define HEIGHT 800
 # endif
 
+# define EPSILON 0.0001
 
 /* Internal Libraries */
 # include "../libs/libft/libft.h"
@@ -50,6 +51,7 @@ typedef struct s_vector
 	double	x;
 	double	y;
 	double	z;
+	double	w;
 }	t_vector;
 
 typedef struct s_ray
@@ -181,8 +183,9 @@ t_light			*parse_light(char **object_configs);
 t_sphere		*parse_sphere(char **object_configs);
 t_plane			*parse_plane(char **object_configs);
 t_cylinder		*parse_cylinder(char **object_configs);
-t_color			*parse_to_color(char *str);
-t_vector		*parse_to_pos(char *str);
+t_color			*parse_color(char *str);
+t_vector		*parse_coordinate(char *str);
+t_vector		*parse_vector(char *str);
 
 /* Linked List Parsing*/
 t_sphere		*ft_lstnew_sphere(char *str);
