@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 18:54:51 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/05/24 18:56:41 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/05/31 16:24:52 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,5 @@
 
 void	vec_print(t_vector vec)
 {
-	printf("Vec: (x, y, z) = (%.4lf, %.4lf, %.4lf)\n", vec.x, vec.y, vec.z);
+	printf("Vec: (x, y, z, w) = (%.4lf, %.4lf, %.4lf, %.4lf)\n", vec.x, vec.y, vec.z, vec.w);
 }

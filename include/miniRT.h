@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/31 13:35:42 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/05/31 16:23:45 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,7 +214,7 @@ t_vector	v_mult(t_vector u, t_vector v);
 double		v_dot(t_vector u, t_vector v);
 t_vector	v_scalar(t_vector u, double t);
 int			v_compare(t_vector u, t_vector v);
-t_vector	v_init(double x, double y, double z);
+t_vector	v_init(double x, double y, double z, double w);
 t_vector	v_cross(t_vector u, t_vector v);
 t_vector	v_neg(t_vector u);
 double		v_length(t_vector v);
