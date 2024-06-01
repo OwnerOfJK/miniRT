@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 00:23:57 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/28 01:40:43 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/05/31 13:35:04 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ t_sphere	*ft_lstnew_sphere(char *str)
 	token = ft_strtok_r(tmp, " ", &save_pointer);
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
-		sphere->pos = parse_to_pos(token);
+		sphere->pos = parse_coordinate(token);
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
 		sphere->diameter = ft_atod(token);
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
-		sphere->color = parse_to_color(token);
+		sphere->color = parse_color(token);
 	sphere->base.next = NULL;
 	free(tmp);
 	return (sphere);
@@ -52,13 +52,13 @@ t_plane	*ft_lstnew_plane(char *str)
 	token = ft_strtok_r(tmp, " ", &save_pointer);
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
-		plane->pos = parse_to_pos(token);
+		plane->pos = parse_coordinate(token);
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
-		plane->normal_vector = parse_to_pos(token);
+		plane->normal_vector = parse_vector(token);
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
-		plane->color = parse_to_color(token);
+		plane->color = parse_color(token);
 	plane->base.next = NULL;
 	free(tmp);
 	return (plane);
@@ -78,10 +78,10 @@ t_cylinder	*ft_lstnew_cylinder(char *str)
 	token = ft_strtok_r(tmp, " ", &save_pointer);
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
-		cylinder->pos = parse_to_pos(token);
+		cylinder->pos = parse_coordinate(token);
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
-		cylinder->axis_vector = parse_to_pos(token);
+		cylinder->axis_vector = parse_vector(token);
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
 		cylinder->diameter = ft_atod(token);
@@ -89,7 +89,7 @@ t_cylinder	*ft_lstnew_cylinder(char *str)
 	if (token != NULL)
 		cylinder->height = ft_atod(token);
 	if (token != NULL)
-		cylinder->color = parse_to_color(token);
+		cylinder->color = parse_color(token);
 	cylinder->base.next = NULL;
 	free(tmp);
 	return (cylinder);

@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/30 21:08:08 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/06/01 16:46:02 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 #  define HEIGHT 800
 # endif
 
+# define EPSILON 0.0001
+
 /* Internal Libraries */
 # include "../libs/libft/libft.h"
 # include "../libs/mlx_linux/mlx.h"
@@ -53,6 +55,7 @@ typedef struct s_vector
 	double	x;
 	double	y;
 	double	z;
+	double	w;
 }	t_vector;
 
 /*
@@ -206,8 +209,9 @@ t_light			*parse_light(char **object_configs);
 t_sphere		*parse_sphere(char **object_configs);
 t_plane			*parse_plane(char **object_configs);
 t_cylinder		*parse_cylinder(char **object_configs);
-t_color			*parse_to_color(char *str);
-t_vector		*parse_to_pos(char *str);
+t_color			*parse_color(char *str);
+t_vector		*parse_coordinate(char *str);
+t_vector		*parse_vector(char *str);
 
 /* Linked List Parsing*/
 t_sphere		*ft_lstnew_sphere(char *str);
@@ -235,7 +239,7 @@ t_vector		v_mult(t_vector u, t_vector v);
 double			v_dot(t_vector u, t_vector v);
 t_vector		v_scalar(t_vector u, double t);
 int				v_compare(t_vector u, t_vector v);
-t_vector		v_init(double x, double y, double z);
+t_vector		v_init(double x, double y, double z, double w);
 t_vector		v_cross(t_vector u, t_vector v);
 t_vector		v_neg(t_vector u);
 double			v_length(t_vector v);
