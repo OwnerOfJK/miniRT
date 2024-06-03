@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 18:42:22 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/05/30 21:06:32 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/06/03 19:30:43 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,14 @@ double	solve_quadratic(t_equat2 *eq)
 		eq->t2 = (- (eq->b) - sqrt(delta)) / (2 * eq->a);
 	}
 	return (delta);
+}
+
+/*
+not tested
+convert degree into radian
+->need it for trigo functions
+*/
+double	radian(double deg)
+{
+	return (deg * PI / 180.0);
 }

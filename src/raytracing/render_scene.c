@@ -6,28 +6,32 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 20:25:49 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/05/27 20:47:00 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/06/03 19:46:18 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniRT.h"
+
+
 
 void	render_scene(t_data *data)
 {
 	int		x;
 	int		y;
 	int		color;
-	//t_ray	*ray;
+	t_ray	*ray;
 
-	//ray = init_ray()
-
+	color = 0x0000FF; //blue
+	ray = init_ray();
 	y = -1;
 	while (++y < HEIGHT)
 	{
 		x = -1;
 		while (++x < WIDTH)
 		{
-			color = 0x0000FF;
+			// 1) get the ray sent from the camera
+			//change the color using the hit function
+			color += 0x00000F;
 			my_mlx_pixel_put(&data->display, x, y, color);
 		}
 	}

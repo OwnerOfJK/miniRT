@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/03 13:46:56 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/06/03 19:50:27 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@
 #  define HEIGHT 800
 # endif
 
+// # ifndef RATIO
+// #  define RATIO (WIDTH / HEIGHT)
+// # endif
+
 # define EPSILON 0.0001
 
 
@@ -66,11 +70,13 @@ typedef struct s_vector
 /*
 origin : starting point
 direction : where it points
+
+CHANGED TO POINTER JUNE 3
 */
 typedef struct s_ray
 {
-	t_vector	origin;
-	t_vector	direction;
+	t_vector	*origin;
+	t_vector	*direction;
 }	t_ray;
 
 /*
@@ -203,6 +209,8 @@ typedef struct s_graphics
 typedef struct s_data
 {
 	t_graphics	display;
+	t_input		*input;
+
 }	t_data;
 
 /*
@@ -242,6 +250,7 @@ void			ft_lstadd_back_miniRT(t_base_node **lst, t_base_node *new);
 void			launching_mlx(t_data *data);
 int				key_handler(int keysym, t_data *data);
 void			event_init(t_data *data);
+t_ray			*init_ray(void);
 
 /* Error Handling */
 void			error_message(char *error_message);
@@ -265,6 +274,7 @@ double			v_length(t_vector v);
 t_vector		v_normalize(t_vector v);
 double			calc_delta(double a, double b, double c);
 double			solve_quadratic(t_equat2 *eq);
+double			radian(double deg);
 
 /* Utils */
 void			print_double_pointer(char **double_pointer);

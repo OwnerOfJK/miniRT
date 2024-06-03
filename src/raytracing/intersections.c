@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 16:07:42 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/06/03 16:07:02 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:25:53 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ int	sphere_intersect(t_sphere *sp, t_ray *ray)
 
 	radius = (sp->diameter / 2);
 	equat2.t1 = -1; //random negative value -> meaning no intersection to begin with
-	o_c = v_sub(ray->origin, *sp->pos);
-	equat2.a = v_dot(ray->direction, ray->direction);
-	equat2.b = 2.0 * v_dot(ray->direction, o_c);
+	o_c = v_sub(*ray->origin, *sp->pos);
+	equat2.a = v_dot(*ray->direction, *ray->direction);
+	equat2.b = 2.0 * v_dot(*ray->direction, o_c);
 	equat2.c = v_dot(o_c, o_c) - (radius * radius);
 	if (solve_quadratic(&equat2) > 0 && (equat2.t1 > EPSILON
 			|| equat2.t2 > EPSILON))
@@ -77,10 +77,10 @@ int	plane_intersect(t_plane *pl, t_ray *ray)
 	double		numerator;
 	double		denominator;
 
-	o_p = v_sub(ray->origin, *pl->pos);
-	if (v_dot(ray->direction, *pl->normal_vector) != 0)
+	o_p = v_sub(*ray->origin, *pl->pos);
+	if (v_dot(*ray->direction, *pl->normal_vector) != 0)
 	{
-		denominator = v_dot(*pl->normal_vector, ray->direction);
+		denominator = v_dot(*pl->normal_vector, *ray->direction);
 		if (denominator == 0) //not neccesasry
 			return (-1);
 		numerator = -1 * v_dot(o_p, *pl->normal_vector);
