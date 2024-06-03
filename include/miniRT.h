@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/01 16:46:02 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/06/03 13:46:56 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <X11/keysym.h>
+
+/* Internal Libraries */
+# include "../libs/libft/libft.h"
+# include "../libs/mlx_linux/mlx.h"
 
 # ifndef PI
 #  define PI 3.14159265358979323846
@@ -38,9 +42,7 @@
 
 # define EPSILON 0.0001
 
-/* Internal Libraries */
-# include "../libs/libft/libft.h"
-# include "../libs/mlx_linux/mlx.h"
+
 
 /* Data Structures */
 typedef struct s_color
@@ -58,8 +60,10 @@ typedef struct s_vector
 	double	w;
 }	t_vector;
 
-/*
 
+
+
+/*
 origin : starting point
 direction : where it points
 */
@@ -200,6 +204,21 @@ typedef struct s_data
 {
 	t_graphics	display;
 }	t_data;
+
+/*
+	shape the shape that was hit
+	ray The ray that hit the shape
+	t The intersection point
+	color The color of the hit shape
+*/
+/*
+typedef struct s_hit
+{
+	t_ray		ray;
+	t_vector	t;
+	t_color		color;
+}	t_hit;
+*/
 
 /* Parsing */
 t_input			*parse_input(char *file_path);
