@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/31 16:23:45 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/03 16:11:58 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,21 @@ typedef struct s_ray
 	t_vector	origin;
 	t_vector	direction;
 }	t_ray;
+
+typedef struct s_object
+{
+	int				type;
+	void			*object;
+	double			**matrix;
+	struct s_object	*next;
+}	t_object;
+
+typedef enum s_object_types
+{
+	SPHERE = 1,
+	PLANE = 2,
+	CYLINDER = 3,
+}	t_object_types;
 
 /*
 ∗ ambient lighting ratio in range [0.0,1.0]: 0.2
@@ -226,8 +241,13 @@ int			get_config_len(char *file_path);
 char		**find_index(char** object_configs, char *index, int len);
 char		*find_and_extract_double(char *str, int pos);
 
+/* Matrix */
+double		**m_mult(double **u, double **v);
+double		**m_init(void);
+
 /* Free Memory */
 void		free_double_pointer(char **double_pointer);
+void		free_matrix(double **matrix);
 
 /* Rendering */
 void		render_scene(t_data *data);
@@ -238,5 +258,7 @@ void		my_mlx_pixel_put(t_graphics *img, int x, int y, int color);
 void		vec_print(t_vector vec);
 void		print_input(t_input *input);
 
+/* Testing */
+void		test_vectors(void);
 
 #endif
