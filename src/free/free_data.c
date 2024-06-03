@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 23:20:40 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/03 16:11:44 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/03 18:59:16 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ void	free_double_pointer(char **double_pointer)
 	free(double_pointer);
 }
 
-void	free_matrix(double **matrix)
+void	free_matrix(double **matrix, int m_len)
 {
 	int	i;
 
 	i = 0;
-	while (i < 4)
+	while (i < m_len)
 	{
 		free(matrix[i]);
 		i++;

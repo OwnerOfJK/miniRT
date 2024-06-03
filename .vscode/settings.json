@@ -58,6 +58,7 @@
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "files.associations": {
     "libft.h": "c",
-    "minirt.h": "c"
+    "minirt.h": "c",
+    "assert.h": "c"
   }
 }

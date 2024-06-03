@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/03 16:11:58 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/03 20:53:02 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,12 +242,19 @@ char		**find_index(char** object_configs, char *index, int len);
 char		*find_and_extract_double(char *str, int pos);
 
 /* Matrix */
+double		**m_init(int m_len);
 double		**m_mult(double **u, double **v);
-double		**m_init(void);
+t_vector	mv_mult(double **u, t_vector v);
+int			m_compare(double **u, double **v);
+double		**m_identity(double **u);
+double		**m_transpose(double **u);
+double		m_determinant(double **u);
+double		m_minor(double **u, int row, int column, int m_len);
+double		m_cofactor(double **u, int row, int column, int m_len);
 
 /* Free Memory */
 void		free_double_pointer(char **double_pointer);
-void		free_matrix(double **matrix);
+void		free_matrix(double **matrix, int m_len);
 
 /* Rendering */
 void		render_scene(t_data *data);
@@ -257,8 +264,10 @@ void		my_mlx_pixel_put(t_graphics *img, int x, int y, int color);
 //need to delete later
 void		vec_print(t_vector vec);
 void		print_input(t_input *input);
+void 		print_matrix(double **matrix, int m_len);
 
 /* Testing */
 void		test_vectors(void);
+int			test_matrices();
 
 #endif

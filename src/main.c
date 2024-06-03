@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:39:45 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/03 15:54:47 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/03 19:27:15 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int argc, char **argv)
 	t_data *data;
 
 	// test_vectors();
-	// test_matrix();
+	test_matrices();
 	t_input	*input;
 
 	if (argc != 2)
