@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 13:20:48 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/03 19:55:45 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/04 16:12:23 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@ double	**m_init(int m_len)
 	double	**matrix;
 	int		i;
 
-	matrix = malloc(sizeof(double *) * m_len);
+	matrix = malloc(sizeof(double *) * (m_len + 1));
 	i = 0;
 	while (i < m_len)
 	{
 		matrix[i] = ft_calloc(m_len, sizeof(double));
 		i++;
 	}
+	matrix[m_len] = NULL;
 	return (matrix);
 }
 
@@ -38,14 +39,14 @@ double	**m_mult(double **u, double **v)
 	k = 0;
 	row = 0;
 	result = m_init(4);
-	while (row < 4)
+	while (row < m_len(u))
 	{
 		column = 0;
-		while (column < 4)
+		while (column < m_len(u))
 		{
 			result[row][column] = 0;
 			k = 0;
-			while (k < 4)
+			while (k < m_len(u))
 			{
 				result[row][column] += u[row][k] * v[k][column];
 				k++;
@@ -64,7 +65,7 @@ t_vector	mv_mult(double **u, t_vector v)
 
 	w = v_init(0.0, 0.0, 0.0, 0.0);
 	row = 0;
-	while (row < 4)
+	while (row < m_len(u))
 	{
 		if (row == 0)
 			w.x = u[row][0] * v.x + u[row][1]
@@ -92,12 +93,12 @@ int	m_compare(double **u, double **v)
 	int	column;
 
 	row = 0;
-	while (row < 4)
+	while (row < m_len(u))
 	{
 		column = 0;
-		while (column < 4)
+		while (column < m_len(u))
 		{
-			if (u[row][column] != v[row][column])
+			if (fabs(u[row][column] - v[row][column]) > EPSILON)
 				return (0);
 			column++;
 		}
@@ -115,10 +116,10 @@ double	**m_identity(double **u)
 
 	row = 0;
 	identity = m_init(4);
-	while (row < 4)
+	while (row < m_len(u))
 	{
 		column = 0;
-		while (column < 4)
+		while (column < m_len(u))
 		{
 			if (row == column)
 				identity[row][column] = 1;
@@ -129,6 +130,6 @@ double	**m_identity(double **u)
 		row++;
 	}
 	result = m_mult(u, identity);
-	free_matrix(identity, 4);
+	free_matrix(identity);
 	return (result);
 }

@@ -59,6 +59,7 @@
   "files.associations": {
     "libft.h": "c",
     "minirt.h": "c",
-    "assert.h": "c"
+    "assert.h": "c",
+    "mlx.h": "c"
   }
 }
