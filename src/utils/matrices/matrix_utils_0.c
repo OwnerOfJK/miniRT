@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 13:20:48 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/04 16:12:23 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/13 17:07:45 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,17 @@ double	**m_init(int m_len)
 	int		i;
 
 	matrix = malloc(sizeof(double *) * (m_len + 1));
+	if (!matrix)
+		return (NULL);
 	i = 0;
 	while (i < m_len)
 	{
 		matrix[i] = ft_calloc(m_len, sizeof(double));
+		if (!matrix[i])
+		{
+			free_matrix(matrix);
+			return (NULL);
+		}
 		i++;
 	}
 	matrix[m_len] = NULL;
@@ -107,7 +114,7 @@ int	m_compare(double **u, double **v)
 	return (1);
 }
 
-double	**m_identity(double **u)
+double	**m_identity(double **u) //multiply by identity matrix
 {
 	int		row;
 	int		column;

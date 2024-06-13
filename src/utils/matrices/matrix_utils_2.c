@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 14:26:51 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/04 15:57:24 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/13 17:39:57 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,31 @@ double	**m_inverse(double **matrix)
 		row++;
 	}
 	return (inverse);
+}
+
+double	**m_translate(t_vector translation) // translate 2D vector to 3D matrix
+{
+	double	**translation_matrix;
+
+	translation_matrix = m_init(4);
+	translation_matrix[0][0] = 1;
+	translation_matrix[1][1] = 1;
+	translation_matrix[2][2] = 1;
+	translation_matrix[3][3] = 1;
+	translation_matrix[0][3] = translation.x;
+	translation_matrix[1][3] = translation.y;
+	translation_matrix[2][3] = translation.z;
+	return (translation_matrix);
+}
+
+double	**m_scale(t_vector scale) // scale 2D vector to 3D matrix
+{
+	double	**scale_matrix;
+
+	scale_matrix = m_init(4);
+	scale_matrix[0][0] = scale.x;
+	scale_matrix[1][1] = scale.y;
+	scale_matrix[2][2] = scale.z;
+	scale_matrix[3][3] = 1;
+	return (scale_matrix);
 }

@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 16:30:42 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/04 16:20:17 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/13 17:47:42 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ void test_m_transpose()
 }
 
 // Test for m_determinant
-void tets_m_determinant()
+void test_m_determinant()
 {
 	double u_vals[3][3] = {
 		{ 3, 5, 0},
@@ -197,7 +197,7 @@ void tets_m_determinant()
 	free_matrix(test);
 }
 
-void tets_m_cofactor()
+void test_m_cofactor()
 {
 	double u_vals[3][3] =
 	{
@@ -216,7 +216,7 @@ void tets_m_cofactor()
 	free_matrix(u);
 }
 
-void tets_m4_cofactor()
+void test_m4_cofactor()
 {
 	double u_vals[4][4] =
 	{
@@ -376,20 +376,97 @@ void	test_m_inverse_mult()
 	free_matrix(expected_result);
 }
 
+void	test_m_translation(void)
+{
+	t_vector translation = { 5, -3, 2, 1};
+	double** translation_matrix = m_translate(translation);
+	double expected_vals[4][4] =
+	{
+		{ 1, 0, 0, 5},
+		{ 0, 1, 0, -3},
+		{ 0, 0, 1, 2},
+		{ 0, 0, 0, 1}
+	};
+	//make sure translation matrix is correct
+	double *expected_vals_ptr[4] = { expected_vals[0], expected_vals[1], expected_vals[2], expected_vals[3]};
+	double** expected_result = initialize_matrix(expected_vals_ptr, 4);
+	assert(m_compare(translation_matrix, expected_result) == 1);
+	
+	//Multiplying by a translation matrix
+	t_vector point = { -3, 4, 5, 1};
+	t_vector result_vector = { 2, 1, 7, 1};
+	t_vector result = mv_mult(translation_matrix, point);
+	assert(v_compare(result, result_vector) == 1);
+
+	//Multiplying by the inverse of a translation matrix
+	t_vector result_inverse_vector = { -8, 7, 3, 1};
+	double **inverse = m_inverse(translation_matrix);
+	t_vector result2 = mv_mult(inverse, point);
+	assert(v_compare(result2, result_inverse_vector) == 1);
+
+	//Multiplying by a translation matrix does not affect vectors
+	t_vector v = { 1, 2, 3, 0};
+	t_vector result3 = mv_mult(translation_matrix, v);
+	assert(v_compare(result3, v) == 1);
+
+	free_matrix(translation_matrix);
+	free_matrix(expected_result);
+}
+
+void	test_m_scaling(void)
+{
+	t_vector scale = { 2, 3, 4, 1};
+	double** scale_matrix = m_scale(scale);
+	double expected_vals[4][4] =
+	{
+		{ 2, 0, 0, 0},
+		{ 0, 3, 0, 0},
+		{ 0, 0, 4, 0},
+		{ 0, 0, 0, 1}
+	};
+	//make sure scale matrix is correct
+	double *expected_vals_ptr[4] = { expected_vals[0], expected_vals[1], expected_vals[2], expected_vals[3]};
+	double** expected_result = initialize_matrix(expected_vals_ptr, 4);
+	assert(m_compare(scale_matrix, expected_result) == 1);
+	
+	//Multiplying by a scale matrix
+	t_vector point = { -4, 6, 8, 1};
+	t_vector result_vector = { -8, 18, 32, 1};
+	t_vector result = mv_mult(scale_matrix, point);
+	assert(v_compare(result, result_vector) == 1);
+
+	//Multiplying by the inverse of a scale matrix
+	t_vector result_inverse_vector = { -2, 2, 2, 1};
+	double **inverse = m_inverse(scale_matrix);
+	t_vector result2 = mv_mult(inverse, point);
+	assert(v_compare(result2, result_inverse_vector) == 1);
+
+	//Multiplying by a scale matrix does affect vectors
+	t_vector result3_vector = { -8, 18, 32, 0};
+	t_vector vector = { -4, 6, 8, 0};
+	t_vector result3 = mv_mult(scale_matrix, vector);
+	assert(v_compare(result3, result3_vector) == 1);
+
+	free_matrix(scale_matrix);
+	free_matrix(expected_result);
+}
+
 // Main function to execute all tests
-int test_matrices()
+int test_matrices(void)
 {
 	test_m_len();
 	test_m_mult();
 	test_mv_mult();
 	test_m_identity();
 	test_m_transpose();
-	tets_m_determinant();
-	tets_m_cofactor();
-	tets_m4_cofactor();
+	test_m_determinant();
+	test_m_cofactor();
+	test_m4_cofactor();
 	test_m_determinant_check();
 	test_m_inverse();
 	test_m_inverse_mult();
+	test_m_translation();
+	test_m_scaling();
 
 	printf("All matrices tests passed!\n");
 

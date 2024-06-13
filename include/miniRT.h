@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/04 16:26:37 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/13 17:40:45 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -299,6 +299,8 @@ double		m_determinant(double **u);
 double		m_minor(double **u, int row, int column);
 double		m_cofactor(double **u, int row, int column);
 double		**m_inverse(double **matrix);
+double		**m_translate(t_vector translation);
+double		**m_scale(t_vector scale);
 
 /* Free Memory */
 void			free_double_pointer(char **double_pointer);
