@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 14:26:51 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/13 17:39:57 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/13 19:06:50 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,12 @@ double	**m_scale(t_vector scale) // scale 2D vector to 3D matrix
 	scale_matrix[2][2] = scale.z;
 	scale_matrix[3][3] = 1;
 	return (scale_matrix);
+}
+
+t_vector	m_reflect(t_vector normal)
+{
+	t_vector	reflect_vector;
+
+	reflect_vector = v_init(-1, 1, 1, 1);
+	return (mv_mult(m_scale(reflect_vector), normal));
 }

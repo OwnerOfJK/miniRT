@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 16:30:42 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/13 17:47:42 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/13 19:08:28 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -451,6 +451,14 @@ void	test_m_scaling(void)
 	free_matrix(expected_result);
 }
 
+void	test_m_reflect(void)
+{
+	t_vector point = { 2, 3, 4, 1};
+	t_vector reflect = m_reflect(point);
+	t_vector expected_result = { -2, 3, 4, 1};
+	assert(v_compare(reflect, expected_result) == 1);
+}
+
 // Main function to execute all tests
 int test_matrices(void)
 {
@@ -467,6 +475,7 @@ int test_matrices(void)
 	test_m_inverse_mult();
 	test_m_translation();
 	test_m_scaling();
+	test_m_reflect();
 
 	printf("All matrices tests passed!\n");
 
