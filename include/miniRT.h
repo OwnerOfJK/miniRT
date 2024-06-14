@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/14 19:41:55 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/15 00:21:39 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -315,6 +315,7 @@ t_vector	m_reflect(t_vector normal);
 t_ray		*ray_init(t_vector origin, t_vector direction);
 t_vector	ray_position(t_ray *ray, double t);
 t_intersections	sphere_intersections(t_sphere *sp, t_ray *ray);
+t_ray	ray_transform(t_ray *ray, double **matrix);
 
 /* Free Memory */
 void		free_double_pointer(char **double_pointer);
