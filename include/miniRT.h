@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/13 19:07:37 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/13 21:14:18 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -303,8 +303,12 @@ double		**m_translate(t_vector translation);
 double		**m_scale(t_vector scale);
 t_vector	m_reflect(t_vector normal);
 
+/* Intersections */
+t_ray		*ray_init(t_vector origin, t_vector direction);
+t_vector	ray_position(t_ray *ray, double t);
+
 /* Free Memory */
-void			free_double_pointer(char **double_pointer);
+void		free_double_pointer(char **double_pointer);
 void		free_matrix(double **matrix);
 
 /* Rendering */
@@ -315,10 +319,11 @@ void			my_mlx_pixel_put(t_graphics *img, int x, int y, int color);
 //need to delete later
 void			vec_print(t_vector vec);
 void			print_input(t_input *input);
-void 		print_matrix(double **matrix);
+void 			print_matrix(double **matrix);
 
 /* Testing */
 void		test_vectors(void);
 int			test_matrices();
+int			test_intersections(void);
 
 #endif
