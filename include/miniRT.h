@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/13 21:14:18 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/14 19:41:55 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,6 +235,14 @@ typedef struct s_hit
 }	t_hit;
 */
 
+typedef struct s_intersections
+{
+	int		count;
+	double	t1;
+	double	t2;
+}	t_intersections;
+
+
 /* Parsing */
 t_input			*parse_input(char *file_path);
 t_alightning	*parse_alightning(char **object_configs);
@@ -306,6 +314,7 @@ t_vector	m_reflect(t_vector normal);
 /* Intersections */
 t_ray		*ray_init(t_vector origin, t_vector direction);
 t_vector	ray_position(t_ray *ray, double t);
+t_intersections	sphere_intersections(t_sphere *sp, t_ray *ray);
 
 /* Free Memory */
 void		free_double_pointer(char **double_pointer);
@@ -324,6 +333,6 @@ void 			print_matrix(double **matrix);
 /* Testing */
 void		test_vectors(void);
 int			test_matrices();
-int			test_intersections(void);
+int			test_intersections(t_input	*input);
 
 #endif
