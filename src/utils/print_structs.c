@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 23:13:40 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/28 01:46:06 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/03 14:44:42 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,3 +99,4 @@ void	print_input(t_input *input)
 	print_plane(input->plane);
 	print_cylinder(input->cylinder);
 }
+

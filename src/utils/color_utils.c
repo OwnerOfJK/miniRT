@@ -1,39 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_data.c                                        :+:      :+:    :+:   */
+/*   color_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/21 23:20:40 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/04 14:56:46 by jkaller          ###   ########.fr       */
+/*   Created: 2024/05/31 19:29:11 by jkaller           #+#    #+#             */
+/*   Updated: 2024/05/31 19:42:53 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniRT.h"
 
-void	free_double_pointer(char **double_pointer)
+t_color	c_add(t_color u, t_color v)
 {
-	int	i;
+	t_color	w;
 
-	i = 0;
-	while (double_pointer[i] != NULL)
-	{
-		free(double_pointer[i]);
-		i++;
-	}
-	free(double_pointer);
+	w.r = u.r + v.r;
+	w.g = u.g + v.g;
+	w.b = u.b + v.b;
+	return (w);
 }
 
-void	free_matrix(double **matrix)
+t_color	c_sub(t_color u, t_color v)
 {
-	int	i;
+	t_color	w;
 
-	i = 0;
-	while (i < m_len(matrix))
-	{
-		free(matrix[i]);
-		i++;
-	}
-	free(matrix);
+	w.r = u.r - v.r;
+	w.g = u.g - v.g;
+	w.b = u.b - v.b;
+	return (w);
+}
+
+t_color	c_mult(t_color u, t_color v)
+{
+	t_color	w;
+
+	w.r = u.r * v.r;
+	w.g = u.g * v.g;
+	w.b = u.b * v.b;
+	return (w);
+}
+
+t_color	c_scalar(t_color u, double t)
+{
+	u.r *= t;
+	u.g *= t;
+	u.b *= t;
+	return (u);
 }
