@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/15 00:21:39 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/15 17:14:02 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,11 +215,6 @@ typedef struct s_graphics
 
 }	t_graphics;
 
-typedef struct s_data
-{
-	t_graphics	display;
-}	t_data;
-
 /*
 	shape the shape that was hit
 	ray The ray that hit the shape
@@ -235,12 +230,27 @@ typedef struct s_hit
 }	t_hit;
 */
 
+typedef struct s_viewport
+{
+	double	fov_radians;
+	double	viewport_height;
+	double	viewport_width;
+}	t_viewport;
+
 typedef struct s_intersections
 {
 	int		count;
 	double	t1;
 	double	t2;
 }	t_intersections;
+
+typedef struct s_data
+{
+	t_graphics		display;
+	t_intersections	*intersections;
+	t_input			*input;
+	t_viewport		*viewport;
+}	t_data;
 
 
 /* Parsing */
@@ -335,5 +345,6 @@ void 			print_matrix(double **matrix);
 void		test_vectors(void);
 int			test_matrices();
 int			test_intersections(t_input	*input);
+int    		test_proof_of_concept(t_data *data);
 
 #endif

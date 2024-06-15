@@ -5,7 +5,7 @@
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
       "request": "launch",
-      "args": [""],
+      "args": ["scenes/test_inputs/sphere_intersection.rt"],
       "stopAtEntry": false,
       "externalConsole": false,
       "cwd": "/home/jkaller/Desktop/HomeOf42/Core_Curriculum_Projects/Rank04/miniRT",
