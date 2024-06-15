@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 20:25:49 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/06/03 19:46:18 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/06/15 14:34:12 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	render_scene(t_data *data)
 	int		x;
 	int		y;
 	int		color;
-	t_ray	*ray;
+	//t_ray	*ray;
 
 	color = 0x0000FF; //blue
-	ray = init_ray();
+	//ray = init_ray();
 	y = -1;
 	while (++y < HEIGHT)
 	{

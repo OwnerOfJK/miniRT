@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/15 13:04:17 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/06/15 14:30:36 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@
 
 # define EPSILON 0.0001
 
-
-
 /* Data Structures */
 typedef struct s_color
 {
@@ -64,19 +62,17 @@ typedef struct s_vector
 	double	w;
 }	t_vector;
 
-
-
-
 /*
 origin : starting point
 direction : where it points
 
 CHANGED TO POINTER JUNE 3
+CHANGED BACK TO NOT POINTER JUNE 15
 */
 typedef struct s_ray
 {
-	t_vector	*origin;
-	t_vector	*direction;
+	t_vector	origin;
+	t_vector	direction;
 }	t_ray;
 
 /*
@@ -221,18 +217,24 @@ typedef struct s_graphics
 
 }	t_graphics;
 
+/*
+
+
+*/
 typedef struct s_data
 {
 	t_graphics	display;
 	t_input		*input;
+	t_light		*lights;
+	t_object	*objects;
 
 }	t_data;
 
 /*
-	shape the shape that was hit
-	ray The ray that hit the shape
-	t The intersection point
-	color The color of the hit shape
+	shape : the shape that was hit
+	ray : The ray that hit the shape
+	t :  The intersection point
+	color : The color of the hit shape
 */
 /*
 typedef struct s_hit
@@ -249,6 +251,7 @@ typedef struct s_intersections
 	double	t1;
 	double	t2;
 }	t_intersections;
+
 
 
 /* Parsing */
@@ -274,6 +277,7 @@ void			launching_mlx(t_data *data);
 int				key_handler(int keysym, t_data *data);
 void			event_init(t_data *data);
 t_ray			*init_ray(void);
+t_data			*create_world(t_data *world);
 
 /* Error Handling */
 void			error_message(char *error_message);
@@ -306,30 +310,30 @@ char			**find_index(char** object_configs, char *index, int len);
 char			*find_and_extract_double(char *str, int pos);
 
 /* Matrix */
-double		**m_init(int m_len);
-int			m_len(double **matrix);
-double		**m_mult(double **u, double **v);
-t_vector	mv_mult(double **u, t_vector v);
-int			m_compare(double **u, double **v);
-double		**m_identity(double **u);
-double		**m_transpose(double **u);
-double		m_determinant(double **u);
-double		m_minor(double **u, int row, int column);
-double		m_cofactor(double **u, int row, int column);
-double		**m_inverse(double **matrix);
-double		**m_translate(t_vector translation);
-double		**m_scale(t_vector scale);
-t_vector	m_reflect(t_vector normal);
+double			**m_init(int m_len);
+int				m_len(double **matrix);
+double			**m_mult(double **u, double **v);
+t_vector		mv_mult(double **u, t_vector v);
+int				m_compare(double **u, double **v);
+double			**m_identity(double **u);
+double			**m_transpose(double **u);
+double			m_determinant(double **u);
+double			m_minor(double **u, int row, int column);
+double			m_cofactor(double **u, int row, int column);
+double			**m_inverse(double **matrix);
+double			**m_translate(t_vector translation);
+double			**m_scale(t_vector scale);
+t_vector		m_reflect(t_vector normal);
 
 /* Intersections */
-t_ray		*ray_init(t_vector origin, t_vector direction);
-t_vector	ray_position(t_ray *ray, double t);
+t_ray			*ray_init(t_vector origin, t_vector direction);
+t_vector		ray_position(t_ray *ray, double t);
 t_intersections	sphere_intersections(t_sphere *sp, t_ray *ray);
-t_ray	ray_transform(t_ray *ray, double **matrix);
+t_ray			ray_transform(t_ray *ray, double **matrix);
 
 /* Free Memory */
-void		free_double_pointer(char **double_pointer);
-void		free_matrix(double **matrix);
+void			free_double_pointer(char **double_pointer);
+void			free_matrix(double **matrix);
 
 /* Rendering */
 void			render_scene(t_data *data);
@@ -339,11 +343,11 @@ void			my_mlx_pixel_put(t_graphics *img, int x, int y, int color);
 //need to delete later
 void			vec_print(t_vector vec);
 void			print_input(t_input *input);
-void 			print_matrix(double **matrix);
+void			print_matrix(double **matrix);
 
 /* Testing */
-void		test_vectors(void);
-int			test_matrices();
-int			test_intersections(t_input	*input);
+void			test_vectors(void);
+int				test_matrices(void);
+int				test_intersections(t_input	*input);
 
 #endif
