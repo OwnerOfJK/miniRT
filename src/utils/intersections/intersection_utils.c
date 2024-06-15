@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 20:43:09 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/14 23:59:41 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/15 17:24:46 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_intersections	sphere_intersections(t_sphere *sp, t_ray *ray)
 	double			delta;
 
 	radius = (sp->diameter / 2);
-	sphere_to_ray = v_sub(ray->origin, *sp->pos);
+	sphere_to_ray = v_sub(ray->origin, sp->pos);
 	equat2.a = v_dot(ray->direction, ray->direction);
 	equat2.b = 2.0 * v_dot(ray->direction, sphere_to_ray);
 	equat2.c = v_dot(sphere_to_ray, sphere_to_ray) - (radius * radius);

@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 13:41:33 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/15 17:15:41 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/15 17:24:35 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ double	pixel_map_y(int y, t_viewport *viewport)
 t_ray	*prepare_ray(t_data *data, double viewport_x, double viewport_y)
 {
 	t_ray		*ray;
-	t_vector	*origin;
+	t_vector	origin;
 	t_vector	direction;
 	double		length;
 
@@ -72,7 +72,7 @@ t_ray	*prepare_ray(t_data *data, double viewport_x, double viewport_y)
 	length = v_length(direction);
 	direction = v_normalize(direction);
 	// Initialize the ray with the origin and direction
-	ray = ray_init(*origin, direction);
+	ray = ray_init(origin, direction);
 	return (ray);
 }
 

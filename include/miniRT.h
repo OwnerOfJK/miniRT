@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/15 17:14:02 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/15 17:23:15 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ typedef enum s_object_types
 typedef struct s_alightning
 {
 	double		ratio;
-	t_color		*color;
+	t_color		color;
 }	t_alightning;
 
 /*
@@ -123,8 +123,8 @@ typedef struct s_alightning
 */
 typedef struct s_camera
 {
-	t_vector	*pos;
-	t_vector	*orientation_vector;
+	t_vector	pos;
+	t_vector	orientation_vector;
 	double		fov;
 }	t_camera;
 
@@ -135,7 +135,7 @@ typedef struct s_camera
 */
 typedef struct s_light
 {
-	t_vector	*pos;
+	t_vector	pos;
 	double		brightness;
 }	t_light;
 
@@ -153,9 +153,9 @@ typedef struct s_base_node
 typedef struct s_sphere
 {
 	t_base_node		base;
-	t_vector		*pos;
+	t_vector		pos;
 	double			diameter;
-	t_color			*color;
+	t_color			color;
 	struct s_sphere	*next;
 }	t_sphere;
 
@@ -167,9 +167,9 @@ typedef struct s_sphere
 typedef struct s_plane
 {
 	t_base_node		base;
-	t_vector		*pos;
-	t_vector		*normal_vector;
-	t_color			*color;
+	t_vector		pos;
+	t_vector		normal_vector;
+	t_color			color;
 	struct s_plane	*next;
 }	t_plane;
 
@@ -184,11 +184,11 @@ typedef struct s_plane
 typedef struct s_cylinder
 {
 	t_base_node			base;
-	t_vector			*pos;
-	t_vector			*axis_vector;
+	t_vector			pos;
+	t_vector			axis_vector;
 	double				diameter;
 	double				height;
-	t_color				*color;
+	t_color				color;
 	struct s_cylinder	*next;
 }	t_cylinder;
 
@@ -261,9 +261,9 @@ t_light			*parse_light(char **object_configs);
 t_sphere		*parse_sphere(char **object_configs);
 t_plane			*parse_plane(char **object_configs);
 t_cylinder		*parse_cylinder(char **object_configs);
-t_color			*parse_color(char *str);
-t_vector		*parse_coordinate(char *str);
-t_vector		*parse_vector(char *str);
+t_color			parse_color(char *str);
+t_vector		parse_coordinate(char *str);
+t_vector		parse_vector(char *str);
 
 /* Linked List Parsing*/
 t_sphere		*ft_lstnew_sphere(char *str);
