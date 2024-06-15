@@ -6,13 +6,19 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 20:25:49 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/06/15 14:34:12 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/06/15 15:45:11 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniRT.h"
 
+int	clostest(t_data *data, t_ray *ray, t_intersections *closest)
+{
+	t_intersections	tmp;
 
+	//go through all the shapes and keep the smallest t
+
+}
 
 void	render_scene(t_data *data)
 {
