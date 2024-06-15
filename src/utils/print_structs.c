@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_structs.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 23:13:40 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/03 14:44:42 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/15 15:31:55 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	print_cylinder(t_cylinder *cylinder)
 	printf("\n");
 }
 
-void	print_input(t_input *input)
+void	print_data(t_data *input)
 {
 	print_alightning(input->alightning);
 	print_camera(input->camera);

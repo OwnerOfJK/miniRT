@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 22:14:18 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/14 19:49:25 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/15 15:31:55 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniRT.h"
 
-t_input	*configs_to_struct(char	**object_configs)
+t_data	*configs_to_struct(char	**object_configs)
 {
-	t_input	*input;
+	t_data	*input;
 
-	input = malloc(sizeof(t_input));
+	input = malloc(sizeof(t_data));
 	if (input == NULL)
 		error_message("Error: Memory allocation failed.\n");
 	input->alightning = parse_alightning(find_index(object_configs, "A", 1));
@@ -28,15 +28,15 @@ t_input	*configs_to_struct(char	**object_configs)
 	return (input);
 }
 
-t_input	*parse_input(char *file_path)
+t_data	*parse_input(char *file_path)
 {
 	char	**object_configs;
-	t_input	*input;
+	t_data	*input;
 
 	object_configs = NULL;
 	object_configs = check_config(file_path);
 	input = configs_to_struct(object_configs);
-	//print_input(input); // This function will be deleted
+	//print_data(input); // This function will be deleted
 	free_double_pointer(object_configs); // This function will be deleted
 	return (input);
 }

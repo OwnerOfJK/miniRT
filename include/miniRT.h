@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/15 14:30:36 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/06/15 15:32:28 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,10 @@ typedef struct s_color
 	double	b;
 }	t_color;
 
+/*
+w = 1 -> point
+w = 0 -> vector
+*/
 typedef struct s_vector
 {
 	double	x;
@@ -92,13 +96,13 @@ typedef struct s_equat2
 	double	t2;
 }	t_equat2;
 
-typedef struct s_object
-{
-	int				type;
-	void			*object;
-	double			**matrix;
-	struct s_object	*next;
-}	t_object;
+// typedef struct s_object
+// {
+// 	int				type;
+// 	void			*object;
+// 	double			**matrix;
+// 	struct s_object	*next;
+// }	t_object;
 
 typedef enum s_object_types
 {
@@ -194,16 +198,6 @@ typedef struct s_cylinder
 	struct s_cylinder	*next;
 }	t_cylinder;
 
-typedef struct s_input
-{
-	t_alightning		*alightning;
-	t_camera			*camera;
-	t_light				*light;
-	t_sphere			*sphere;
-	t_plane				*plane;
-	t_cylinder			*cylinder;
-}	t_input;
-
 
 typedef struct s_graphics
 {
@@ -217,18 +211,36 @@ typedef struct s_graphics
 
 }	t_graphics;
 
-/*
-
-
-*/
 typedef struct s_data
 {
-	t_graphics	display;
-	t_input		*input;
-	t_light		*lights;
-	t_object	*objects;
-
+	t_graphics			display;
+	t_alightning		*alightning;
+	t_camera			*camera;
+	t_light				*light;
+	t_sphere			*sphere;
+	t_plane				*plane;
+	t_cylinder			*cylinder;
 }	t_data;
+// /*
+// 	@param display : mlx variables
+// 	@param input :
+// 	@param light :
+// 	@param ambient : scene's ambient light
+// 	@param camera :  scene's camera
+// */
+// typedef struct s_data
+// {
+// 	t_graphics		display;
+// 	t_data			*input;
+// 	t_light			*light;
+// 	t_alightning	ambient;
+// 	t_camera		*camera;
+// 	t_sphere		*sphere;
+// 	t_plane			*plane;
+// 	t_cylinder		*cylinder;
+// 	//t_object	*objects;
+
+// }	t_data;
 
 /*
 	shape : the shape that was hit
@@ -255,7 +267,7 @@ typedef struct s_intersections
 
 
 /* Parsing */
-t_input			*parse_input(char *file_path);
+t_data			*parse_input(char *file_path);
 t_alightning	*parse_alightning(char **object_configs);
 t_camera		*parse_camera(char **object_configs);
 t_light			*parse_light(char **object_configs);
@@ -277,7 +289,7 @@ void			launching_mlx(t_data *data);
 int				key_handler(int keysym, t_data *data);
 void			event_init(t_data *data);
 t_ray			*init_ray(void);
-t_data			*create_world(t_data *world);
+t_data			*create_world(t_data *world, t_data *input);
 
 /* Error Handling */
 void			error_message(char *error_message);
@@ -342,12 +354,12 @@ void			my_mlx_pixel_put(t_graphics *img, int x, int y, int color);
 /*debug utils*/
 //need to delete later
 void			vec_print(t_vector vec);
-void			print_input(t_input *input);
+void			print_data(t_data *input);
 void			print_matrix(double **matrix);
 
 /* Testing */
 void			test_vectors(void);
 int				test_matrices(void);
-int				test_intersections(t_input	*input);
+int				test_intersections(t_data	*input);
 
 #endif

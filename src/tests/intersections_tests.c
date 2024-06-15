@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersections_tests.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 20:34:47 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/15 00:26:49 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/15 15:31:55 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	test_ray_position(void)
 	assert(position.z == 4);
 }
 
-void	test_sphere_intersections(t_input	*input)
+void	test_sphere_intersections(t_data	*input)
 {
 	t_sphere		*sp;
 	t_ray			*ray;
@@ -113,7 +113,7 @@ void	test_ray_transform(void)
 	assert(position.z == 32);
 }
 
-int	test_intersections(t_input	*input)
+int	test_intersections(t_data	*input)
 {
 	test_ray_position();
 	test_sphere_intersections(input);
