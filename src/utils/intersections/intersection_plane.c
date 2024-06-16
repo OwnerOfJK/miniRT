@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 18:16:39 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/06/16 22:09:43 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/06/16 22:25:44 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ t_intersections	plane_inter(t_plane *pl, t_ray *ray)
 	while (pl != NULL)
 	{
 		intersect = plane_intersect(pl, ray);
-
 		if (intersect.count != 0)
 		{
 			intersect.hit = 1;
@@ -57,10 +56,8 @@ t_intersections	plane_intersect(t_plane *pl, t_ray *ray)
 	intersections.count = 0;
 
 	o_p = v_sub(ray->origin, pl->pos);
-
 	if (v_dot(ray->direction, pl->normal_vector) != 0)
 	{
-
 		denominator = v_dot(pl->normal_vector, ray->direction);
 		// if (denominator == 0)
 		// 	return (-1);

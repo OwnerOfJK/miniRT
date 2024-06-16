@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 18:19:12 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/06/16 18:19:40 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/06/16 22:25:25 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ t_intersections	sphere_intersections(t_sphere *sp, t_ray *ray)
 		set_intersections(equat2.t1, equat2.t2, &intersections);
 		intersections.color = sp->color;
 	}
-
 	else
 		intersections.count = 0;
 	return (intersections);
