@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 13:41:33 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/16 18:42:56 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/06/16 21:52:06 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,8 @@ void	render(t_data *data)
 			ray = prepare_ray(data, viewport_x, viewport_y);
 			// Check for intersections with the sphere
 
-			intersections = plane_inter(data->input->plane, ray);
+			intersections = shape_intersection(data->input->plane, data->input->sphere, ray);
+			//intersections = plane_inter(data->input->plane, ray);
 			//intersections = spheres_inter(data->input->sphere, ray);
 
 			// Set the pixel color based on whether there was an intersection

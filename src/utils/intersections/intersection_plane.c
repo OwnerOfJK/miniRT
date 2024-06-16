@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 18:16:39 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/06/16 21:23:38 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/06/16 22:09:43 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ t_intersections	plane_inter(t_plane *pl, t_ray *ray)
 	t_intersections	intersect;
 	t_intersections	temp;
 
+	temp.hit = 0;
 	intersect.hit = 0;
-	temp.t1 = DBL_MAX;
+	temp.t1 = DBL_MAX; //not sure about this
 	while (pl != NULL)
 	{
 		intersect = plane_intersect(pl, ray);
@@ -52,8 +53,6 @@ t_intersections	plane_intersect(t_plane *pl, t_ray *ray)
 	double			numerator;
 	double			denominator;
 	double			t;
-    // intersections.t1 = DBL_MAX;
-    // intersections.t2 = DBL_MAX;
 
 	intersections.count = 0;
 
@@ -70,7 +69,7 @@ t_intersections	plane_intersect(t_plane *pl, t_ray *ray)
 		// printf("Numerator = %f\n", numerator);
 		// printf("Denominator = %f\n", denominator);
 		// printf("t = %f\n", t);
-		if (t > 0)
+		if (t >= 0)
 		{
 			intersections.count = 1;
 			printf("hit plane\n");
