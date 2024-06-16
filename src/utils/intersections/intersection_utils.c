@@ -3,15 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   intersection_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 20:43:09 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/15 17:24:46 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/16 17:15:06 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/miniRT.h"
 
+/*
+Computes a colour in format trgb for mlx library
+*/
+t_color_mlx	rgb_to_colour(t_color rgb)
+{
+	return (*(int *)(unsigned char [4]){rgb.b, rgb.g, rgb.r, 255});
+}
+
+// void static print_sphere(t_sphere *sphere) {
+//         printf("Sphere\n");
+//         printf("Position: %f %f %f\n", sphere->pos.x, sphere->pos.y, sphere->pos.z);
+//         printf("Diameter: %f\n", sphere->diameter);
+//         printf("Color: %f %f %f\n", sphere->color.r, sphere->color.g, sphere->color.b);
+//        // sphere = (t_sphere *)sphere->base.next;
+//     	printf("\n");
+// }
+
+t_intersections	spheres_inter(t_sphere *sp, t_ray *ray)
+{
+	t_intersections	intersections;
+	(void)ray;
+
+	intersections = sphere_intersections(sp, ray);
+
+
+	// while(sp!= NULL)
+	// {
+	// 	print_sphere(sp);
+	// 	sp = (t_sphere *)sp->base.next;
+	// }
+
+
+	return (intersections);
+}
 void	set_intersections(double t1, double t2, t_intersections *intersections)
 {
 	double	temp;
@@ -40,6 +74,8 @@ void	set_intersections(double t1, double t2, t_intersections *intersections)
 		intersections->count = 1;
 	}
 }
+
+
 
 t_intersections	sphere_intersections(t_sphere *sp, t_ray *ray)
 {

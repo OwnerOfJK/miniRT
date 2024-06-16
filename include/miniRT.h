@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/15 17:23:15 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/16 17:14:18 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 
 # define EPSILON 0.0001
 
-
+typedef int			t_color_mlx;
 
 /* Data Structures */
 typedef struct s_color
@@ -59,8 +59,6 @@ typedef struct s_vector
 	double	z;
 	double	w;
 }	t_vector;
-
-
 
 
 /*
@@ -221,14 +219,14 @@ typedef struct s_graphics
 	t The intersection point
 	color The color of the hit shape
 */
-/*
+
 typedef struct s_hit
 {
 	t_ray		ray;
 	t_vector	t;
 	t_color		color;
 }	t_hit;
-*/
+
 
 typedef struct s_viewport
 {
@@ -327,6 +325,8 @@ t_vector	ray_position(t_ray *ray, double t);
 t_intersections	sphere_intersections(t_sphere *sp, t_ray *ray);
 t_ray	ray_transform(t_ray *ray, double **matrix);
 
+t_intersections	spheres_inter(t_sphere *sp, t_ray *ray);
+
 /* Free Memory */
 void		free_double_pointer(char **double_pointer);
 void		free_matrix(double **matrix);
@@ -334,6 +334,8 @@ void		free_matrix(double **matrix);
 /* Rendering */
 void			render_scene(t_data *data);
 void			my_mlx_pixel_put(t_graphics *img, int x, int y, int color);
+t_color_mlx		rgb_to_colour(t_color rgb);
+
 
 /*debug utils*/
 //need to delete later

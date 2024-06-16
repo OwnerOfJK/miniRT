@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   proof_of_concept.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 13:41:33 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/15 17:24:35 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/16 17:16:23 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,15 @@ void	render(t_data *data)
 			// Prepare the ray for the current pixel
 			ray = prepare_ray(data, viewport_x, viewport_y);
 			// Check for intersections with the sphere
-			intersections = sphere_intersections(data->input->sphere, ray);
+
+			intersections = spheres_inter(data->input->sphere, ray);
+			//intersections = sphere_intersections(data->input->sphere, ray);
+
+
 			// Set the pixel color based on whether there was an intersection
 			if (intersections.count == 2 || intersections.count == 1)
-				color = 0x00FF00;  // Green for hit
+				//color = 0x00FF00;  // Green for hit
+				color = rgb_to_colour(data->input->sphere->color);
 			else
 				color = 0x0000FF;  // Blue for miss
 			my_mlx_pixel_put(&data->display, x, y, color);
