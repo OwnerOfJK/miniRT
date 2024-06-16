@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 20:43:09 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/16 17:15:06 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/06/16 18:03:02 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,28 @@ t_color_mlx	rgb_to_colour(t_color rgb)
 
 t_intersections	spheres_inter(t_sphere *sp, t_ray *ray)
 {
-	t_intersections	intersections;
-	(void)ray;
+	t_intersections	intersect;
+	t_intersections	temp;
 
-	intersections = sphere_intersections(sp, ray);
+	intersect.hit = 0;
+	temp.t1 = DBL_MAX;
+	while(sp!= NULL)
+	{
+		//print_sphere(sp);
+		intersect = sphere_intersections(sp, ray);
 
-
-	// while(sp!= NULL)
-	// {
-	// 	print_sphere(sp);
-	// 	sp = (t_sphere *)sp->base.next;
-	// }
-
-
-	return (intersections);
+		if (intersect.count != 0)
+		{
+			intersect.hit = 1;
+			if (intersect.t1 < temp.t1)
+				temp = intersect;
+		}
+		sp = (t_sphere *)sp->base.next;
+	}
+	if (intersect.hit == 1)
+		return (intersect);
+	else
+		return (temp);
 }
 void	set_intersections(double t1, double t2, t_intersections *intersections)
 {
@@ -93,7 +101,11 @@ t_intersections	sphere_intersections(t_sphere *sp, t_ray *ray)
 	delta = solve_quadratic(&equat2);
 	intersections.count = 0;
 	if (delta >= 0)
+	{
 		set_intersections(equat2.t1, equat2.t2, &intersections);
+		intersections.color = sp->color;
+	}
+
 	else
 		intersections.count = 0;
 	return (intersections);

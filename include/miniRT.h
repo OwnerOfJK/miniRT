@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/16 17:14:18 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/06/16 17:53:14 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINIRT_H
 
 /* External Libraries */
+#include <float.h>
 # include <math.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -220,12 +221,12 @@ typedef struct s_graphics
 	color The color of the hit shape
 */
 
-typedef struct s_hit
-{
-	t_ray		ray;
-	t_vector	t;
-	t_color		color;
-}	t_hit;
+// typedef struct s_hit
+// {
+// 	t_ray		ray;
+// 	t_vector	t;
+// 	t_color		color;
+// }	t_hit;
 
 
 typedef struct s_viewport
@@ -237,9 +238,12 @@ typedef struct s_viewport
 
 typedef struct s_intersections
 {
-	int		count;
-	double	t1;
-	double	t2;
+	int			hit;
+	t_ray		ray;
+	t_color		color;
+	int			count;
+	double		t1;
+	double		t2;
 }	t_intersections;
 
 typedef struct s_data
