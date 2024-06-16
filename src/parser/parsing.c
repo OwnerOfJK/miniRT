@@ -6,20 +6,20 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 22:14:18 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/15 15:31:55 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/06/16 16:01:01 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniRT.h"
 
-t_data	*configs_to_struct(char	**object_configs)
+t_input	*configs_to_struct(char	**object_configs)
 {
-	t_data	*input;
+	t_input	*input;
 
 	input = malloc(sizeof(t_data));
 	if (input == NULL)
 		error_message("Error: Memory allocation failed.\n");
-	input->alightning = parse_alightning(find_index(object_configs, "A", 1));
+	input->ambient = parse_alightning(find_index(object_configs, "A", 1));
 	input->camera = parse_camera(find_index(object_configs, "C", 1));
 	input->light = parse_light(find_index(object_configs, "L", 1));
 	input->sphere = parse_sphere(find_index(object_configs, "sp", 2));

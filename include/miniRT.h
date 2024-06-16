@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/16 15:51:14 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/06/16 16:01:08 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,16 +211,18 @@ typedef struct s_graphics
 
 }	t_graphics;
 
-typedef struct s_data
-{
-	t_graphics			display;
-	t_alightning		*alightning;
-	t_camera			*camera;
-	t_light				*light;
-	t_sphere			*sphere;
-	t_plane				*plane;
-	t_cylinder			*cylinder;
-}	t_data;
+// typedef struct s_data
+// {
+// 	t_graphics			display;
+// 	t_alightning		*alightning;
+// 	t_camera			*camera;
+// 	t_light				*light;
+// 	t_sphere			*sphere;
+// 	t_plane				*plane;
+// 	t_cylinder			*cylinder;
+// }	t_data;
+
+
 // /*
 // 	@param display : mlx variables
 // 	@param input :
@@ -228,27 +230,18 @@ typedef struct s_data
 // 	@param ambient : scene's ambient light
 // 	@param camera :  scene's camera
 // */
-// typedef struct s_data
-// {
-// 	t_graphics		display;
-// 	t_data			*input;
-// 	t_light			*light;
-// 	t_alightning	ambient;
-// 	t_camera		*camera;
-// 	t_sphere		*sphere;
-// 	t_plane			*plane;
-// 	t_cylinder		*cylinder;
-// 	//t_object	*objects;
-
-// }	t_data;
-
-/*
-	shape : the shape that was hit
-	ray : The ray that hit the shape
-	t :  The intersection point
-	color : The color of the hit shape
-
-*/
+typedef struct s_input
+{
+	//t_graphics		display;
+	//t_data			*input;
+	t_light			*light;
+	t_alightning	*ambient;
+	t_camera		*camera;
+	t_sphere		*sphere;
+	t_plane			*plane;
+	t_cylinder		*cylinder;
+	//t_object	*objects;
+}	t_input;
 
 typedef struct s_hit
 {
@@ -257,7 +250,6 @@ typedef struct s_hit
 	t_vector	t;
 	t_color		color;
 }	t_hit;
-*/
 
 typedef struct s_viewport
 {

@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:39:45 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/16 15:53:19 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/06/16 15:59:32 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		error_message("Error: Wrong number of arguments\n");
 	data = malloc(sizeof(t_data));
-	data->data = parse_input(argv[1]);
+	data->input = parse_input(argv[1]);
 	//test_intersections(data->data);
 	// if (check_input(argv[1]) == EXIT_SUCCESS)
 	// 	parse_input(argv[1]);
