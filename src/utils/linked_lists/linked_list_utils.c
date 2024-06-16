@@ -6,11 +6,11 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 00:23:57 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/31 13:35:04 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/16 16:45:30 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/miniRT.h"
+#include "../../../include/miniRT.h"
 
 t_sphere	*ft_lstnew_sphere(char *str)
 {

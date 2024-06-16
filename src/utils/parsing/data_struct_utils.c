@@ -6,11 +6,11 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 23:20:16 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/27 23:39:12 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/16 16:45:36 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/miniRT.h"
+#include "../../../include/miniRT.h"
 
 int	get_config_len(char *file_path)
 {

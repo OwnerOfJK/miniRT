@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 19:29:11 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/31 19:42:53 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/16 20:18:36 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,9 @@ t_color	c_scalar(t_color u, double t)
 	u.g *= t;
 	u.b *= t;
 	return (u);
+}
+
+int	rgb_to_colour(t_color rgb)
+{
+	return (*(int *)(unsigned char [4]){rgb.b, rgb.g, rgb.r, 255});
 }

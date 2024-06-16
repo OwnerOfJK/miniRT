@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/15 17:23:15 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/16 20:40:57 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,13 @@ typedef struct s_vector
 	double	w;
 }	t_vector;
 
-
-
+typedef struct s_material
+{
+	double		ambient;
+	double		diffuse;
+	double		specular;
+	double		shininess;
+}	t_material;
 
 /*
 origin : starting point
@@ -89,21 +94,6 @@ typedef struct s_equat2
 	double	t1;
 	double	t2;
 }	t_equat2;
-
-typedef struct s_object
-{
-	int				type;
-	void			*object;
-	double			**matrix;
-	struct s_object	*next;
-}	t_object;
-
-typedef enum s_object_types
-{
-	SPHERE = 1,
-	PLANE = 2,
-	CYLINDER = 3,
-}	t_object_types;
 
 /*
 ∗ ambient lighting ratio in range [0.0,1.0]: 0.2
@@ -156,6 +146,8 @@ typedef struct s_sphere
 	t_vector		pos;
 	double			diameter;
 	t_color			color;
+	double			**transformation_matrix; //this should be part of an object struct
+	t_material		material;
 	struct s_sphere	*next;
 }	t_sphere;
 
@@ -244,6 +236,13 @@ typedef struct s_intersections
 	double	t2;
 }	t_intersections;
 
+// typedef	struct s_object
+// {
+// 	t_sphere	*sphere;
+// 	double		**transformation_matrix;
+
+// }	t_object;
+
 typedef struct s_data
 {
 	t_graphics		display;
@@ -326,6 +325,7 @@ t_ray		*ray_init(t_vector origin, t_vector direction);
 t_vector	ray_position(t_ray *ray, double t);
 t_intersections	sphere_intersections(t_sphere *sp, t_ray *ray);
 t_ray	ray_transform(t_ray *ray, double **matrix);
+t_vector 	normal_at(t_sphere *sp, t_vector world_point);
 
 /* Free Memory */
 void		free_double_pointer(char **double_pointer);
@@ -334,6 +334,12 @@ void		free_matrix(double **matrix);
 /* Rendering */
 void			render_scene(t_data *data);
 void			my_mlx_pixel_put(t_graphics *img, int x, int y, int color);
+
+/* Light */
+t_vector l_reflect(t_vector light_in, t_vector normal_vector);
+
+/* Color Utils */
+int	rgb_to_colour(t_color rgb);
 
 /*debug utils*/
 //need to delete later

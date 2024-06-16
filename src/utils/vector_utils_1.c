@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 20:23:55 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/05/31 17:23:52 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/16 20:56:46 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ t_vector	v_neg(t_vector u)
 */
 double	v_length(t_vector v)
 {
-	if (v.w == 1)
-		ft_putstr_fd("v_length: Why are you \
-		calculating the length of a point?\n", 2);
+	// if (v.w == 1)
+	// 	ft_putstr_fd("v_length: Why are you \
+	// 	calculating the length of a point?\n", 2);
 	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
 }

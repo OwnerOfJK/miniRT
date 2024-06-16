@@ -6,11 +6,11 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:55:19 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/15 17:21:43 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/16 16:45:40 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/miniRT.h"
+#include "../../../include/miniRT.h"
 
 char	*find_and_extract_double(char *str, int pos)
 {
