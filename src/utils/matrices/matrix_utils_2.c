@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 14:26:51 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/13 19:06:50 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/16 22:48:10 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	m_len(double **matrix)
 	int	i;
 
 	i = 0;
+	if (!matrix)
+		return (0);
 	while (matrix[i])
 		i++;
 	return (i);

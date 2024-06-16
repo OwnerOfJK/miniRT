@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 16:23:05 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/16 21:29:47 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/16 22:41:40 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int calculate_lighting(t_data *data, t_vector intersection_point, t_vector norma
     b = fmin(1.0, fmax(0.0, b));
 
     // Convert to integer color representation
-    int color = rgb_to_colour((t_color){r * 255, g * 255, b * 255});
+    t_color_mlx color = rgb_to_colour((t_color){r * 255, g * 255, b * 255});
 	
     return (color);
 }

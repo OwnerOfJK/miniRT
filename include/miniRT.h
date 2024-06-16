@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/16 21:51:41 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/16 22:30:14 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINIRT_H
 
 /* External Libraries */
+#include <float.h>
 # include <math.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -42,7 +43,7 @@
 
 # define EPSILON 0.0001
 
-
+typedef int			t_color_mlx;
 
 /* Data Structures */
 typedef struct s_color
@@ -213,14 +214,14 @@ typedef struct s_graphics
 	t The intersection point
 	color The color of the hit shape
 */
-/*
-typedef struct s_hit
-{
-	t_ray		ray;
-	t_vector	t;
-	t_color		color;
-}	t_hit;
-*/
+
+// typedef struct s_hit
+// {
+// 	t_ray		ray;
+// 	t_vector	t;
+// 	t_color		color;
+// }	t_hit;
+
 
 typedef struct s_viewport
 {
@@ -231,9 +232,12 @@ typedef struct s_viewport
 
 typedef struct s_intersections
 {
-	int		count;
-	double	t1;
-	double	t2;
+	int			hit;
+	t_ray		ray;
+	t_color		color;
+	int			count;
+	double		t1;
+	double		t2;
 }	t_intersections;
 
 // typedef	struct s_object
@@ -333,6 +337,11 @@ t_vector	ray_position(t_ray *ray, double t);
 t_intersections	sphere_intersections(t_sphere *sp, t_ray *ray);
 t_ray	ray_transform(t_ray *ray, double **matrix);
 
+t_intersections	plane_inter(t_plane *pl, t_ray *ray);
+t_intersections	plane_intersect(t_plane *pl, t_ray *ray);
+t_intersections	spheres_inter(t_sphere *sp, t_ray *ray);
+t_intersections	shape_intersection(t_plane *pl, t_sphere *sp, t_ray *ray);
+
 /* Free Memory */
 void		free_double_pointer(char **double_pointer);
 void		free_matrix(double **matrix);
@@ -353,7 +362,8 @@ t_viewport	*viewport_init(t_camera *camera);
 t_ray		*prepare_ray(t_data *data, double viewport_x, double viewport_y);
 
 /* Color Utils */
-int	rgb_to_colour(t_color rgb);
+t_color_mlx		rgb_to_colour(t_color rgb);
+
 
 /*debug utils*/
 //need to delete later
@@ -366,5 +376,6 @@ void		test_vectors(void);
 int			test_matrices();
 int			test_intersections(t_input	*input);
 int    		test_proof_of_concept(t_data *data);
+void test_plane_intersect();
 
 #endif

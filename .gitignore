@@ -1,6 +1,2 @@
 *.o
 miniRT
-libft
-libft/libft.a
-libft/Makefile
-libft/*.o

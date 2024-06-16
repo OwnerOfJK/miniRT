@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersections_tests.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 20:34:47 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/15 00:26:49 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/16 21:16:52 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,3 +122,62 @@ int	test_intersections(t_input	*input)
 	printf("All intersections tests passed!\n");
 	return (0);
 }
+void test_plane_intersect() {
+    t_plane pl;
+    t_ray ray;
+    t_intersections result;
+
+	pl.pos.x = 0.0;
+	pl.pos.y = -5.0;
+	pl.pos.z = -10.0;
+
+	pl.normal_vector.x = 0.0;
+	pl.normal_vector.y = 1.0;
+	pl.normal_vector.z = 0.0;
+
+	pl.color.r = 0;
+	pl.color.g = 0;
+	pl.color.b = 225;
+
+    // Cas où le rayon doit intersecter le plan (hit)
+	ray.origin.x = 0.0;
+	ray.origin.y = 0.0;
+	ray.origin.z = 0.0;
+
+	ray.direction.x = 0.0;
+	ray.direction.y = -1.0; // Direction vers le bas
+	ray.direction.z = 0.0;
+
+
+    printf("Test 1 - Ray hits the plane:\n");
+    result = plane_intersect(&pl, &ray);
+
+    if (result.count > 0) {
+        printf("Intersection found at t1 = %f\n", result.t1);
+        printf("Color of the plane at intersection: (%f, %f, %f)\n", result.color.r, result.color.g, result.color.b);
+    } else {
+        printf("No intersection found.\n");
+    }
+
+    // Cas où le rayon ne doit pas intersecter le plan (miss)
+    ray.origin.x = 0.0;
+    ray.origin.y = 0.0;
+    ray.origin.z = 0.0;
+
+    ray.direction.x = 1.0; // Direction vers la droite, perpendiculaire au plan
+    ray.direction.y = 0.0;
+    ray.direction.z = 0.0;
+
+    printf("\nTest 2 - Ray misses the plane:\n");
+    result = plane_intersect(&pl, &ray);
+
+    if (result.count > 0) {
+        printf("Intersection found at t1 = %f\n", result.t1);
+        printf("Color of the plane at intersection: (%f, %f, %f)\n", result.color.r, result.color.g, result.color.b);
+    } else {
+        printf("No intersection found.\n");
+    }
+}
+
+
+
