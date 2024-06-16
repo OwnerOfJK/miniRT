@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/15 15:47:46 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/06/16 15:51:14 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ typedef enum s_object_types
 typedef struct s_alightning
 {
 	double		ratio;
-	t_color		*color;
+	t_color		color;
 }	t_alightning;
 
 /*
@@ -129,8 +129,8 @@ typedef struct s_alightning
 */
 typedef struct s_camera
 {
-	t_vector	*pos;
-	t_vector	*orientation_vector;
+	t_vector	pos;
+	t_vector	orientation_vector;
 	double		fov;
 }	t_camera;
 
@@ -141,7 +141,7 @@ typedef struct s_camera
 */
 typedef struct s_light
 {
-	t_vector	*pos;
+	t_vector	pos;
 	double		brightness;
 }	t_light;
 
@@ -159,9 +159,9 @@ typedef struct s_base_node
 typedef struct s_sphere
 {
 	t_base_node		base;
-	t_vector		*pos;
+	t_vector		pos;
 	double			diameter;
-	t_color			*color;
+	t_color			color;
 	struct s_sphere	*next;
 }	t_sphere;
 
@@ -173,9 +173,9 @@ typedef struct s_sphere
 typedef struct s_plane
 {
 	t_base_node		base;
-	t_vector		*pos;
-	t_vector		*normal_vector;
-	t_color			*color;
+	t_vector		pos;
+	t_vector		normal_vector;
+	t_color			color;
 	struct s_plane	*next;
 }	t_plane;
 
@@ -190,11 +190,11 @@ typedef struct s_plane
 typedef struct s_cylinder
 {
 	t_base_node			base;
-	t_vector			*pos;
-	t_vector			*axis_vector;
+	t_vector			pos;
+	t_vector			axis_vector;
 	double				diameter;
 	double				height;
-	t_color				*color;
+	t_color				color;
 	struct s_cylinder	*next;
 }	t_cylinder;
 
@@ -257,7 +257,14 @@ typedef struct s_hit
 	t_vector	t;
 	t_color		color;
 }	t_hit;
+*/
 
+typedef struct s_viewport
+{
+	double	fov_radians;
+	double	viewport_height;
+	double	viewport_width;
+}	t_viewport;
 
 typedef struct s_intersections
 {
@@ -265,6 +272,14 @@ typedef struct s_intersections
 	double	t1;
 	double	t2;
 }	t_intersections;
+
+typedef struct s_data
+{
+	t_graphics		display;
+	t_intersections	*intersections;
+	t_input			*input;
+	t_viewport		*viewport;
+}	t_data;
 
 
 
@@ -276,9 +291,9 @@ t_light			*parse_light(char **object_configs);
 t_sphere		*parse_sphere(char **object_configs);
 t_plane			*parse_plane(char **object_configs);
 t_cylinder		*parse_cylinder(char **object_configs);
-t_color			*parse_color(char *str);
-t_vector		*parse_coordinate(char *str);
-t_vector		*parse_vector(char *str);
+t_color			parse_color(char *str);
+t_vector		parse_coordinate(char *str);
+t_vector		parse_vector(char *str);
 
 /* Linked List Parsing*/
 t_sphere		*ft_lstnew_sphere(char *str);
@@ -360,8 +375,9 @@ void			print_data(t_data *input);
 void			print_matrix(double **matrix);
 
 /* Testing */
-void			test_vectors(void);
-int				test_matrices(void);
-int				test_intersections(t_data	*input);
+void		test_vectors(void);
+int			test_matrices();
+int			test_intersections(t_input	*input);
+int    		test_proof_of_concept(t_data *data);
 
 #endif

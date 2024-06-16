@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:55:19 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/31 13:34:16 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/15 17:21:43 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*find_and_extract_double(char *str, int pos)
 	return (double_value);
 }
 
-t_color	*parse_color(char *str)
+t_color	parse_color(char *str)
 {
 	t_color	*color;
 	char	*token;
@@ -56,10 +56,10 @@ t_color	*parse_color(char *str)
 	if (token != NULL)
 		color->b = ft_atod(token);
 	free(tmp);
-	return (color);
+	return (*color);
 }
 
-t_vector	*parse_coordinate(char *str)
+t_vector	parse_coordinate(char *str)
 {
 	t_vector	*coordinate;
 	char		*token;
@@ -81,10 +81,10 @@ t_vector	*parse_coordinate(char *str)
 		coordinate->z = ft_atod(token);
 	coordinate->w = 1;
 	free(tmp);
-	return (coordinate);
+	return (*coordinate);
 }
 
-t_vector	*parse_vector(char *str)
+t_vector	parse_vector(char *str)
 {
 	t_vector	*vector;
 	char		*token;
@@ -106,5 +106,5 @@ t_vector	*parse_vector(char *str)
 		vector->z = ft_atod(token);
 	vector->w = 0;
 	free(tmp);
-	return (vector);
+	return (*vector);
 }
