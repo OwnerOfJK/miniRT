@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/16 20:40:57 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/16 21:51:41 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,6 +251,13 @@ typedef struct s_data
 	t_viewport		*viewport;
 }	t_data;
 
+/* Init */
+t_material		material_init(void);
+
+/* Rendering */
+void			launch_window(t_data *data);
+void    		launch_mlx(t_data *data);
+void			render(t_data *data);
 
 /* Parsing */
 t_input			*parse_input(char *file_path);
@@ -325,7 +332,6 @@ t_ray		*ray_init(t_vector origin, t_vector direction);
 t_vector	ray_position(t_ray *ray, double t);
 t_intersections	sphere_intersections(t_sphere *sp, t_ray *ray);
 t_ray	ray_transform(t_ray *ray, double **matrix);
-t_vector 	normal_at(t_sphere *sp, t_vector world_point);
 
 /* Free Memory */
 void		free_double_pointer(char **double_pointer);
@@ -336,7 +342,15 @@ void			render_scene(t_data *data);
 void			my_mlx_pixel_put(t_graphics *img, int x, int y, int color);
 
 /* Light */
-t_vector l_reflect(t_vector light_in, t_vector normal_vector);
+t_vector 	l_reflect(t_vector light_in, t_vector normal_vector);
+int 		calculate_lighting(t_data *data, t_vector intersection_point, t_vector normal);
+t_vector 	normal_at(t_sphere *sp, t_vector world_point);
+
+/* Viewport */
+double		pixel_map_x(int x, t_viewport *viewport);
+double		pixel_map_y(int y, t_viewport *viewport);
+t_viewport	*viewport_init(t_camera *camera);
+t_ray		*prepare_ray(t_data *data, double viewport_x, double viewport_y);
 
 /* Color Utils */
 int	rgb_to_colour(t_color rgb);
