@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 18:16:39 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/06/16 21:12:09 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/06/16 21:23:38 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,77 +67,16 @@ t_intersections	plane_intersect(t_plane *pl, t_ray *ray)
 		// 	return (-1);
 		numerator = -v_dot(o_p, pl->normal_vector);
 		t = numerator / denominator;
-		printf("Numerator = %f\n", numerator);
-		printf("Denominator = %f\n", denominator);
-		printf("t = %f\n", t);
+		// printf("Numerator = %f\n", numerator);
+		// printf("Denominator = %f\n", denominator);
+		// printf("t = %f\n", t);
 		if (t > 0)
 		{
 			intersections.count = 1;
+			printf("hit plane\n");
 			intersections.t1 = numerator / denominator;
 			intersections.color = pl->color;
 		}
 	}
 	return (intersections);
 }
-
-// t_intersections	plane_intersect(t_plane *pl, t_ray *ray)
-// {
-// 	t_intersections	intersections;
-// 	t_vector		o_p;
-// 	double			numerator;
-// 	double			denominator;
-// 	double			t;
-//     // intersections.t1 = DBL_MAX;
-//     // intersections.t2 = DBL_MAX;
-
-// 	intersections.count = 0;
-
-// 	o_p = v_sub(ray->origin, pl->pos);
-
-// 	if (v_dot(ray->direction, pl->normal_vector) != 0)
-// 	{
-
-// 		denominator = v_dot(pl->normal_vector, ray->direction);
-// 		// if (denominator == 0)
-// 		// 	return (-1);
-// 		numerator = -v_dot(o_p, pl->normal_vector);
-// 		if (denominator != 0)
-// 			t = numerator / denominator;
-// 		printf("Numerator = %f\n", numerator);
-// 		printf("Denominator = %f\n", denominator);
-// 		printf("t = %f\n", t);
-// 		if (t > 0)
-// 		{
-// 			intersections.count = 1;
-// 			intersections.t1 = t;
-// 			intersections.color = pl->color;
-// 		}
-// 	}
-// 	return (intersections);
-// }
-
-// t_intersections	plane_intersect(t_plane *pl, t_ray *ray)
-// {
-// 	t_intersections	inter;
-// 	t_vector		o_p;
-// 	t_equat2		equation;
-
-// 	inter.count = 0;
-
-
-// 	if (v_dot(ray->direction, pl->normal_vector) != 0)
-// 	{
-// 		o_p = v_sub(ray->origin, pl->pos);
-// 		equation.a = 0;
-// 		equation.b = v_dot(ray->direction, pl->normal_vector);
-// 		equation.c = v_dot(o_p, pl->normal_vector);
-// 		solve_quadratic(&equation);
-// 		if (equation.t1 > EPSILON)
-// 		{
-// 			inter.count = 1;
-// 			inter.t1 = equation.t1;
-// 			inter.color = pl->color;
-// 		}
-// 	}
-// 	return (inter);
-// }
