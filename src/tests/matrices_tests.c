@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 16:30:42 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/13 19:08:28 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/17 15:43:48 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,14 @@ void print_matrix(double **matrix)
 {
 	int row;
 	int column;
+	int len;
 
 	row = 0;
-	while (row < m_len(matrix))
+	len = m_len(matrix);
+	while (row < len)
 	{
 		column = 0;
-		while (column < m_len(matrix))
+		while (column < len)
 		{
 			printf("%8.2f ", matrix[row][column]);
 			column++;

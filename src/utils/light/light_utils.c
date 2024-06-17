@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 16:23:05 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/16 22:41:40 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/17 15:29:47 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_vector l_reflect(t_vector light_in, t_vector normal_vector)
     return v_sub(light_in, scaled_normal);
 }
 
-int calculate_lighting(t_data *data, t_vector intersection_point, t_vector normal)
+int calculate_lighting(t_data *data, t_vector intersection_point, t_vector normal, t_color base_color)
 {
 	t_vector	light_pos;
 	double 		brightness;
@@ -63,10 +63,10 @@ int calculate_lighting(t_data *data, t_vector intersection_point, t_vector norma
     t_vector reflection_direction = l_reflect(light_direction, normal);
     double specular_intensity = pow(fmax(0, v_dot(view_direction, reflection_direction)), data->input->sphere->material.shininess);
 
-    // Combine ambient, diffuse, and specular components
-    double r = ambient_coefficient + brightness * (diffuse_coefficient * diffuse_intensity + specular_coefficient * specular_intensity);
-    double g = ambient_coefficient + brightness * (diffuse_coefficient * diffuse_intensity + specular_coefficient * specular_intensity);
-    double b = ambient_coefficient + brightness * (diffuse_coefficient * diffuse_intensity + specular_coefficient * specular_intensity);
+    // Combine ambient, diffuse, and specular components with the base color
+    double r = (ambient_coefficient + brightness * (diffuse_coefficient * diffuse_intensity + specular_coefficient * specular_intensity)) * base_color.r / 255;
+    double g = (ambient_coefficient + brightness * (diffuse_coefficient * diffuse_intensity + specular_coefficient * specular_intensity)) * base_color.g / 255;
+    double b = (ambient_coefficient + brightness * (diffuse_coefficient * diffuse_intensity + specular_coefficient * specular_intensity)) * base_color.b / 255;
 
     // Ensure color values are within valid range
     r = fmin(1.0, fmax(0.0, r));

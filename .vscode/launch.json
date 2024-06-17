@@ -8,8 +8,10 @@
       "args": ["scenes/test_inputs/spheres_intersection.rt"],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/ecarlier/Documents/ring4/miniRT",
-      "program": "/home/ecarlier/Documents/ring4/miniRT/miniRT",
+      // "cwd": "/home/ecarlier/Documents/ring4/miniRT",
+      "cwd": "/home/jkaller/Desktop/HomeOf42/Core_Curriculum_Projects/Rank04/miniRT",
+      // "program": "/home/ecarlier/Documents/ring4/miniRT/miniRT",
+      "program": "/home/jkaller/Desktop/HomeOf42/Core_Curriculum_Projects/Rank04/miniRT/miniRT",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

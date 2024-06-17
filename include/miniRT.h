@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/16 22:30:14 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/17 15:34:05 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -352,7 +352,7 @@ void			my_mlx_pixel_put(t_graphics *img, int x, int y, int color);
 
 /* Light */
 t_vector 	l_reflect(t_vector light_in, t_vector normal_vector);
-int 		calculate_lighting(t_data *data, t_vector intersection_point, t_vector normal);
+int 		calculate_lighting(t_data *data, t_vector intersection_point, t_vector normal, t_color base_color);
 t_vector 	normal_at(t_sphere *sp, t_vector world_point);
 
 /* Viewport */
@@ -368,6 +368,7 @@ t_color_mlx		rgb_to_colour(t_color rgb);
 /*debug utils*/
 //need to delete later
 void			vec_print(t_vector vec);
+void			color_print(t_color color);
 void			print_input(t_input *input);
 void 			print_matrix(double **matrix);
 
@@ -375,7 +376,6 @@ void 			print_matrix(double **matrix);
 void		test_vectors(void);
 int			test_matrices();
 int			test_intersections(t_input	*input);
-int    		test_proof_of_concept(t_data *data);
-void test_plane_intersect();
+void		test_plane_intersect();
 
 #endif

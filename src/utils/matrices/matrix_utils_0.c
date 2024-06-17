@@ -6,24 +6,24 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 13:20:48 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/13 17:07:45 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/17 15:46:27 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/miniRT.h"
 
-double	**m_init(int m_len)
+double	**m_init(int len)
 {
 	double	**matrix;
 	int		i;
 
-	matrix = malloc(sizeof(double *) * (m_len + 1));
+	matrix = malloc(sizeof(double *) * (len + 1));
 	if (!matrix)
 		return (NULL);
 	i = 0;
-	while (i < m_len)
+	while (i < len)
 	{
-		matrix[i] = ft_calloc(m_len, sizeof(double));
+		matrix[i] = ft_calloc(len, sizeof(double));
 		if (!matrix[i])
 		{
 			free_matrix(matrix);
@@ -31,7 +31,7 @@ double	**m_init(int m_len)
 		}
 		i++;
 	}
-	matrix[m_len] = NULL;
+	matrix[len] = NULL;
 	return (matrix);
 }
 
@@ -42,18 +42,20 @@ double	**m_mult(double **u, double **v)
 	int		column;
 	int		k;
 	double	**result;
+	int		len;
 
 	k = 0;
 	row = 0;
 	result = m_init(4);
-	while (row < m_len(u))
+	len = m_len(u);
+	while (row < len)
 	{
 		column = 0;
-		while (column < m_len(u))
+		while (column < len)
 		{
 			result[row][column] = 0;
 			k = 0;
-			while (k < m_len(u))
+			while (k < len)
 			{
 				result[row][column] += u[row][k] * v[k][column];
 				k++;
@@ -69,10 +71,12 @@ t_vector	mv_mult(double **u, t_vector v)
 {
 	t_vector	w;
 	int			row;
+	int			len;
 
 	w = v_init(0.0, 0.0, 0.0, 0.0);
 	row = 0;
-	while (row < m_len(u))
+	len = m_len(u);
+	while (row < len)
 	{
 		if (row == 0)
 			w.x = u[row][0] * v.x + u[row][1]
@@ -98,12 +102,14 @@ int	m_compare(double **u, double **v)
 {
 	int	row;
 	int	column;
+	int	len;
 
 	row = 0;
-	while (row < m_len(u))
+	len = m_len(u);
+	while (row < len)
 	{
 		column = 0;
-		while (column < m_len(u))
+		while (column < len)
 		{
 			if (fabs(u[row][column] - v[row][column]) > EPSILON)
 				return (0);
@@ -120,13 +126,15 @@ double	**m_identity(double **u) //multiply by identity matrix
 	int		column;
 	double	**identity;
 	double	**result;
+	int		len;
 
 	row = 0;
 	identity = m_init(4);
-	while (row < m_len(u))
+	len = m_len(u);
+	while (row < len)
 	{
 		column = 0;
-		while (column < m_len(u))
+		while (column < len)
 		{
 			if (row == column)
 				identity[row][column] = 1;

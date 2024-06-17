@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 16:19:46 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/04 15:45:13 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/17 15:47:18 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,15 @@ double	**m_transpose(double **u)
 	double	**transpose;
 	int		row;
 	int		column;
+	int		len;
 
 	transpose = m_init(4);
 	row = 0;
-	while (row < m_len(u))
+	len = m_len(u);
+	while (row < len)
 	{
 		column = 0;
-		while (column < m_len(u))
+		while (column < len)
 		{
 			transpose[row][column] = u[column][row];
 			column++;
@@ -62,18 +64,20 @@ double	**m_submatrix(double **u, int row, int column)
 	int		j;
 	int		x;
 	int		y;
+	int		len;
 
 	x = 0;
 	y = 0;
-	submatrix = m_init(m_len(u) - 1);
+	len = m_len(u);
+	submatrix = m_init(len - 1);
 	i = 0;
-	while (i < m_len(u))
+	while (i < len)
 	{
 		if (i != row)
 		{
 			j = 0;
 			y = 0;
-			while (j < m_len(u))
+			while (j < len)
 			{
 				if (j != column)
 				{

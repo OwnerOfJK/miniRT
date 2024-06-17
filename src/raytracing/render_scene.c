@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 20:25:49 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/06/16 22:42:32 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/17 16:11:25 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,10 @@ void	render(t_data *data)
 				double t = intersections.t1;
 				t_vector intersection_point = ray_position(ray, t);
         		t_vector normal = normal_at(data->input->sphere, intersection_point);
-				color = calculate_lighting(data, intersection_point, normal);
-				// color = 0x00FF00;  // Green for hit
+				color = calculate_lighting(data, intersection_point, normal, intersections.color);
 			}
 			else
-				color = 0x0000FF;  // Blue for miss
+				color = 0x66FFB2;  // White for miss
 			my_mlx_pixel_put(&data->display, x, y, color);
 		}
 	}
