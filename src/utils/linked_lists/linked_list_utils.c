@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 00:23:57 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/16 16:45:30 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/17 17:35:10 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_sphere	*ft_lstnew_sphere(char *str)
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
 		sphere->color = parse_color(token);
+	sphere->transformation_matrix = m_translate(sphere->pos);
 	sphere->base.next = NULL;
 	free(tmp);
 	return (sphere);
