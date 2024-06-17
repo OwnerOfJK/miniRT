@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   linked_list_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 00:23:57 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/31 13:35:04 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/17 17:22:51 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,9 @@ t_cylinder	*ft_lstnew_cylinder(char *str)
 		cylinder->height = ft_atod(token);
 	if (token != NULL)
 		cylinder->color = parse_color(token);
+	//maybe need to add a condition to avoid segfault
+	cylinder->cap_up = v_add(cylinder->pos, v_scalar(cylinder->axis_vector, cylinder->height / 2.0));
+	cylinder->cap_down = v_add(cylinder->pos, v_scalar(cylinder->axis_vector, -cylinder->height / 2.0));
 	cylinder->base.next = NULL;
 	free(tmp);
 	return (cylinder);

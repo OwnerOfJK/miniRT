@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/16 21:52:42 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/06/17 18:58:44 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,8 @@ typedef struct s_cylinder
 	t_vector			axis_vector;
 	double				diameter;
 	double				height;
+	t_vector			cap_up;
+	t_vector			cap_down;
 	t_color				color;
 	struct s_cylinder	*next;
 }	t_cylinder;
@@ -213,21 +215,6 @@ typedef struct s_graphics
 	int		endian;
 
 }	t_graphics;
-
-/*
-	shape the shape that was hit
-	ray The ray that hit the shape
-	t The intersection point
-	color The color of the hit shape
-*/
-
-// typedef struct s_hit
-// {
-// 	t_ray		ray;
-// 	t_vector	t;
-// 	t_color		color;
-// }	t_hit;
-
 
 typedef struct s_viewport
 {
@@ -326,13 +313,14 @@ t_vector	m_reflect(t_vector normal);
 /* Intersections */
 t_ray		*ray_init(t_vector origin, t_vector direction);
 t_vector	ray_position(t_ray *ray, double t);
-t_intersections	sphere_intersections(t_sphere *sp, t_ray *ray);
 t_ray	ray_transform(t_ray *ray, double **matrix);
 
+t_intersections	sphere_intersections(t_sphere *sp, t_ray *ray);
 t_intersections	plane_inter(t_plane *pl, t_ray *ray);
 t_intersections	plane_intersect(t_plane *pl, t_ray *ray);
 t_intersections	spheres_inter(t_sphere *sp, t_ray *ray);
 t_intersections	shape_intersection(t_plane *pl, t_sphere *sp, t_ray *ray);
+t_intersections	cylinder_inter(t_cylinder *cy, t_ray *ray);
 
 /* Free Memory */
 void		free_double_pointer(char **double_pointer);
