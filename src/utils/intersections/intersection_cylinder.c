@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:45:49 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/06/17 18:59:19 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/06/17 19:27:38 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_intersections	cylinder_inter(t_cylinder *cy, t_ray *ray)
 	temp.t1 = DBL_MAX; //not sure about this
 	while (cy != NULL)
 	{
-		intersect = cylinder_inter(cy, ray);
+		intersect = cylinder_intersections(cy, ray);
 		if (intersect.count != 0)
 		{
 			intersect.hit = 1;
@@ -53,7 +53,13 @@ t_intersections	cylinder_intersections(t_cylinder *cy, t_ray *ray)
 	equat.c = v_dot(cylinder_to_ray, cylinder_to_ray) - (v_dot(cylinder_to_ray, cy->axis_vector) * v_dot(cylinder_to_ray, cy->axis_vector) - (radius * radius));
 	delta = solve_quadratic(&equat);
 	intersections.count = 0;
-
+	if (delta >= 0)
+	{
+		set_intersections(equat.t1, equat.t2, &intersections);
+		intersections.color = cy->color;
+	}
+	else
+		intersections.count = 0;
 
 	return (intersections);
 }

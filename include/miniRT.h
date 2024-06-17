@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/17 18:58:44 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/06/17 19:29:24 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -322,6 +322,8 @@ t_intersections	spheres_inter(t_sphere *sp, t_ray *ray);
 t_intersections	shape_intersection(t_plane *pl, t_sphere *sp, t_ray *ray);
 t_intersections	cylinder_inter(t_cylinder *cy, t_ray *ray);
 
+t_intersections	cylinder_intersections(t_cylinder *cy, t_ray *ray);
+void	set_intersections(double t1, double t2, t_intersections *intersections);
 /* Free Memory */
 void		free_double_pointer(char **double_pointer);
 void		free_matrix(double **matrix);
