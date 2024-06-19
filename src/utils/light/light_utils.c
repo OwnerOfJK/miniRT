@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 16:23:05 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/17 15:29:47 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/18 15:14:15 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,44 +37,77 @@ t_vector l_reflect(t_vector light_in, t_vector normal_vector)
     return v_sub(light_in, scaled_normal);
 }
 
-int calculate_lighting(t_data *data, t_vector intersection_point, t_vector normal, t_color base_color)
-{
-	t_vector	light_pos;
-	double 		brightness;
-	t_vector light_direction;
+// int calculate_lighting(t_data *data, t_vector intersection_point, t_vector normal, t_color base_color)
+// {
+// 	t_vector	light_pos;
+// 	double 		brightness;
+// 	t_vector light_direction;
 
-	light_pos = data->input->light->pos;
-	brightness = data->input->light->brightness;
-    // Direction from intersection point to the light source
-    light_direction = v_sub(light_pos, intersection_point);
+// 	light_pos = data->input->light->pos;
+// 	brightness = data->input->light->brightness;
+//     // Direction from intersection point to the light source
+//     light_direction = v_sub(light_pos, intersection_point);
+//     light_direction = v_normalize(light_direction);
+
+//     // Ambient light contribution
+//     double ambient_coefficient = data->input->sphere->material.ambient;
+
+//     // Diffuse light contribution
+//     double diffuse_coefficient = data->input->sphere->material.diffuse;
+//     double diffuse_intensity = fmax(0, v_dot(normal, light_direction));
+
+//     // Specular light contribution
+//     double specular_coefficient = data->input->sphere->material.specular;
+//     t_vector view_direction = v_sub(data->input->camera->pos, intersection_point);
+//     view_direction = v_normalize(view_direction);
+//     t_vector reflection_direction = l_reflect(light_direction, normal);
+//     double specular_intensity = pow(fmax(0, v_dot(view_direction, reflection_direction)), data->input->sphere->material.shininess);
+
+//     // Combine ambient, diffuse, and specular components with the base color
+//     double r = (ambient_coefficient + brightness * (diffuse_coefficient * diffuse_intensity + specular_coefficient * specular_intensity)) * base_color.r / 255;
+//     double g = (ambient_coefficient + brightness * (diffuse_coefficient * diffuse_intensity + specular_coefficient * specular_intensity)) * base_color.g / 255;
+//     double b = (ambient_coefficient + brightness * (diffuse_coefficient * diffuse_intensity + specular_coefficient * specular_intensity)) * base_color.b / 255;
+
+//     // Ensure color values are within valid range
+//     r = fmin(1.0, fmax(0.0, r));
+//     g = fmin(1.0, fmax(0.0, g));
+//     b = fmin(1.0, fmax(0.0, b));
+
+//     // Convert to integer color representation
+//     t_color_mlx color = rgb_to_colour((t_color){r * 255, g * 255, b * 255});
+	
+//     return (color);
+// }
+
+int calculate_lighting(t_data *data, t_vector intersection_point, t_vector normal, t_color base_color) {
+    t_vector light_pos = data->input->light->pos;
+    double brightness = data->input->light->brightness;
+    
+    t_vector light_direction = v_sub(light_pos, intersection_point);
     light_direction = v_normalize(light_direction);
-
+    
     // Ambient light contribution
-    double ambient_coefficient = data->input->sphere->material.ambient;
-
+    double ambient = data->input->sphere->material.ambient;
+    
     // Diffuse light contribution
-    double diffuse_coefficient = data->input->sphere->material.diffuse;
-    double diffuse_intensity = fmax(0, v_dot(normal, light_direction));
-
+    double diffuse = fmax(0, v_dot(normal, light_direction)) * data->input->sphere->material.diffuse * brightness;
+    
     // Specular light contribution
-    double specular_coefficient = data->input->sphere->material.specular;
     t_vector view_direction = v_sub(data->input->camera->pos, intersection_point);
     view_direction = v_normalize(view_direction);
     t_vector reflection_direction = l_reflect(light_direction, normal);
-    double specular_intensity = pow(fmax(0, v_dot(view_direction, reflection_direction)), data->input->sphere->material.shininess);
-
-    // Combine ambient, diffuse, and specular components with the base color
-    double r = (ambient_coefficient + brightness * (diffuse_coefficient * diffuse_intensity + specular_coefficient * specular_intensity)) * base_color.r / 255;
-    double g = (ambient_coefficient + brightness * (diffuse_coefficient * diffuse_intensity + specular_coefficient * specular_intensity)) * base_color.g / 255;
-    double b = (ambient_coefficient + brightness * (diffuse_coefficient * diffuse_intensity + specular_coefficient * specular_intensity)) * base_color.b / 255;
-
+    double specular = pow(fmax(0, v_dot(view_direction, reflection_direction)), data->input->sphere->material.shininess) * data->input->sphere->material.specular * brightness;
+    
+    double final_red = (ambient + diffuse + specular) * base_color.r / 255;
+    double final_green = (ambient + diffuse + specular) * base_color.g / 255;
+    double final_blue = (ambient + diffuse + specular) * base_color.b / 255;
+    
     // Ensure color values are within valid range
-    r = fmin(1.0, fmax(0.0, r));
-    g = fmin(1.0, fmax(0.0, g));
-    b = fmin(1.0, fmax(0.0, b));
-
-    // Convert to integer color representation
-    t_color_mlx color = rgb_to_colour((t_color){r * 255, g * 255, b * 255});
-	
-    return (color);
+    final_red = fmin(1.0, fmax(0.0, final_red));
+    final_green = fmin(1.0, fmax(0.0, final_green));
+    final_blue = fmin(1.0, fmax(0.0, final_blue));
+    
+    t_color_mlx color = rgb_to_colour((t_color){final_red * 255, final_green * 255, final_blue * 255});
+    
+    return color;
 }

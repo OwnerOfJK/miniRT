@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/17 15:34:05 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/19 15:20:49 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,10 +131,10 @@ typedef struct s_light
 }	t_light;
 
 /* Used to generalise linked lists */
-typedef struct s_base_node
-{
-	struct s_base_node	*next;
-}	t_base_node;
+// typedef struct s_base_node
+// {
+// 	struct s_base_node	*next;
+// }	t_base_node;
 
 /*
 ∗ x,y,z coordinates of the sphere center: 0.0,0.0,20.6
@@ -143,7 +143,6 @@ typedef struct s_base_node
 */
 typedef struct s_sphere
 {
-	t_base_node		base;
 	t_vector		pos;
 	double			diameter;
 	t_color			color;
@@ -159,7 +158,6 @@ typedef struct s_sphere
 */
 typedef struct s_plane
 {
-	t_base_node		base;
 	t_vector		pos;
 	t_vector		normal_vector;
 	t_color			color;
@@ -176,7 +174,6 @@ typedef struct s_plane
 */
 typedef struct s_cylinder
 {
-	t_base_node			base;
 	t_vector			pos;
 	t_vector			axis_vector;
 	double				diameter;
@@ -184,17 +181,6 @@ typedef struct s_cylinder
 	t_color				color;
 	struct s_cylinder	*next;
 }	t_cylinder;
-
-typedef struct s_input
-{
-	t_alightning		*alightning;
-	t_camera			*camera;
-	t_light				*light;
-	t_sphere			*sphere;
-	t_plane				*plane;
-	t_cylinder			*cylinder;
-}	t_input;
-
 
 typedef struct s_graphics
 {
@@ -240,14 +226,46 @@ typedef struct s_intersections
 	double		t2;
 }	t_intersections;
 
-// typedef	struct s_object
-// {
-// 	t_sphere	*sphere;
-// 	double		**transformation_matrix;
+typedef enum {
+    SPHERE,
+    PLANE,
+    CYLINDER
+} t_obj_type;
 
-// }	t_object;
+typedef struct s_object {
+    t_obj_type type;
+    t_vector pos;
+    t_color color;
+    double **transformation_matrix;
+    union {
+        struct
+		{
+            double diameter;
+        } sphere;
+        struct
+		{
+            t_vector normal_vector;
+        } plane;
+        struct
+		{
+            t_vector axis_vector;
+            double diameter;
+            double height;
+        } cylinder;
+    } shape;
+    struct s_object *next;
+}	t_object;
 
-typedef struct s_data
+typedef struct s_input
+{
+	t_alightning		*alightning;
+	t_camera			*camera;
+	t_light				*light;
+	t_object			*objects;
+	t_material			*material;
+}	t_input;
+
+typedef struct s_data //this is our world
 {
 	t_graphics		display;
 	t_intersections	*intersections;
@@ -256,7 +274,9 @@ typedef struct s_data
 }	t_data;
 
 /* Init */
-t_material		material_init(void);
+t_material		*material_init(void);
+t_ray			*ray_init(t_vector origin, t_vector direction);
+t_viewport		*viewport_init(t_camera *camera);
 
 /* Rendering */
 void			launch_window(t_data *data);
@@ -268,18 +288,22 @@ t_input			*parse_input(char *file_path);
 t_alightning	*parse_alightning(char **object_configs);
 t_camera		*parse_camera(char **object_configs);
 t_light			*parse_light(char **object_configs);
-t_sphere		*parse_sphere(char **object_configs);
-t_plane			*parse_plane(char **object_configs);
-t_cylinder		*parse_cylinder(char **object_configs);
+t_object		*parse_objects(char	**object_configs);
 t_color			parse_color(char *str);
 t_vector		parse_coordinate(char *str);
 t_vector		parse_vector(char *str);
 
 /* Linked List Parsing*/
-t_sphere		*ft_lstnew_sphere(char *str);
-t_plane			*ft_lstnew_plane(char *str);
-t_cylinder		*ft_lstnew_cylinder(char *str);
-void			ft_lstadd_back_miniRT(t_base_node **lst, t_base_node *new);
+// t_sphere		*ft_lstnew_sphere(char *str);
+// t_plane			*ft_lstnew_plane(char *str);
+// t_cylinder		*ft_lstnew_cylinder(char *str);
+// void			ft_lstadd_back_miniRT(t_base_node **lst, t_base_node *new);
+t_object	*ft_lstnew_object(char *str);
+t_object	*add_sphere(t_object *object, char *save_pointer);
+t_object	*add_plane(t_object *object, char *save_pointer);
+t_object	*add_cylinder(t_object *object, char *save_pointer);
+void		ft_lstadd_back_miniRT(t_object **lst, t_object *new);
+
 
 /*init*/
 void			launching_mlx(t_data *data);
@@ -332,7 +356,6 @@ double		**m_scale(t_vector scale);
 t_vector	m_reflect(t_vector normal);
 
 /* Intersections */
-t_ray		*ray_init(t_vector origin, t_vector direction);
 t_vector	ray_position(t_ray *ray, double t);
 t_intersections	sphere_intersections(t_sphere *sp, t_ray *ray);
 t_ray	ray_transform(t_ray *ray, double **matrix);
@@ -358,7 +381,6 @@ t_vector 	normal_at(t_sphere *sp, t_vector world_point);
 /* Viewport */
 double		pixel_map_x(int x, t_viewport *viewport);
 double		pixel_map_y(int y, t_viewport *viewport);
-t_viewport	*viewport_init(t_camera *camera);
 t_ray		*prepare_ray(t_data *data, double viewport_x, double viewport_y);
 
 /* Color Utils */
@@ -369,7 +391,7 @@ t_color_mlx		rgb_to_colour(t_color rgb);
 //need to delete later
 void			vec_print(t_vector vec);
 void			color_print(t_color color);
-void			print_input(t_input *input);
+void		 print_input(const t_input *input);
 void 			print_matrix(double **matrix);
 
 /* Testing */

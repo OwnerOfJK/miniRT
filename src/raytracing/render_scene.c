@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 20:25:49 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/06/17 17:37:04 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/19 15:15:11 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 // Initializes the window and starts the rendering process
 void	launch_window(t_data *data)
 {
-	launch_mlx(data);  // Initialize mlx and create the window
-	data->viewport = viewport_init(data->input->camera);  // Initialize the viewport
-	data->input->sphere->material = material_init();
+	launch_mlx(data);  // Initialize mlx and create the window 
+	data->viewport = viewport_init(data->input->camera);  // Initialize the viewport !!this should be added to the init function!!
 	render(data);  // Render the scene
 	event_init(data);  // Initialize event handling
 	mlx_loop(data->display.mlx_ptr);  // Enter the mlx event loop
@@ -73,11 +72,12 @@ void	render(t_data *data)
 			{
 				double t = intersections.t1;
 				t_vector intersection_point = ray_position(ray, t);
+				vec_print(intersection_point);
         		t_vector normal = normal_at(data->input->sphere, intersection_point);
 				color = calculate_lighting(data, intersection_point, normal, intersections.color);
 			}
 			else
-				color = 0x606060;  // White for miss
+				color = 0x606060;  // for miss
 			my_mlx_pixel_put(&data->display, x, y, color);
 		}
 	}

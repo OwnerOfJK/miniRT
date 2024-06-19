@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 21:33:00 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/16 21:34:18 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/19 15:20:46 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,32 @@ t_viewport	*viewport_init(t_camera *camera)
 	return (viewport);
 }
 
-t_material	material_init(void)
+t_material	*material_init(void)
 {
-	t_material	material;
+	t_material	*material;
 
-	material.ambient = 0.1;
-	material.diffuse = 0.9;
-	material.specular = 0.9;
-	material.shininess = 200;
+	material = malloc(sizeof(t_material));
+	if (material == NULL)
+		error_message("Error: Memory allocation failed.\n");
+	material->ambient = 0.1;
+	material->diffuse = 0.9;
+	material->specular = 0.9;
+	material->shininess = 200;
 	return (material);
+}
+
+void	event_init(t_data *data)
+{
+	mlx_hook(data->display.win_ptr, 02, (1L << 0), key_handler, data);
+	//mlx_hook(data->display.win_ptr, 04, (1L << 2), mouse_handler, data);
+	mlx_hook(data->display.win_ptr, 17, (1L << 17), clean_exit, data);
+}
+
+int	key_handler(int keysym, t_data *data)
+{
+	if (keysym == XK_Escape)
+		clean_exit(data);
+	printf("The %d key has been pressed\n\n", keysym);
+	//render_scene(data);
+	return (0);
 }
