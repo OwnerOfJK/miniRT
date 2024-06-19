@@ -6,28 +6,51 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 16:23:05 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/18 15:14:15 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/19 18:34:57 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/miniRT.h"
 
-t_vector normal_at(t_sphere *sp, t_vector world_point) {
-    // Transform the world point to object space
-    double** inverse_transform = m_inverse(sp->transformation_matrix);
-    t_vector object_point = mv_mult(inverse_transform, world_point);
+// t_vector normal_at(t_object *object, t_vector world_point) {
+//     // Transform the world point to object space
+//     double** inverse_transform = m_inverse(object->transformation_matrix);
+//     t_vector object_point = mv_mult(inverse_transform, world_point);
     
-    // Compute the normal in object space
-    t_vector object_normal = v_sub(object_point, v_init(0, 0, 0, 0));
-    object_normal = v_normalize(object_normal);
+//     // Compute the normal in object space
+//     t_vector object_normal = v_sub(object_point, v_init(0, 0, 0, 0));
+//     object_normal = v_normalize(object_normal);
 
-    // Transform the normal back to world space
-    t_vector world_normal = mv_mult(m_transpose(m_inverse(sp->transformation_matrix)), object_normal);
-    world_normal = v_normalize(world_normal);  // Ensure the normal is normalized
+//     // Transform the normal back to world space
+//     t_vector world_normal = mv_mult(m_transpose(m_inverse(object->transformation_matrix)), object_normal);
+//     world_normal = v_normalize(world_normal);  // Ensure the normal is normalized
 
-    // Free the dynamically allocated inverse_transform matrix
-    free_matrix(inverse_transform);
-    return world_normal;
+//     // Free the dynamically allocated inverse_transform matrix
+//     free_matrix(inverse_transform);
+//     return world_normal;
+// }
+
+t_vector normal_at(t_object *object, t_vector world_point)
+{
+    t_vector normal;
+
+    normal = v_init(0, 0, 0, 0);
+    if (object->type == SPHERE) {
+        double** inverse_transform = m_inverse(object->transformation_matrix);
+        t_vector object_point = mv_mult(inverse_transform, world_point);
+        normal = v_sub(object_point, v_init(0, 0, 0, 1));
+        normal = v_normalize(normal);
+        t_vector world_normal = mv_mult(m_transpose(inverse_transform), normal);
+        normal = v_normalize(world_normal);
+        free_matrix(inverse_transform);
+    } else if (object->type == PLANE) {
+        double** inverse_transform = m_inverse(object->transformation_matrix);
+        t_vector transformed_normal = mv_mult(m_transpose(inverse_transform), object->shape.plane.normal_vector);
+        normal = v_normalize(transformed_normal);
+        free_matrix(inverse_transform);
+    }
+
+    return normal;
 }
 
 t_vector l_reflect(t_vector light_in, t_vector normal_vector)
@@ -37,66 +60,28 @@ t_vector l_reflect(t_vector light_in, t_vector normal_vector)
     return v_sub(light_in, scaled_normal);
 }
 
-// int calculate_lighting(t_data *data, t_vector intersection_point, t_vector normal, t_color base_color)
-// {
-// 	t_vector	light_pos;
-// 	double 		brightness;
-// 	t_vector light_direction;
-
-// 	light_pos = data->input->light->pos;
-// 	brightness = data->input->light->brightness;
-//     // Direction from intersection point to the light source
-//     light_direction = v_sub(light_pos, intersection_point);
-//     light_direction = v_normalize(light_direction);
-
-//     // Ambient light contribution
-//     double ambient_coefficient = data->input->sphere->material.ambient;
-
-//     // Diffuse light contribution
-//     double diffuse_coefficient = data->input->sphere->material.diffuse;
-//     double diffuse_intensity = fmax(0, v_dot(normal, light_direction));
-
-//     // Specular light contribution
-//     double specular_coefficient = data->input->sphere->material.specular;
-//     t_vector view_direction = v_sub(data->input->camera->pos, intersection_point);
-//     view_direction = v_normalize(view_direction);
-//     t_vector reflection_direction = l_reflect(light_direction, normal);
-//     double specular_intensity = pow(fmax(0, v_dot(view_direction, reflection_direction)), data->input->sphere->material.shininess);
-
-//     // Combine ambient, diffuse, and specular components with the base color
-//     double r = (ambient_coefficient + brightness * (diffuse_coefficient * diffuse_intensity + specular_coefficient * specular_intensity)) * base_color.r / 255;
-//     double g = (ambient_coefficient + brightness * (diffuse_coefficient * diffuse_intensity + specular_coefficient * specular_intensity)) * base_color.g / 255;
-//     double b = (ambient_coefficient + brightness * (diffuse_coefficient * diffuse_intensity + specular_coefficient * specular_intensity)) * base_color.b / 255;
-
-//     // Ensure color values are within valid range
-//     r = fmin(1.0, fmax(0.0, r));
-//     g = fmin(1.0, fmax(0.0, g));
-//     b = fmin(1.0, fmax(0.0, b));
-
-//     // Convert to integer color representation
-//     t_color_mlx color = rgb_to_colour((t_color){r * 255, g * 255, b * 255});
-	
-//     return (color);
-// }
-
 int calculate_lighting(t_data *data, t_vector intersection_point, t_vector normal, t_color base_color) {
     t_vector light_pos = data->input->light->pos;
     double brightness = data->input->light->brightness;
+
+    // double final_red = 0;
+    // double final_green = 0;
+    // double final_blue = 0; 
     
     t_vector light_direction = v_sub(light_pos, intersection_point);
     light_direction = v_normalize(light_direction);
     
     // Ambient light contribution
-    double ambient = data->input->sphere->material.ambient;
+    double ambient = data->input->material->ambient;
     
     // Diffuse light contribution
-    double diffuse = fmax(0, v_dot(normal, light_direction)) * data->input->sphere->material.diffuse * brightness;
+    double diffuse = fmax(0, v_dot(normal, light_direction)) * data->input->material->diffuse * brightness;
     
     // Specular light contribution
     t_vector view_direction = v_sub(data->input->camera->pos, intersection_point);
     view_direction = v_normalize(view_direction);
     t_vector reflection_direction = l_reflect(light_direction, normal);
-    double specular = pow(fmax(0, v_dot(view_direction, reflection_direction)), data->input->sphere->material.shininess) * data->input->sphere->material.specular * brightness;
+    double specular = pow(fmax(0, v_dot(view_direction, reflection_direction)), data->input->material->shininess) * data->input->material->specular * brightness;
     
     double final_red = (ambient + diffuse + specular) * base_color.r / 255;
     double final_green = (ambient + diffuse + specular) * base_color.g / 255;

@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/19 15:20:49 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/19 18:33:26 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,28 +141,28 @@ typedef struct s_light
 ∗ the sphere diameter: 12.6
 ∗ R,G,B colors in range [0-255]: 10, 0, 255
 */
-typedef struct s_sphere
-{
-	t_vector		pos;
-	double			diameter;
-	t_color			color;
-	double			**transformation_matrix; //this should be part of an object struct
-	t_material		material;
-	struct s_sphere	*next;
-}	t_sphere;
+// typedef struct s_sphere
+// {
+// 	t_vector		pos;
+// 	double			diameter;
+// 	t_color			color;
+// 	double			**transformation_matrix; //this should be part of an object struct
+// 	t_material		material;
+// 	struct s_sphere	*next;
+// }	t_sphere;
 
 /*
 ∗ x,y,z coordinates of a point in the plane: 0.0,0.0,-10.0
 ∗ 3d normalized normal vector. In range [-1,1] for each x,y,z axis: 0.0,1.0,0.0
 ∗ R,G,B colors in range [0-255]: 0,0,225
 */
-typedef struct s_plane
-{
-	t_vector		pos;
-	t_vector		normal_vector;
-	t_color			color;
-	struct s_plane	*next;
-}	t_plane;
+// typedef struct s_plane
+// {
+// 	t_vector		pos;
+// 	t_vector		normal_vector;
+// 	t_color			color;
+// 	struct s_plane	*next;
+// }	t_plane;
 
 /*
 ∗ x,y,z coordinates of the center of the cylinder: 50.0,0.0,20.6
@@ -172,15 +172,15 @@ typedef struct s_plane
 ∗ the cylinder height: 21.42
 ∗ R,G,B colors in range [0,255]: 10, 0, 255
 */
-typedef struct s_cylinder
-{
-	t_vector			pos;
-	t_vector			axis_vector;
-	double				diameter;
-	double				height;
-	t_color				color;
-	struct s_cylinder	*next;
-}	t_cylinder;
+// typedef struct s_cylinder
+// {
+// 	t_vector			pos;
+// 	t_vector			axis_vector;
+// 	double				diameter;
+// 	double				height;
+// 	t_color				color;
+// 	struct s_cylinder	*next;
+// }	t_cylinder;
 
 typedef struct s_graphics
 {
@@ -216,16 +216,6 @@ typedef struct s_viewport
 	double	viewport_width;
 }	t_viewport;
 
-typedef struct s_intersections
-{
-	int			hit;
-	t_ray		ray;
-	t_color		color;
-	int			count;
-	double		t1;
-	double		t2;
-}	t_intersections;
-
 typedef enum {
     SPHERE,
     PLANE,
@@ -255,6 +245,17 @@ typedef struct s_object {
     } shape;
     struct s_object *next;
 }	t_object;
+
+typedef struct s_intersections
+{
+	int			hit;
+	t_ray		ray;
+	t_color		color;
+	int			count;
+	double		t1;
+	double		t2;
+	t_object	*object;
+}	t_intersections;
 
 typedef struct s_input
 {
@@ -357,13 +358,10 @@ t_vector	m_reflect(t_vector normal);
 
 /* Intersections */
 t_vector	ray_position(t_ray *ray, double t);
-t_intersections	sphere_intersections(t_sphere *sp, t_ray *ray);
 t_ray	ray_transform(t_ray *ray, double **matrix);
-
-t_intersections	plane_inter(t_plane *pl, t_ray *ray);
-t_intersections	plane_intersect(t_plane *pl, t_ray *ray);
-t_intersections	spheres_inter(t_sphere *sp, t_ray *ray);
-t_intersections	shape_intersection(t_plane *pl, t_sphere *sp, t_ray *ray);
+t_intersections	*plane_intersect(t_object *pl, t_ray *ray);
+t_intersections *sphere_intersect(t_object *sp, t_ray *ray);
+t_intersections *object_intersection(t_object *objects, t_ray *ray);
 
 /* Free Memory */
 void		free_double_pointer(char **double_pointer);
@@ -376,8 +374,7 @@ void			my_mlx_pixel_put(t_graphics *img, int x, int y, int color);
 /* Light */
 t_vector 	l_reflect(t_vector light_in, t_vector normal_vector);
 int 		calculate_lighting(t_data *data, t_vector intersection_point, t_vector normal, t_color base_color);
-t_vector 	normal_at(t_sphere *sp, t_vector world_point);
-
+t_vector	normal_at(t_object *object, t_vector world_point);
 /* Viewport */
 double		pixel_map_x(int x, t_viewport *viewport);
 double		pixel_map_y(int y, t_viewport *viewport);

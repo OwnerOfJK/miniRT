@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:39:45 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/19 15:21:04 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/19 15:57:10 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 	// if (check_input(argv[1]) == EXIT_SUCCESS)
 	// 	parse_input(argv[1]);
 	//ft_memset(data, 0, sizeof(t_data)); //delete later
-	//launch_window(data);
+	launch_window(data);
 	//launching_mlx(data); //need to add the data
 	// render_scene(data);
 	//clean_exit(data);

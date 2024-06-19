@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 20:25:49 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/06/19 15:15:11 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/19 18:32:11 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	render(t_data *data)
 	double			viewport_x;
 	double			viewport_y;
 	t_ray			*ray;
-	t_intersections	intersections;
+	t_intersections	*intersections;
 
 	viewport_x = 0;
 	viewport_y = 0;
@@ -66,15 +66,14 @@ void	render(t_data *data)
 			ray = prepare_ray(data, viewport_x, viewport_y);
 			// Check for intersections with the sphere
 			//intersections = sphere_intersections(data->input->sphere, ray);
-			intersections = shape_intersection(data->input->plane, data->input->sphere, ray);
+			intersections = object_intersection(data->input->objects, ray);
 			// Set the pixel color based on whether there was an intersection
-			if (intersections.hit == 1)
+			if (intersections->hit == 1)
 			{
-				double t = intersections.t1;
+				double t = intersections->t1;
 				t_vector intersection_point = ray_position(ray, t);
-				vec_print(intersection_point);
-        		t_vector normal = normal_at(data->input->sphere, intersection_point);
-				color = calculate_lighting(data, intersection_point, normal, intersections.color);
+        		t_vector normal = normal_at(intersections->object, intersection_point);
+				color = calculate_lighting(data, intersection_point, normal, intersections->color);
 			}
 			else
 				color = 0x606060;  // for miss
