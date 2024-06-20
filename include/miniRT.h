@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/20 15:24:16 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/06/20 16:23:29 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct s_color
 	double	g;
 	double	b;
 }	t_color;
+
+# define BLACK		(t_color){0, 0, 0, 0}
 
 typedef struct s_vector
 {
@@ -323,6 +325,8 @@ t_intersections	shape_intersection(t_plane *pl, t_sphere *sp, t_ray *ray);
 t_intersections	cylinder_inter(t_cylinder *cy, t_ray *ray);
 t_intersections	cylinder_intersections(t_cylinder *cy, t_ray *ray);
 void	set_intersections(double t1, double t2, t_intersections *intersections);
+
+t_plane	*create_plane(t_vector pos, t_vector normal_vector, t_color color);
 
 /* Free Memory */
 void		free_double_pointer(char **double_pointer);

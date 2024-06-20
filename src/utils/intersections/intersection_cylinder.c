@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:45:49 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/06/20 15:34:11 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/06/20 16:52:05 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,32 @@ t_intersections	cylinder_inter(t_cylinder *cy, t_ray *ray)
 	else
 		return (temp);
 }
+
+double	cap_inter(t_cylinder *cy, t_ray *ray, t_vector cap)
+{
+	t_plane	*plane;
+	t_intersections	inter;
+	plane = create_plane(cap, cy->axis_vector, BLACK);
+	inter = plane_intersect(plane, ray);
+	if (inter.t1 > EPSILON)
+		return (inter.t1);
+	return (-1);
+}
+//t_intersections	plane_intersect(t_plane *pl, t_ray *ray)
+
+double	verify_t(t_cylinder *cy, t_ray *ray, t_intersections *inter)
+{
+	double t;
+	double t3;
+	double t4;
+
+	t = inter->t1;
+	t3 = cap_inter(cy, ray, cy->cap_down);
+	t4 = cap_inter(cy, ray, cy->cap_up);
+	inter->t1 = INFINITY;
+
+}
+
 
 t_intersections	cylinder_intersections(t_cylinder *cy, t_ray *ray)
 {

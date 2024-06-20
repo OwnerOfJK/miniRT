@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 20:43:09 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/16 22:00:32 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/06/20 16:23:00 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,14 @@ t_intersections	shape_intersection(t_plane *pl, t_sphere *sp, t_ray *ray)
 		closest = sp_inter;
 	return (closest);
 }
-/*
 
-Need to create a function to go through all the shapes
-*/
+t_plane	*create_plane(t_vector pos, t_vector normal_vector, t_color color)
+{
+	t_plane	*plane;
+
+	plane->pos = pos;
+	plane->normal_vector = normal_vector;
+	plane->color = color;
+
+	return (plane);
+}
