@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 18:42:22 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/05/30 21:06:32 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/06/20 13:29:03 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,42 @@ if delta = 0 -> t1 and t2 should be the same
 Return value :
 delta or -1 if delta < 0
 */
-double	solve_quadratic(t_equat2 *eq)
-{
-	double	delta;
+// double	solve_quadratic(t_equat2 *eq)
+// {
+// 	double	delta;
 
-	delta = calc_delta(eq->a, eq->b, eq->c);
-	if (eq->a == 0 && eq->b != 0)
-	{
-		eq->t1 = - (eq->c) / eq->b;
-		return (delta);
-	}
-	if (delta < 0)
-		return (-1);
-	if (delta >= 0)
-	{
-		eq->t1 = (- (eq->b) + sqrt(delta)) / (2 * eq->a);
-		eq->t2 = (- (eq->b) - sqrt(delta)) / (2 * eq->a);
-	}
-	return (delta);
+// 	delta = calc_delta(eq->a, eq->b, eq->c);
+// 	if (eq->a == 0 && eq->b != 0)
+// 	{
+// 		eq->t1 = - (eq->c) / eq->b;
+// 		return (delta);
+// 	}
+// 	if (delta < 0)
+// 		return (-1);
+// 	if (delta >= 0)
+// 	{
+// 		eq->t1 = (- (eq->b) + sqrt(delta)) / (2 * eq->a);
+// 		eq->t2 = (- (eq->b) - sqrt(delta)) / (2 * eq->a);
+// 	}
+// 	return (delta);
+// }
+double solve_quadratic(t_equat2 *eq) {
+    double delta;
+
+    delta = calc_delta(eq->a, eq->b, eq->c);
+    if (fabs(eq->a) < EPSILON) { // handling a very small 'a'
+        if (fabs(eq->b) > EPSILON) {
+            eq->t1 = -eq->c / eq->b;
+            eq->t2 = -eq->c / eq->b; // In this case t1 and t2 are the same
+            return delta;
+        }
+        // If both a and b are very small, there's no valid solution
+        return -1;
+    }
+    if (delta < 0) {
+        return -1;
+    }
+    eq->t1 = (-eq->b + sqrt(delta)) / (2 * eq->a);
+    eq->t2 = (-eq->b - sqrt(delta)) / (2 * eq->a);
+    return delta;
 }

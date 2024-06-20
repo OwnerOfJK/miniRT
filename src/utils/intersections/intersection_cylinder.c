@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:45:49 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/06/17 19:27:38 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/06/20 13:34:34 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,38 @@ t_intersections	cylinder_intersections(t_cylinder *cy, t_ray *ray)
 	double			radius;
 	double			delta;
 
+	//intersections.count = 0;
+    if (cy == NULL || ray == NULL) {
+        printf("Error: NULL pointer passed to cylinder_intersections\n");
+        //return intersections;
+    }
+
 	radius = cy->diameter / 2;
 	cylinder_to_ray = v_sub(ray->origin, cy->cap_down);
-	equat.a = v_dot(ray->direction, ray->direction) - ((v_dot(ray->direction, cy->axis_vector) * (v_dot(ray->direction, cy->axis_vector))));
-	equat.b = 2 * (v_dot(ray->direction, cylinder_to_ray) - (v_dot(ray->direction, cy->axis_vector) * v_dot(ray->direction, cy->axis_vector))
-);
-	equat.c = v_dot(cylinder_to_ray, cylinder_to_ray) - (v_dot(cylinder_to_ray, cy->axis_vector) * v_dot(cylinder_to_ray, cy->axis_vector) - (radius * radius));
+	//equat.a = v_dot(ray->direction, ray->direction) - ((v_dot(ray->direction, cy->axis_vector) * (v_dot(ray->direction, cy->axis_vector))));
+//	equat.b = 2 * (v_dot(ray->direction, cylinder_to_ray) - (v_dot(ray->direction, cy->axis_vector) * v_dot(ray->direction, cy->axis_vector))
+//);
+	//equat.c = v_dot(cylinder_to_ray, cylinder_to_ray) - (v_dot(cylinder_to_ray, cy->axis_vector) * v_dot(cylinder_to_ray, cy->axis_vector) - (radius * radius));
+  	equat.a = v_dot(ray->direction, ray->direction) - (v_dot(ray->direction, cy->axis_vector) * v_dot(ray->direction, cy->axis_vector));
+    equat.b = 2 * (v_dot(ray->direction, cylinder_to_ray) - (v_dot(ray->direction, cy->axis_vector) * v_dot(cylinder_to_ray, cy->axis_vector)));
+	equat.c = v_dot(cylinder_to_ray, cylinder_to_ray) - (v_dot(cylinder_to_ray, cy->axis_vector) * v_dot(cylinder_to_ray, cy->axis_vector)) - (radius * radius);
+	// double dv = v_dot(ray->direction, cy->axis_vector);
+    // double cv = v_dot(cylinder_to_ray, cy->axis_vector);
+
+    // equat.a = v_dot(ray->direction, ray->direction) - dv * dv;
+    // equat.b = 2 * (v_dot(ray->direction, cylinder_to_ray) - dv * cv);
+    // equat.c = v_dot(cylinder_to_ray, cylinder_to_ray) - cv * cv - radius * radius;
+
+    printf("cylinder_to_ray: (%f, %f, %f, %f)\n", cylinder_to_ray.x, cylinder_to_ray.y, cylinder_to_ray.z, cylinder_to_ray.w);
+  //  printf("dv: %f, cv: %f\n", dv, cv);
+
+
 	delta = solve_quadratic(&equat);
-	intersections.count = 0;
+
+	printf("delta: %f\n", delta);
+    printf("equat.a: %f, equat.b: %f, equat.c: %f\n", equat.a, equat.b, equat.c);
+    printf("t1: %f, t2: %f\n", equat.t1, equat.t2);
+	//intersections.count = 0;
 	if (delta >= 0)
 	{
 		set_intersections(equat.t1, equat.t2, &intersections);

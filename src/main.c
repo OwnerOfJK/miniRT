@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:39:45 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/16 21:20:38 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/06/20 13:30:27 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main(int argc, char **argv)
 	data->input = parse_input(argv[1]);
 	//test_intersections(data->input);
 	//test_plane_intersect();
+	//test_cylinder_intersections();
 	// if (check_input(argv[1]) == EXIT_SUCCESS)
 	// 	parse_input(argv[1]);
 	//ft_memset(data, 0, sizeof(t_data)); //delete later
