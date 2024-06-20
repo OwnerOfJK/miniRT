@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/19 18:33:26 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/20 15:35:19 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,6 +241,8 @@ typedef struct s_object {
             t_vector axis_vector;
             double diameter;
             double height;
+			t_vector cap_up;
+			t_vector cap_down;
         } cylinder;
     } shape;
     struct s_object *next;
@@ -361,7 +363,9 @@ t_vector	ray_position(t_ray *ray, double t);
 t_ray	ray_transform(t_ray *ray, double **matrix);
 t_intersections	*plane_intersect(t_object *pl, t_ray *ray);
 t_intersections *sphere_intersect(t_object *sp, t_ray *ray);
+t_intersections	*cylinder_intersect(t_object *cy, t_ray *ray);
 t_intersections *object_intersection(t_object *objects, t_ray *ray);
+void	set_intersections(double t1, double t2, t_intersections *intersections);
 
 /* Free Memory */
 void		free_double_pointer(char **double_pointer);

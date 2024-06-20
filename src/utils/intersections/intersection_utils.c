@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 20:43:09 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/19 18:30:12 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/20 15:33:45 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,15 @@ t_intersections *object_intersection(t_object *objects, t_ray *ray)
 		else if (objects->type == SPHERE)
 		{
 			sp_intersection = sphere_intersect(objects, ray);
+			if (sp_intersection->hit == 1)
+			{
+				if (sp_intersection->t1 < closest->t1)
+					closest = sp_intersection;
+			}
+		}
+		else if (objects->type == CYLINDER)
+		{
+			sp_intersection = cylinder_intersect(objects, ray);
 			if (sp_intersection->hit == 1)
 			{
 				if (sp_intersection->t1 < closest->t1)

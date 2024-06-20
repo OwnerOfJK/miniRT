@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 23:13:40 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/19 15:21:49 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/20 15:44:23 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,11 @@ void print_input(const t_input *input)
                 print_vector("  Axis Vector", obj->shape.cylinder.axis_vector);
                 printf("  Diameter: %f\n", obj->shape.cylinder.diameter);
                 printf("  Height: %f\n", obj->shape.cylinder.height);
+                print_vector("  Cap Up", obj->shape.cylinder.cap_up);
+                print_vector("  Cap Down", obj->shape.cylinder.cap_down);
                 break;
         }
         obj = obj->next;
+        printf("\n");
     }
 }
