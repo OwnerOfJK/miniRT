@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 20:25:49 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/06/19 18:32:11 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/20 17:58:03 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,12 @@ void	render(t_data *data)
 	double			viewport_y;
 	t_ray			*ray;
 	t_intersections	*intersections;
+	bool			in_shadow;
 
 	viewport_x = 0;
 	viewport_y = 0;
 	y = -1;
+	in_shadow = false;
 	while (++y < HEIGHT)
 	{
 		x = -1;
@@ -73,7 +75,10 @@ void	render(t_data *data)
 				double t = intersections->t1;
 				t_vector intersection_point = ray_position(ray, t);
         		t_vector normal = normal_at(intersections->object, intersection_point);
-				color = calculate_lighting(data, intersection_point, normal, intersections->color);
+				// Adjust the intersection point to avoid shadow acne
+                //t_vector adjusted_point = v_add(intersection_point, v_scalar(normal, EPSILON));
+				in_shadow = is_shadowed(data, intersection_point);
+				color = calculate_lighting(data, intersection_point, normal, intersections->color, in_shadow);
 			}
 			else
 				color = 0x606060;  // for miss

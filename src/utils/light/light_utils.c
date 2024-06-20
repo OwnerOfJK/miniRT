@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 16:23:05 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/20 16:14:51 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/20 17:35:25 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_vector l_reflect(t_vector light_in, t_vector normal_vector)
     return v_sub(light_in, scaled_normal);
 }
 
-int calculate_lighting(t_data *data, t_vector intersection_point, t_vector normal, t_color base_color) {
+int calculate_lighting(t_data *data, t_vector intersection_point, t_vector normal, t_color base_color, bool in_shadow) {
     t_vector light_pos = data->input->light->pos;
     double brightness = data->input->light->brightness;
     
@@ -71,6 +71,12 @@ int calculate_lighting(t_data *data, t_vector intersection_point, t_vector norma
     t_vector reflection_direction = l_reflect(light_direction, normal);
     double specular = pow(fmax(0, v_dot(view_direction, reflection_direction)), data->input->material->shininess) * data->input->material->specular * brightness;
     
+    if (in_shadow)
+    {
+        diffuse = 0;
+        specular = 0;
+    }
+
     double final_red = (ambient + diffuse + specular) * base_color.r / 255;
     double final_green = (ambient + diffuse + specular) * base_color.g / 255;
     double final_blue = (ambient + diffuse + specular) * base_color.b / 255;
@@ -79,8 +85,21 @@ int calculate_lighting(t_data *data, t_vector intersection_point, t_vector norma
     final_red = fmin(1.0, fmax(0.0, final_red));
     final_green = fmin(1.0, fmax(0.0, final_green));
     final_blue = fmin(1.0, fmax(0.0, final_blue));
-    
+    // color_print((t_color){final_red * 255, final_green * 255, final_blue * 255});
     t_color_mlx color = rgb_to_colour((t_color){final_red * 255, final_green * 255, final_blue * 255});
     
     return color;
+}
+
+bool is_shadowed(t_data *data, t_vector point)
+{
+    t_vector light_to_point = v_sub(data->input->light->pos, point);
+    double distance = v_length(light_to_point);
+    t_vector direction = v_normalize(light_to_point);
+    t_ray shadow_ray = {point, direction};
+    t_intersections *intersections = object_intersection(data->input->objects, &shadow_ray);
+    double t = intersections->t1;
+    if (t > 0 && t < distance)
+        return true;
+    return false;
 }

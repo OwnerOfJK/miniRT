@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:39:45 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/20 15:45:58 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/20 17:03:56 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	main(int argc, char **argv)
 
 	// test_vectors();
 	// test_matrices();
+	//test_shadows();
 
 	if (argc != 2)
 		error_message("Error: Wrong number of arguments\n");
