@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 13:41:33 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/17 19:14:39 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/06/20 15:24:39 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	render(t_data *data)
 			//intersections = plane_inter(data->input->plane, ray);
 			//intersections = spheres_inter(data->input->sphere, ray);
 			intersections = cylinder_inter(data->input->cylinder, ray);
-			
+
 			// Set the pixel color based on whether there was an intersection
 			if (intersections.hit == 1)
 				color = rgb_to_colour(intersections.color);
