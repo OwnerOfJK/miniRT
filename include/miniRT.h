@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/20 15:35:19 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/20 16:11:15 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,58 +130,6 @@ typedef struct s_light
 	double		brightness;
 }	t_light;
 
-/* Used to generalise linked lists */
-// typedef struct s_base_node
-// {
-// 	struct s_base_node	*next;
-// }	t_base_node;
-
-/*
-∗ x,y,z coordinates of the sphere center: 0.0,0.0,20.6
-∗ the sphere diameter: 12.6
-∗ R,G,B colors in range [0-255]: 10, 0, 255
-*/
-// typedef struct s_sphere
-// {
-// 	t_vector		pos;
-// 	double			diameter;
-// 	t_color			color;
-// 	double			**transformation_matrix; //this should be part of an object struct
-// 	t_material		material;
-// 	struct s_sphere	*next;
-// }	t_sphere;
-
-/*
-∗ x,y,z coordinates of a point in the plane: 0.0,0.0,-10.0
-∗ 3d normalized normal vector. In range [-1,1] for each x,y,z axis: 0.0,1.0,0.0
-∗ R,G,B colors in range [0-255]: 0,0,225
-*/
-// typedef struct s_plane
-// {
-// 	t_vector		pos;
-// 	t_vector		normal_vector;
-// 	t_color			color;
-// 	struct s_plane	*next;
-// }	t_plane;
-
-/*
-∗ x,y,z coordinates of the center of the cylinder: 50.0,0.0,20.6
-∗ 3d normalized vector of axis of cylinder. In range [-1,1] for each x,y,z axis:
-0.0,0.0,1.0
-∗ the cylinder diameter: 14.2
-∗ the cylinder height: 21.42
-∗ R,G,B colors in range [0,255]: 10, 0, 255
-*/
-// typedef struct s_cylinder
-// {
-// 	t_vector			pos;
-// 	t_vector			axis_vector;
-// 	double				diameter;
-// 	double				height;
-// 	t_color				color;
-// 	struct s_cylinder	*next;
-// }	t_cylinder;
-
 typedef struct s_graphics
 {
 	void	*mlx_ptr;
@@ -193,21 +141,6 @@ typedef struct s_graphics
 	int		endian;
 
 }	t_graphics;
-
-/*
-	shape the shape that was hit
-	ray The ray that hit the shape
-	t The intersection point
-	color The color of the hit shape
-*/
-
-// typedef struct s_hit
-// {
-// 	t_ray		ray;
-// 	t_vector	t;
-// 	t_color		color;
-// }	t_hit;
-
 
 typedef struct s_viewport
 {
@@ -221,6 +154,30 @@ typedef enum {
     PLANE,
     CYLINDER
 } t_obj_type;
+
+/*
+SPHERE
+∗ x,y,z coordinates of the sphere center: 0.0,0.0,20.6
+∗ the sphere diameter: 12.6
+∗ R,G,B colors in range [0-255]: 10, 0, 255
+*/
+
+/*
+PLANE
+∗ x,y,z coordinates of a point in the plane: 0.0,0.0,-10.0
+∗ 3d normalized normal vector. In range [-1,1] for each x,y,z axis: 0.0,1.0,0.0
+∗ R,G,B colors in range [0-255]: 0,0,225
+*/
+
+/*
+CYLINDER
+∗ x,y,z coordinates of the center of the cylinder: 50.0,0.0,20.6
+∗ 3d normalized vector of axis of cylinder. In range [-1,1] for each x,y,z axis:
+0.0,0.0,1.0
+∗ the cylinder diameter: 14.2
+∗ the cylinder height: 21.42
+∗ R,G,B colors in range [0,255]: 10, 0, 255
+*/
 
 typedef struct s_object {
     t_obj_type type;

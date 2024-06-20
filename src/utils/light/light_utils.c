@@ -6,29 +6,11 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 16:23:05 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/19 18:34:57 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/20 16:14:51 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/miniRT.h"
-
-// t_vector normal_at(t_object *object, t_vector world_point) {
-//     // Transform the world point to object space
-//     double** inverse_transform = m_inverse(object->transformation_matrix);
-//     t_vector object_point = mv_mult(inverse_transform, world_point);
-    
-//     // Compute the normal in object space
-//     t_vector object_normal = v_sub(object_point, v_init(0, 0, 0, 0));
-//     object_normal = v_normalize(object_normal);
-
-//     // Transform the normal back to world space
-//     t_vector world_normal = mv_mult(m_transpose(m_inverse(object->transformation_matrix)), object_normal);
-//     world_normal = v_normalize(world_normal);  // Ensure the normal is normalized
-
-//     // Free the dynamically allocated inverse_transform matrix
-//     free_matrix(inverse_transform);
-//     return world_normal;
-// }
 
 t_vector normal_at(t_object *object, t_vector world_point)
 {
@@ -48,8 +30,18 @@ t_vector normal_at(t_object *object, t_vector world_point)
         t_vector transformed_normal = mv_mult(m_transpose(inverse_transform), object->shape.plane.normal_vector);
         normal = v_normalize(transformed_normal);
         free_matrix(inverse_transform);
-    }
+    } else if (object->type == CYLINDER) {
+        double **inverse_transform = m_inverse(object->transformation_matrix);
+        t_vector object_point = mv_mult(inverse_transform, world_point);
 
+        // Assume cylinder is aligned along the z-axis in object space
+        t_vector cylinder_base_to_point = v_sub(object_point, v_init(0, 0, object_point.z, 1));
+        normal = v_normalize(cylinder_base_to_point);
+
+        t_vector world_normal = mv_mult(m_transpose(inverse_transform), normal);
+        normal = v_normalize(world_normal);
+        free_matrix(inverse_transform);
+    }
     return normal;
 }
 
@@ -63,10 +55,6 @@ t_vector l_reflect(t_vector light_in, t_vector normal_vector)
 int calculate_lighting(t_data *data, t_vector intersection_point, t_vector normal, t_color base_color) {
     t_vector light_pos = data->input->light->pos;
     double brightness = data->input->light->brightness;
-
-    // double final_red = 0;
-    // double final_green = 0;
-    // double final_blue = 0; 
     
     t_vector light_direction = v_sub(light_pos, intersection_point);
     light_direction = v_normalize(light_direction);
