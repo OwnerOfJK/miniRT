@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/21 15:25:22 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/21 17:47:20 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,7 +269,6 @@ void		ft_lstadd_back_miniRT(t_object **lst, t_object *new);
 
 
 /*init*/
-void			launching_mlx(t_data *data);
 int				key_handler(int keysym, t_data *data);
 void			event_init(t_data *data);
 t_data			*data_init(char **argv);
@@ -338,7 +337,7 @@ void			my_mlx_pixel_put(t_graphics *img, int x, int y, int color);
 
 /* Light */
 t_vector 	l_reflect(t_vector light_in, t_vector normal_vector);
-int 		calculate_lighting(t_data *data, t_vector intersection_point, t_vector normal, t_color base_color,  bool in_shadow);
+int	calculate_lighting(t_data *data, t_intersections *intersection, t_vector normal, bool in_shadow);
 t_vector	normal_at(t_intersections *intersection, t_ray *ray);
 bool		shadow_at_intersection(t_data *data, t_vector intersection_point);
 /* Viewport */

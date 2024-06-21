@@ -6,11 +6,11 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 20:23:55 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/06/16 20:56:46 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/21 15:41:37 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/miniRT.h"
+#include "../../../include/miniRT.h"
 
 /*
 	Checks if two vectors are equal

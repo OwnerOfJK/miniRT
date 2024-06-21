@@ -6,7 +6,7 @@
 #    By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/20 14:04:55 by jkaller           #+#    #+#              #
-#    Updated: 2024/06/16 21:54:21 by jkaller          ###   ########.fr        #
+#    Updated: 2024/06/21 15:41:14 by jkaller          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ LIBS = ./libs/libft/libft.a
 # Source files
 SRCS = src/main.c $(wildcard src/error/*.c) $(wildcard src/parser/*.c) $(wildcard src/free/*.c) $(wildcard src/utils/*.c) $(wildcard src/raytracing/*.c) $(wildcard src/tests/*.c) \
 	$(wildcard src/utils/matrices/*.c) $(wildcard src/utils/intersections/*.c) $(wildcard src/utils/rays/*.c) $(wildcard src/utils/parsing/*.c) $(wildcard src/utils/light/*.c) \
-	$(wildcard src/utils/linked_lists/*.c) $(wildcard src/init/*.c)
+	$(wildcard src/utils/linked_lists/*.c) $(wildcard src/init/*.c) $(wildcard src/utils/vectors/*.c)
 
 # Object files
 OBJS = $(SRCS:.c=.o)

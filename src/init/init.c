@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 21:33:00 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/21 15:33:11 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/21 17:40:08 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ t_material	*material_init(void)
 	material = malloc(sizeof(t_material));
 	if (material == NULL)
 		error_message("Error: Memory allocation failed.\n");
-	material->ambient = 0.1;
 	material->diffuse = 0.9;
 	material->specular = 0.9;
 	material->shininess = 200;

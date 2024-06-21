@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 19:44:10 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/06/21 13:08:32 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/21 17:03:25 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,12 @@ t_ray	*prepare_ray(t_data *data, double viewport_x, double viewport_y)
 	t_ray		*ray;
 	t_vector	origin;
 	t_vector	direction;
-	double		length;
 
 	// Get the camera position as the origin of the ray
 	origin = data->input->camera->pos;
 	// Create a direction vector from the camera through the viewport coordinates
 	direction = v_init(viewport_x, viewport_y, 1, 0);
 	// Normalize the direction vector
-	length = v_length(direction);
 	direction = v_normalize(direction);
 	// Initialize the ray with the origin and direction
 	ray = ray_init(origin, direction);

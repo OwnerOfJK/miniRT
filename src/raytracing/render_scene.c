@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 20:25:49 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/06/21 15:35:27 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/21 17:44:56 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ int	color_at_intersection(t_intersections *intersection,
 
 	normal_vector = normal_at(intersection, ray);
 	in_shadow = shadow_at_intersection(data, intersection->intersection_point);
-	color = calculate_lighting(data, intersection->intersection_point,
-			normal_vector, intersection->color, in_shadow);
+	color = calculate_lighting(data, intersection, normal_vector, in_shadow);
 	return (color);
 }
 
@@ -61,8 +60,11 @@ void	render(t_data *data)
 		{
 			color = set_color(data, x, y);
 			my_mlx_pixel_put(&data->display, x, y, color);
+			if ((y * WIDTH + x) % (WIDTH * HEIGHT / 20) == 0)
+				ft_printf("Rendering progress: %d%%\n", ((y * WIDTH + x) * 100) / (WIDTH * HEIGHT));
 		}
 	}
 	mlx_put_image_to_window(data->display.mlx_ptr,
 		data->display.win_ptr, data->display.img, 0, 0);
+	ft_printf("Rendering done\n");
 }

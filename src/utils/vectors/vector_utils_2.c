@@ -6,11 +6,11 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 19:25:21 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/06/16 20:56:41 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/21 15:41:40 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/miniRT.h"
+#include "../../../include/miniRT.h"
 
 /*
 	Normalizes a vector

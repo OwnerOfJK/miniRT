@@ -6,11 +6,11 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 18:46:59 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/06/16 21:08:55 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/21 15:41:34 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/miniRT.h"
+#include "../../../include/miniRT.h"
 
 /*
 	addition of two vectors u and v

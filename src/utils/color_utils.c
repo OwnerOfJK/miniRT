@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 19:29:11 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/16 22:44:42 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/21 17:55:41 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,5 @@ Computes a colour in format trgb for mlx library
 */
 int	rgb_to_colour(t_color rgb)
 {
-	return (*(int *)(unsigned char [4]){rgb.b, rgb.g, rgb.r, 255});
+	return (*(int *)(unsigned char [4]){rgb.b * 255, rgb.g * 255, rgb.r * 255, 255});
 }
