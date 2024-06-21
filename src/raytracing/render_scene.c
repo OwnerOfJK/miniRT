@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 20:25:49 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/06/20 17:58:03 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/20 20:54:24 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void	render(t_data *data)
 			// Prepare the ray for the current pixel
 			ray = prepare_ray(data, viewport_x, viewport_y);
 			// Check for intersections with the sphere
-			//intersections = sphere_intersections(data->input->sphere, ray);
 			intersections = object_intersection(data->input->objects, ray);
 			// Set the pixel color based on whether there was an intersection
 			if (intersections->hit == 1)
@@ -75,9 +74,11 @@ void	render(t_data *data)
 				double t = intersections->t1;
 				t_vector intersection_point = ray_position(ray, t);
         		t_vector normal = normal_at(intersections->object, intersection_point);
-				// Adjust the intersection point to avoid shadow acne
-                //t_vector adjusted_point = v_add(intersection_point, v_scalar(normal, EPSILON));
-				in_shadow = is_shadowed(data, intersection_point);
+				// Adjust the intersection point in the direction of the camera
+                t_vector camera_direction = v_sub(data->input->camera->pos, intersection_point);
+                camera_direction = v_normalize(camera_direction);
+                t_vector adjusted_point = v_add(intersection_point, v_scalar(camera_direction, EPSILON));
+				in_shadow = is_shadowed(data, adjusted_point);
 				color = calculate_lighting(data, intersection_point, normal, intersections->color, in_shadow);
 			}
 			else
