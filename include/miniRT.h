@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/20 17:11:48 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/21 14:12:01 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 # endif
 
 # define EPSILON 0.0001
+# define BACKGROUND 0x606060
 
 typedef int			t_color_mlx;
 
@@ -214,6 +215,8 @@ typedef struct s_intersections
 	double		t1;
 	double		t2;
 	t_object	*object;
+	t_vector	intersection_point;
+	t_vector	normal;
 }	t_intersections;
 
 typedef struct s_input
@@ -335,8 +338,8 @@ void			my_mlx_pixel_put(t_graphics *img, int x, int y, int color);
 /* Light */
 t_vector 	l_reflect(t_vector light_in, t_vector normal_vector);
 int 		calculate_lighting(t_data *data, t_vector intersection_point, t_vector normal, t_color base_color,  bool in_shadow);
-t_vector	normal_at(t_object *object, t_vector world_point);
-bool		is_shadowed(t_data *data, t_vector point);
+t_vector	normal_at(t_intersections *intersection, t_ray *ray);
+bool		shadow_at_intersection(t_data *data, t_vector intersection_point);
 /* Viewport */
 double		pixel_map_x(int x, t_viewport *viewport);
 double		pixel_map_y(int y, t_viewport *viewport);

@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 19:44:10 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/06/16 21:51:56 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/21 13:08:32 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@ double	pixel_map_y(int y, t_viewport *viewport)
 	double	normalized_y;
 	double	viewport_y;
 
-	// Normalize the pixel y coordinate to the range [-1, 1]
 	normalized_y = 1 - (y + 0.5) / HEIGHT * 2;
-	// Convert the normalized y coordinate to the viewport y coordinate
 	viewport_y = normalized_y * (viewport->viewport_height / 2);
 	return (viewport_y);
 }

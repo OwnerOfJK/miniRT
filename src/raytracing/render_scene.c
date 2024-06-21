@@ -6,95 +6,67 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 20:25:49 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/06/20 20:54:24 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/21 13:39:09 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniRT.h"
 
-// Initializes the window and starts the rendering process
-void	launch_window(t_data *data)
+int	color_at_intersection(t_intersections *intersection,
+	t_data *data, t_ray *ray)
 {
-	launch_mlx(data);  // Initialize mlx and create the window 
-	data->viewport = viewport_init(data->input->camera);  // Initialize the viewport !!this should be added to the init function!!
-	render(data);  // Render the scene
-	event_init(data);  // Initialize event handling
-	mlx_loop(data->display.mlx_ptr);  // Enter the mlx event loop
+	bool		in_shadow;
+	t_vector	normal_vector;
+	int			color;
+
+	normal_vector = normal_at(intersection, ray);
+	in_shadow = shadow_at_intersection(data, intersection->intersection_point);
+	color = calculate_lighting(data, intersection->intersection_point,
+			normal_vector, intersection->color, in_shadow);
+	return (color);
 }
 
-// Initializes the mlx library and creates a new window and image for rendering
-void    launch_mlx(t_data *data)
+int	set_color(t_data *data, int x, int y)
 {
-	data->display.mlx_ptr = mlx_init();
-	if (!data->display.mlx_ptr)
-		error_free(data, "Error malloc mlx ");
-	data->display.win_ptr = mlx_new_window(data->display.mlx_ptr, WIDTH, HEIGHT, "miniRT");
-	if (!data->display.win_ptr)
-		error_free(data, "Error malloc mlx window");
-	data->display.img = mlx_new_image(data->display.mlx_ptr, WIDTH, HEIGHT);
-	if (!data->display.img)
-		error_free(data, "Error malloc mlx image");
-	data->display.addr = mlx_get_data_addr(data->display.img, &data->display.bpp, \
-		&data->display.line_length, &data->display.endian);
-	if (!data->display.addr)
-		error_free(data, "Error malloc mlx address");
+	double			viewport_x;
+	double			viewport_y;
+	t_ray			*ray;
+	t_intersections	*intersection;
+	int				color;
+
+	viewport_x = 0;
+	viewport_y = 0;
+	viewport_x = pixel_map_x(x, data->viewport);
+	viewport_y = pixel_map_y(y, data->viewport);
+	ray = prepare_ray(data, viewport_x, viewport_y);
+	color = BACKGROUND;
+	intersection = object_intersection(data->input->objects, ray);
+	if (intersection)
+	{
+		if (intersection->hit == 1)
+			color = color_at_intersection(intersection, data, ray);
+	}
+	else
+		color = BACKGROUND;
+	return (color);
 }
 
-// Renders the scene by casting rays for each pixel and checking for intersections with the sphere
 void	render(t_data *data)
 {
 	int				x;
 	int				y;
 	int				color;
-	double			viewport_x;
-	double			viewport_y;
-	t_ray			*ray;
-	t_intersections	*intersections;
-	bool			in_shadow;
 
-	viewport_x = 0;
-	viewport_y = 0;
 	y = -1;
-	in_shadow = false;
 	while (++y < HEIGHT)
 	{
 		x = -1;
 		while (++x < WIDTH)
 		{
-			// Map the pixel coordinates to the viewport coordinates
-			viewport_x = pixel_map_x(x, data->viewport);
-			viewport_y = pixel_map_y(y, data->viewport);
-			// Prepare the ray for the current pixel
-			ray = prepare_ray(data, viewport_x, viewport_y);
-			// Check for intersections with the sphere
-			intersections = object_intersection(data->input->objects, ray);
-			// Set the pixel color based on whether there was an intersection
-			if (intersections->hit == 1)
-			{
-				double t = intersections->t1;
-				t_vector intersection_point = ray_position(ray, t);
-        		t_vector normal = normal_at(intersections->object, intersection_point);
-				// Adjust the intersection point in the direction of the camera
-                t_vector camera_direction = v_sub(data->input->camera->pos, intersection_point);
-                camera_direction = v_normalize(camera_direction);
-                t_vector adjusted_point = v_add(intersection_point, v_scalar(camera_direction, EPSILON));
-				in_shadow = is_shadowed(data, adjusted_point);
-				color = calculate_lighting(data, intersection_point, normal, intersections->color, in_shadow);
-			}
-			else
-				color = 0x606060;  // for miss
+			color = set_color(data, x, y);
 			my_mlx_pixel_put(&data->display, x, y, color);
 		}
 	}
-	// Display the rendered image in the window
-	mlx_put_image_to_window(data->display.mlx_ptr, data->display.win_ptr, data->display.img, 0, 0);
-}
-
-
-void	my_mlx_pixel_put(t_graphics *img, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = img->addr + (y * img->line_length + x * (img->bpp / 8));
-	*(unsigned int *)dst = color;
+	mlx_put_image_to_window(data->display.mlx_ptr,
+		data->display.win_ptr, data->display.img, 0, 0);
 }

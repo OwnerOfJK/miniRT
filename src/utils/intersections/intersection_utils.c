@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 20:43:09 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/20 15:33:45 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/21 14:22:44 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_intersections *object_intersection(t_object *objects, t_ray *ray)
 {
 	t_intersections	*pl_intersection;
 	t_intersections	*sp_intersection;
+	t_intersections	*cy_intersection;
 	t_intersections	*closest;
 	int i;
 
@@ -69,11 +70,11 @@ t_intersections *object_intersection(t_object *objects, t_ray *ray)
 		}
 		else if (objects->type == CYLINDER)
 		{
-			sp_intersection = cylinder_intersect(objects, ray);
-			if (sp_intersection->hit == 1)
+			cy_intersection = cylinder_intersect(objects, ray);
+			if (cy_intersection->hit == 1)
 			{
-				if (sp_intersection->t1 < closest->t1)
-					closest = sp_intersection;
+				if (cy_intersection->t1 < closest->t1)
+					closest = cy_intersection;
 			}
 		}
 		objects = objects->next;
