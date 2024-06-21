@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/20 16:23:29 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/06/21 12:20:17 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -323,7 +323,9 @@ t_intersections	plane_intersect(t_plane *pl, t_ray *ray);
 t_intersections	spheres_inter(t_sphere *sp, t_ray *ray);
 t_intersections	shape_intersection(t_plane *pl, t_sphere *sp, t_ray *ray);
 t_intersections	cylinder_inter(t_cylinder *cy, t_ray *ray);
-t_intersections	cylinder_intersections(t_cylinder *cy, t_ray *ray);
+t_intersections	cylinder_intersections(t_cylinder *cy, t_ray ray);
+void verify_t(t_cylinder *cy, t_ray ray, t_intersections *d);
+
 void	set_intersections(double t1, double t2, t_intersections *intersections);
 
 t_plane	*create_plane(t_vector pos, t_vector normal_vector, t_color color);

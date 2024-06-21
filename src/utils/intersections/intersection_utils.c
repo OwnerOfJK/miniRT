@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 20:43:09 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/20 16:23:00 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/06/21 12:21:48 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,14 @@ t_intersections	shape_intersection(t_plane *pl, t_sphere *sp, t_ray *ray)
 	return (closest);
 }
 
-t_plane	*create_plane(t_vector pos, t_vector normal_vector, t_color color)
-{
-	t_plane	*plane;
+// t_plane	*create_plane(t_vector pos, t_vector normal_vector, t_color color)
+// {
+// 	t_plane	*plane;
 
-	plane->pos = pos;
-	plane->normal_vector = normal_vector;
-	plane->color = color;
+// 	plane->pos = pos;
+// 	plane->normal_vector = normal_vector;
+// 	plane->color = color;
 
-	return (plane);
-}
+// 	return (plane);
+// }
+//t_vector	ray_at()
