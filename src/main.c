@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:39:45 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/20 17:03:56 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/21 15:24:49 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,10 @@ int	main(int argc, char **argv)
 
 	// test_vectors();
 	// test_matrices();
-	//test_shadows();
 
 	if (argc != 2)
 		error_message("Error: Wrong number of arguments\n");
-	data = malloc(sizeof(t_data));
-	data->input = parse_input(argv[1]);
+	data = data_init(argv);
 	//test_intersections(data->input);
 	//test_plane_intersect();
 	// if (check_input(argv[1]) == EXIT_SUCCESS)

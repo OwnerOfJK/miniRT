@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 23:20:16 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/16 16:45:36 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/21 15:17:31 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	get_config_len(char *file_path)
 	return (config_len);
 }
 
-char	**find_index(char** object_configs, char *index, int len)
+char	**find_index(char **object_configs, char *index, int len)
 {
 	while (*object_configs)
 	{

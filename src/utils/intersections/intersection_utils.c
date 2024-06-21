@@ -6,34 +6,11 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 20:43:09 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/21 14:22:44 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/21 15:13:37 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/miniRT.h"
-
-
-// t_intersections	shape_intersection(t_plane *pl, t_sphere *sp, t_ray *ray)
-// {
-// 	t_intersections	pl_inter;
-// 	t_intersections	sp_inter;
-// 	t_intersections	closest;
-
-// 	pl_inter = plane_inter(pl, ray);
-// 	sp_inter = spheres_inter(sp, ray);
-
-// 	if (sp_inter.hit == 1 && pl_inter.hit == 1)
-// 	{
-// 		if (pl_inter.t1 < sp_inter.t1)
-// 			closest = pl_inter;
-// 		else
-// 			closest = sp_inter;
-// 	}
-// 	else if (sp_inter.hit == 1 && pl_inter.hit == 0)
-// 		closest = sp_inter;
-// 	else if (sp_inter.hit == 0 && pl_inter.hit == 1)
-// 		closest = sp_inter;
-// }
 
 t_intersections *object_intersection(t_object *objects, t_ray *ray)
 {
@@ -41,7 +18,7 @@ t_intersections *object_intersection(t_object *objects, t_ray *ray)
 	t_intersections	*sp_intersection;
 	t_intersections	*cy_intersection;
 	t_intersections	*closest;
-	int i;
+	int				i;
 
 	closest = malloc(sizeof(t_intersections));
 	closest->t1 = DBL_MAX;

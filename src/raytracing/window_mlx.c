@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 12:55:17 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/21 13:09:59 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/21 15:33:37 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,10 @@
 // Initializes the window and starts the rendering process
 void	launch_window(t_data *data)
 {
-	launch_mlx(data);  // Initialize mlx and create the window 
-	data->viewport = viewport_init(data->input->camera);  // Initialize the viewport !!this should be added to the init function!!
-	render(data);  // Render the scene
-	event_init(data);  // Initialize event handling
-	mlx_loop(data->display.mlx_ptr);  // Enter the mlx event loop
+	launch_mlx(data);
+	render(data);
+	event_init(data);
+	mlx_loop(data->display.mlx_ptr);
 }
 
 // Initializes the mlx library and creates a new window and image for rendering

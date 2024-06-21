@@ -6,37 +6,11 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 18:16:39 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/06/19 18:30:01 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/21 15:13:59 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/miniRT.h"
-
-// t_intersections	plane_inter(t_plane *pl, t_ray *ray)
-// {
-// 	t_intersections	intersect;
-// 	t_intersections	temp;
-
-// 	temp.hit = 0;
-// 	intersect.hit = 0;
-// 	temp.t1 = DBL_MAX; //not sure about this
-// 	while (pl != NULL)
-// 	{
-// 		intersect = plane_intersect(pl, ray);
-// 		if (intersect.count != 0)
-// 		{
-// 			intersect.hit = 1;
-// 			if (intersect.t1 < temp.t1)
-// 				temp = intersect;
-// 		}
-// 		pl = (t_plane *)pl->base.next;
-// 	}
-// 	if (intersect.hit == 1)
-// 		return (intersect);
-// 	else
-// 		return (temp);
-// }
-
 
 /*
 4 cases :

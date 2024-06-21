@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 20:25:49 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/06/21 13:39:09 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/21 15:35:27 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,16 @@ int	set_color(t_data *data, int x, int y)
 	t_intersections	*intersection;
 	int				color;
 
-	viewport_x = 0;
-	viewport_y = 0;
+	color = BACKGROUND;
 	viewport_x = pixel_map_x(x, data->viewport);
 	viewport_y = pixel_map_y(y, data->viewport);
 	ray = prepare_ray(data, viewport_x, viewport_y);
-	color = BACKGROUND;
 	intersection = object_intersection(data->input->objects, ray);
 	if (intersection)
 	{
 		if (intersection->hit == 1)
 			color = color_at_intersection(intersection, data, ray);
 	}
-	else
-		color = BACKGROUND;
 	return (color);
 }
 

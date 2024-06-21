@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/21 14:12:01 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/21 15:25:22 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -272,6 +272,7 @@ void		ft_lstadd_back_miniRT(t_object **lst, t_object *new);
 void			launching_mlx(t_data *data);
 int				key_handler(int keysym, t_data *data);
 void			event_init(t_data *data);
+t_data			*data_init(char **argv);
 
 /* Error Handling */
 void			error_message(char *error_message);
