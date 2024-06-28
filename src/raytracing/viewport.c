@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   viewport.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 19:44:10 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/06/21 17:03:25 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/28 17:02:40 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@ double	pixel_map_y(int y, t_viewport *viewport)
 	viewport_y = normalized_y * (viewport->viewport_height / 2);
 	return (viewport_y);
 }
-
-// Prepares a ray from the camera origin through the specified viewport coordinates
+/*
+Prepares a ray from the camera origin through the specified viewport coordinates
+*/
 t_ray	*prepare_ray(t_data *data, double viewport_x, double viewport_y)
 {
 	t_ray		*ray;
