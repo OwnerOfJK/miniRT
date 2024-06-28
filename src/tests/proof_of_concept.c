@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 13:41:33 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/20 15:24:39 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/06/28 15:13:57 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,11 @@ void	render(t_data *data)
 
 			// Set the pixel color based on whether there was an intersection
 			if (intersections.hit == 1)
-				color = rgb_to_colour(intersections.color);
+			{
+				//color = rgb_to_colour(intersections.color);
+				color = 0xFF00FF;
+			}
+
 			else
 				color = 0x0000FF;  // Blue for miss
 			my_mlx_pixel_put(&data->display, x, y, color);
