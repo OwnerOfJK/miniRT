@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:22:54 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/26 14:42:47 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/06/28 16:02:51 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ t_intersections	*cylinder_intersect(t_object *cy, t_ray *ray)
 	double			radius;
 	double			delta;
 	double**		inverse_transform;
+	double	y0;
+	double	y1;
     t_ray			object_space_ray;
 
 	intersections = malloc(sizeof(t_intersections));
@@ -47,10 +49,22 @@ t_intersections	*cylinder_intersect(t_object *cy, t_ray *ray)
 	if (delta >= 0)
 	{
 		set_intersections(equat.t1, equat.t2, intersections);
-		intersections->count = 1;
-		intersections->hit = 1;
-		intersections->color = cy->color;
-		intersections->object = cy;
+		y0 = v_dot(ray->direction,cy->shape.cylinder.axis_vector) * v_dot(ray->direction, cy->shape.cylinder.axis_vector) * equat.t1 + v_dot(cylinder_to_ray, cy->shape.cylinder.axis_vector) * v_dot(ray->direction, cy->shape.cylinder.axis_vector);
+		y1 = v_dot(ray->direction, cy->shape.cylinder.axis_vector) * v_dot(ray->direction, cy->shape.cylinder.axis_vector) * equat.t2 + v_dot(cylinder_to_ray, cy->shape.cylinder.axis_vector) * v_dot(ray->direction, cy->shape.cylinder.axis_vector);
+		if (y0 >= cy->shape.cylinder.height / - 2 && y0 <= cy->shape.cylinder.height / 2 )
+		{
+			intersections->count = 1;
+			intersections->hit = 1;
+			intersections->color = cy->color;
+			intersections->object = cy;
+		}
+		else if ( y1 >= cy->shape.cylinder.height / - 2 && y1 <= cy->shape.cylinder.height/ 2 )
+		{
+			intersections->count = 1;
+			intersections->hit = 1;
+			intersections->color = cy->color;
+			intersections->object = cy;
+		}
 	}
 	free_matrix(inverse_transform);
 	return (intersections);
