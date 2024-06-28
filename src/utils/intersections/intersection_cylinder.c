@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection_cylinder.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:22:54 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/20 15:37:46 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/06/26 14:42:47 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,14 @@ t_intersections	*cylinder_intersect(t_object *cy, t_ray *ray)
 	// Initialize intersections
     intersections->count = 0;
     intersections->hit = 0;
+
 	// Inverse transformation matrix
     inverse_transform = m_inverse(cy->transformation_matrix);
     // Transform the ray into object space
     object_space_ray = ray_transform(ray, inverse_transform);
-    // Sphere radius
+
 	radius = cy->shape.cylinder.diameter / 2;
+
 	// Compute cylinder_to_ray vector in object space
 	cylinder_to_ray = v_sub(ray->origin, cy->shape.cylinder.cap_down);
 	// Quadratic equation coefficients
@@ -39,7 +41,9 @@ t_intersections	*cylinder_intersect(t_object *cy, t_ray *ray)
     equat.b = 2 * (v_dot(ray->direction, cylinder_to_ray) - (v_dot(ray->direction, cy->shape.cylinder.axis_vector) * v_dot(cylinder_to_ray, cy->shape.cylinder.axis_vector)));
 	equat.c = v_dot(cylinder_to_ray, cylinder_to_ray) - (v_dot(cylinder_to_ray, cy->shape.cylinder.axis_vector) * v_dot(cylinder_to_ray, cy->shape.cylinder.axis_vector)) - (radius * radius);
 	// Solve quadratic equation
+
 	delta = solve_quadratic(&equat);
+
 	if (delta >= 0)
 	{
 		set_intersections(equat.t1, equat.t2, intersections);
@@ -47,7 +51,7 @@ t_intersections	*cylinder_intersect(t_object *cy, t_ray *ray)
 		intersections->hit = 1;
 		intersections->color = cy->color;
 		intersections->object = cy;
-    }
-    free_matrix(inverse_transform);
-    return (intersections);
+	}
+	free_matrix(inverse_transform);
+	return (intersections);
 }
