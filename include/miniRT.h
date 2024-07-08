@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/21 17:47:20 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/08 19:04:43 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -294,7 +294,10 @@ t_vector		v_neg(t_vector u);
 double			v_length(t_vector v);
 t_vector		v_normalize(t_vector v);
 double			calc_delta(double a, double b, double c);
-double			solve_quadratic(t_equat2 *eq);
+
+double			solve_quadratic_cy(t_equat2 *eq);
+double	solve_quadratic(double a, double b, double c);
+
 
 /* Utils */
 void			print_double_pointer(char **double_pointer);
@@ -325,7 +328,10 @@ t_intersections	*plane_intersect(t_object *pl, t_ray *ray);
 t_intersections *sphere_intersect(t_object *sp, t_ray *ray);
 t_intersections	*cylinder_intersect(t_object *cy, t_ray *ray);
 t_intersections *object_intersection(t_object *objects, t_ray *ray);
-void	set_intersections(double t1, double t2, t_intersections *intersections);
+
+
+void	set_intersections_cy(double t1, double t2, t_intersections *intersections);
+double	set_intersections(double t1, double t2);
 
 /* Free Memory */
 void		free_double_pointer(char **double_pointer);
