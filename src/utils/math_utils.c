@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 18:42:22 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/07/08 19:04:35 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/07/09 12:31:07 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,19 +64,33 @@ double	solve_quadratic_cy(t_equat2 *eq)
 	return (delta);
 }
 
+double	solve_quadratic_t2(double a, double b, double c)
+{
+	double	delta;
+	double	t1;
+	double	t2;
+
+	delta = calc_delta(a, b, c);
+	if (delta < 0)
+		return (-1);
+	if (delta >= 0)
+	{
+		t1 = (- (b) + sqrt(delta)) / (2 * a);
+		t2 = (- (b) - sqrt(delta)) / (2 * a);
+		t2 = set_intersections_t2(t1, t2);
+	}
+	else
+		t2 = -1;
+	return (t2);
+}
+
 double	solve_quadratic(double a, double b, double c)
 {
 	double	delta;
 	double	t1;
 	double	t2;
 
-
 	delta = calc_delta(a, b, c);
-	// if (a == 0 && b != 0)
-	// {
-	// 	t1 = - (c) / (b);
-	// 	return (delta);
-	// }
 	if (delta < 0)
 		return (-1);
 	if (delta >= 0)

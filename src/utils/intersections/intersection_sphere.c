@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 18:19:12 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/07/08 19:14:26 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/07/09 12:34:50 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,25 @@ void	set_intersections_cy(double t1, double t2, t_intersections *intersections)
 }
 
 
+double	set_intersections_t2(double t1, double t2)
+{
+	double	temp;
 
+	temp = 0;
+	if (t1 > EPSILON && t2 > EPSILON)
+	{
+		if (t1 > t2)
+		{
+			temp = t1;
+			t1 = t2;
+			t2 = temp;
+		}
+	}
+	if (t2 < EPSILON )
+		return (-1);
+	else
+		return (t2);
+}
 
 double	set_intersections(double t1, double t2)
 {
@@ -140,7 +158,6 @@ t_intersections *sphere_intersect(t_object *sp, t_ray *ray)
 
 	if (t1 > EPSILON)
 	{
-
 		intersections->count = 1;
 		intersections->hit = 1;
 		intersections->color = sp->color;

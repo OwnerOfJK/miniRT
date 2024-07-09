@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/08 19:04:43 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/07/09 12:30:36 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -297,7 +297,8 @@ double			calc_delta(double a, double b, double c);
 
 double			solve_quadratic_cy(t_equat2 *eq);
 double	solve_quadratic(double a, double b, double c);
-
+double	solve_quadratic_t2(double a, double b, double c);
+double	set_intersections_t2(double t1, double t2);
 
 /* Utils */
 void			print_double_pointer(char **double_pointer);
