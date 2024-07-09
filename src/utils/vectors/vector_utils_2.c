@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector_utils_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 19:25:21 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/06/21 15:41:40 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/09 13:06:56 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,8 @@ t_vector	v_normalize(t_vector v)
 		v.z /= length;
 	}
 	return (v);
+}
+t_vector	neg(t_vector u)
+{
+	return (v_scalar(u, -1.0));
 }

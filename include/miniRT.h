@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/09 12:30:36 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/07/09 13:07:19 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -294,6 +294,7 @@ t_vector		v_neg(t_vector u);
 double			v_length(t_vector v);
 t_vector		v_normalize(t_vector v);
 double			calc_delta(double a, double b, double c);
+t_vector		neg(t_vector u);
 
 double			solve_quadratic_cy(t_equat2 *eq);
 double	solve_quadratic(double a, double b, double c);
