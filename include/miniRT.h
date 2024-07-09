@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/09 15:11:25 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/07/09 17:39:46 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -331,7 +331,8 @@ t_vector	m_reflect(t_vector normal);
 /* Intersections */
 t_vector	ray_position(t_ray *ray, double t);
 t_ray	ray_transform(t_ray *ray, double **matrix);
-t_intersections	*plane_intersect(t_object *pl, t_ray *ray);
+//t_intersections	*plane_intersect(t_object *pl, t_ray *ray);
+double	plane_intersect(t_object *pl, t_ray *ray);
 t_intersections *sphere_intersect(t_object *sp, t_ray *ray);
 t_intersections	*cylinder_intersect(t_object *cy, t_ray *ray);
 t_intersections *object_intersection(t_object *objects, t_ray *ray);
