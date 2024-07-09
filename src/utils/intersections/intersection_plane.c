@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection_plane.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 18:16:39 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/06/21 15:13:59 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/09 15:10:25 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_intersections	*plane_intersect(t_object *pl, t_ray *ray)
     intersections = malloc(sizeof(t_intersections));
     if (!intersections)
         return (NULL);
-    
+
     intersections->count = 0;
     intersections->hit = 0;
 
@@ -49,7 +49,7 @@ t_intersections	*plane_intersect(t_object *pl, t_ray *ray)
     // Compute ray-plane intersection in object space
     o_p = v_sub(object_space_ray.origin, pl->pos);
     denominator = v_dot(object_space_ray.direction, transformed_normal);
-    
+
     if (denominator != 0) // Ensure the ray is not parallel to the plane
     {
         numerator = -v_dot(o_p, transformed_normal);

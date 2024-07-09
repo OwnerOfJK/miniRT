@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:22:54 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/09 12:57:51 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/07/09 15:11:11 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,6 @@ double	cylinder_tube(t_object *cy, t_ray *ray)
 		return (-1);
 }
 
-// double	cylinder_cap(t_object *cy, t_ray *ray)
-// {
-
-// }
 
 t_intersections	*cylinder_intersect(t_object *cy, t_ray *ray)
 {

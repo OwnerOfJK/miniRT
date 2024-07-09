@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 20:43:09 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/28 17:03:16 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/07/09 15:12:14 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,3 +58,24 @@ t_intersections *object_intersection(t_object *objects, t_ray *ray)
 	}
 	return (closest);
 }
+
+// void	set_top_bottom(t_object *obj)
+// {
+// 	t_vector	half_height;
+// 	t_vector	axis_vector;
+// 	double		height;
+
+// 	if (obj->type != CYLINDER)
+// 		return ;
+
+// 	axis_vector = obj->shape.cylinder.axis_vector;
+// 	height = obj->shape.cylinder.height;
+
+// 	half_height = v_scalar(axis_vector, height / 2);
+
+// 	obj->shape.cylinder.top_plane.normal_vector = axis_vector;
+// 	obj->shape.cylinder.top_plane.pos = v_sub(obj->pos, half_height);
+
+// 	obj->shape.cylinder.bottom_plane.normal_vector = axis_vector;
+// 	obj->shape.cylinder.bottom_plane.pos = v_sub(obj->pos, half_height);
+// }

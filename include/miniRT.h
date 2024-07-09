@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/09 13:07:19 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/07/09 15:11:25 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,6 +201,11 @@ typedef struct s_object {
             double height;
 			t_vector cap_up;
 			t_vector cap_down;
+			// struct
+			// {
+			// 	t_vector normal_vector;
+			// 	t_vector pos;
+			// } top_plane, bottom_plane;
         } cylinder;
     } shape;
     struct s_object *next;
