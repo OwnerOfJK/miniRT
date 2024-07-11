@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 20:43:09 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/09 17:44:29 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/07/09 18:02:07 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,22 @@ t_intersections *object_intersection(t_object *objects, t_ray *ray)
 		if (objects->type == PLANE)
 		{
 			pl_inter = plane_intersect(objects, ray);
-			if (pl_inter >= EPSILON)
+			if (pl_inter >= 0)
 			{
-				if (pl_inter < closest->t1)
-				{
-					pl_intersection = malloc(sizeof(t_intersections));
-					if (!pl_intersection)
-						return (NULL);
-					pl_intersection->count = 1;
-					pl_intersection->hit = 1;
-					pl_intersection->t1 = pl_inter;
-					pl_intersection->color = objects->color;
-					pl_intersection->object = objects;
-				}
-					closest = pl_intersection;
+				pl_intersection = malloc(sizeof(t_intersections));
+				if (!pl_intersection)
+					return (NULL);
+				pl_intersection->count = 1;
+				pl_intersection->hit = 1;
+				pl_intersection->t1 = pl_inter;
+				pl_intersection->color = objects->color;
+				pl_intersection->object = objects;
+
 			}
+			if (pl_inter < closest->t1)
+				{
+					closest = pl_intersection;
+				}
 			//pl_intersection = plane_intersect(objects, ray);
 			// if (pl_intersection->hit == 1)
 			// {
