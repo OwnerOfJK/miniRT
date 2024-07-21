@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector_utils_0.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 18:46:59 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/06/21 15:41:34 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/09 15:32:27 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ t_vector	v_add(t_vector u, t_vector v)
 	w.y = u.y + v.y;
 	w.z = u.z + v.z;
 	w.w = u.w + v.w;
-	if (w.w > 1)
-		ft_putstr_fd("Warning: w value is greater than 1\n", 2);
+	//if (w.w > 1)
+		//ft_putstr_fd("Warning: w value is greater than 1\n", 2);
 	return (w);
 }
 

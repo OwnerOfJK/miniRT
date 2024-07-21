@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 20:43:09 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/21 12:18:02 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/21 12:26:10 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,5 @@ t_intersections *object_intersection(t_object *objects, t_ray *ray)
 	}
 	return (intersection);
 }
-/*
 
-Need to create a function to go through all the shapes
-*/
+

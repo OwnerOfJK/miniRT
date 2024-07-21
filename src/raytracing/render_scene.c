@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_scene.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 20:25:49 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/06/21 17:44:56 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/09 15:14:36 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ int	set_color(t_data *data, int x, int y)
 
 void	render(t_data *data)
 {
-	int				x;
-	int				y;
-	int				color;
+	int	x;
+	int	y;
+	int	color;
 
 	y = -1;
 	while (++y < HEIGHT)

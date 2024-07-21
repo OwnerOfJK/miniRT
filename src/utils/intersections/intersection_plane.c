@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 18:16:39 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/07/21 12:17:57 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/21 12:23:53 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void    plane_intersect(t_object *pl, t_ray *ray, t_intersections *intersection)
     // Compute ray-plane intersection in object space
     o_p = v_sub(object_space_ray.origin, pl->pos);
     denominator = v_dot(object_space_ray.direction, transformed_normal);
-    
+
     if (denominator != 0) // Ensure the ray is not parallel to the plane
     {
         numerator = -v_dot(o_p, transformed_normal);
