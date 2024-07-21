@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection_cylinder.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:22:54 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/09 16:39:15 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/07/21 13:55:18 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,8 @@ double	min_of_three(double a, double b, double c)
 }
 
 /* attention si pas d'inter -1, */
-t_intersections	*cylinder_intersect(t_object *cy, t_ray *ray)
+void	cylinder_intersect(t_object *cy, t_ray *ray, t_intersections *intersection)
 {
-	t_intersections	*inter;
 	double			t_tube;
 	// double			t_cap_up;
 	// double			t_cap_down;
@@ -81,11 +80,6 @@ t_intersections	*cylinder_intersect(t_object *cy, t_ray *ray)
 //     inverse_transform = m_inverse(cy->transformation_matrix);
 //     object_space_ray = ray_transform(ray, inverse_transform);
 
-
-	inter = malloc(sizeof(t_intersections));
-	inter->count = 0;
-	inter->hit = 0;
-
 	t_tube = cylinder_tube(cy, ray);
 
 	// t_cap_up = cylinder_cap_up();
@@ -94,13 +88,15 @@ t_intersections	*cylinder_intersect(t_object *cy, t_ray *ray)
 
 	if (t_tube > EPSILON)
 	{
-		inter->t1 = t_tube;
-		inter->count = 1;
-		inter->hit = 1;
-		inter->color = cy->color;
-		inter->object = cy;
+		if (t_tube < intersection->t1)
+		{
+			intersection->t1 = t_tube;
+			intersection->count = 1;
+			intersection->hit = 1;
+			intersection->color = cy->color;
+			intersection->object = cy;
+		}
 	}
-	return (inter);
 }
 
 // void	set_top_bottom(t_object *obj)

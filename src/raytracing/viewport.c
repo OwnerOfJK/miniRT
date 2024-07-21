@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   viewport.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 19:44:10 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/06/28 17:02:40 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/07/21 13:38:11 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ double	pixel_map_y(int y, t_viewport *viewport)
 /*
 Prepares a ray from the camera origin through the specified viewport coordinates
 */
-t_ray	*prepare_ray(t_data *data, double viewport_x, double viewport_y)
+t_ray	*prepare_ray(t_data *data, double viewport_x, double viewport_y, t_ray *ray)
 {
-	t_ray		*ray;
+	//t_ray		*ray;
 	t_vector	origin;
 	t_vector	direction;
 
@@ -51,6 +51,8 @@ t_ray	*prepare_ray(t_data *data, double viewport_x, double viewport_y)
 	// Normalize the direction vector
 	direction = v_normalize(direction);
 	// Initialize the ray with the origin and direction
-	ray = ray_init(origin, direction);
+	ray->direction = direction;
+	ray->origin = origin;
+	//ray = ray_init(origin, direction);
 	return (ray);
 }
