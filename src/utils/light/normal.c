@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   normal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 11:53:17 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/09 14:17:57 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/07/21 16:22:43 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,14 @@
 t_vector	compute_sphere(t_object	*object, t_vector world_point)
 {
 	t_vector	normal;
-	double		**inverse_transform;
 	t_vector	object_point;
 	t_vector	world_normal;
 
-	inverse_transform = m_inverse(object->transformation_matrix);
-	object_point = mv_mult(inverse_transform, world_point);
+	object_point = mv_mult(object->inverse_matrix, world_point);
 	normal = v_sub(object_point, v_init(0, 0, 0, 1));
 	normal = v_normalize(normal);
-	world_normal = mv_mult(m_transpose(inverse_transform), normal);
+	world_normal = mv_mult(m_transpose(object->inverse_matrix), normal);
 	normal = v_normalize(world_normal);
-	free_matrix(inverse_transform);
 	return (normal);
 }
 
@@ -50,23 +47,39 @@ t_vector	compute_plane(t_object	*object, t_ray *ray)
 		return (object->shape.plane.normal_vector);
 }
 
-t_vector	compute_cylinder(t_object	*object, t_vector world_point)
+// t_vector	compute_cylinder(t_object	*object, t_vector world_point)
+// {
+// 	t_vector	pc;
+// 	t_vector	normal;
+
+
+// 	// t_vector	object_point;
+// 	// double		**inverse_transform;
+
+// 	// inverse_transform = m_inverse(object->transformation_matrix); //doesn't change anything
+// 	// object_point = mv_mult(inverse_transform, world_point);
+
+// 	pc = v_sub(world_point, object->pos);
+// 	normal = v_sub(pc, v_scalar(object->shape.cylinder.axis_vector, v_dot(pc, object->shape.cylinder.axis_vector)));
+
+// 	//free_matrix(inverse_transform);
+// 	return (normal);
+// }
+
+t_vector compute_cylinder(t_object *object, t_vector local_point)
 {
-	t_vector	pc;
-	t_vector	normal;
+    t_vector pc, normal;
 
+    // Compute vector from cylinder center to intersection point
+    pc = v_sub(local_point, object->pos);
 
-	// t_vector	object_point;
-	// double		**inverse_transform;
+    // Project pc onto the axis vector of the cylinder
+    t_vector projection = v_scalar(object->shape.cylinder.axis_vector, v_dot(pc, object->shape.cylinder.axis_vector));
 
-	// inverse_transform = m_inverse(object->transformation_matrix); //doesn't change anything
-	// object_point = mv_mult(inverse_transform, world_point);
+    // Calculate the normal as the difference between pc and the projection
+    normal = v_sub(pc, projection);
 
-	pc = v_sub(world_point, object->pos);
-	normal = v_sub(pc, v_scalar(object->shape.cylinder.axis_vector, v_dot(pc, object->shape.cylinder.axis_vector)));
-
-	//free_matrix(inverse_transform);
-	return (normal);
+    return normal;
 }
 
 // t_vector	compute_cylinder(t_object	*object, t_vector world_point)

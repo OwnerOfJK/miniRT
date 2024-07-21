@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 18:16:39 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/07/21 12:23:53 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/21 15:23:33 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,14 @@ void    plane_intersect(t_object *pl, t_ray *ray, t_intersections *intersection)
     double			numerator;
     double			denominator;
     double			t;
-    double**		inverse_transform;
     t_ray			object_space_ray;
     t_vector		transformed_normal;
 
-    // Inverse transformation matrix
-    inverse_transform = m_inverse(pl->transformation_matrix);
-
     // Transform the ray into object space
-    object_space_ray = ray_transform(ray, inverse_transform);
+    object_space_ray = ray_transform(ray, pl->inverse_matrix);
 
     // Transform the plane's normal vector to object space
-    transformed_normal = mv_mult(inverse_transform, pl->shape.plane.normal_vector);
+    transformed_normal = mv_mult(pl->inverse_matrix, pl->shape.plane.normal_vector);
 
     // Compute ray-plane intersection in object space
     o_p = v_sub(object_space_ray.origin, pl->pos);
@@ -60,5 +56,4 @@ void    plane_intersect(t_object *pl, t_ray *ray, t_intersections *intersection)
         }
     }
     // Free the inverse transformation matrix
-    free_matrix(inverse_transform);
 }

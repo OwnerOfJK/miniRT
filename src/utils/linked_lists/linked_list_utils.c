@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 00:23:57 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/20 15:37:24 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/21 15:25:25 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_object	*ft_lstnew_object(char *str)
 t_object	*add_sphere(t_object *object, char *save_pointer)
 {
 	char		*token;
-	
+
 	object = malloc(sizeof(t_object));
 	if (object == NULL)
 		error_message("Error: Memory allocation failed.\n");
@@ -56,13 +56,14 @@ t_object	*add_sphere(t_object *object, char *save_pointer)
 	if (token != NULL)
 		object->color = parse_color(token);
 	object->transformation_matrix = m_translate(object->pos);
+	object->inverse_matrix = m_inverse(object->transformation_matrix);
 	return (object);
 }
 
 t_object	*add_plane(t_object *object, char *save_pointer)
 {
 	char		*token;
-	
+
 	object = malloc(sizeof(t_object));
 	if (object == NULL)
 		error_message("Error: Memory allocation failed.\n");
@@ -77,13 +78,14 @@ t_object	*add_plane(t_object *object, char *save_pointer)
 	if (token != NULL)
 		object->color = parse_color(token);
 	object->transformation_matrix = m_translate(object->pos);
+	object->inverse_matrix = m_inverse(object->transformation_matrix);
 	return (object);
 }
 
 t_object	*add_cylinder(t_object *object, char *save_pointer)
 {
 	char		*token;
-	
+
 	object = malloc(sizeof(t_object));
 	if (object == NULL)
 		error_message("Error: Memory allocation failed.\n");
@@ -104,6 +106,7 @@ t_object	*add_cylinder(t_object *object, char *save_pointer)
 	if (token != NULL)
 		object->color = parse_color(token);
 	object->transformation_matrix = m_translate(object->pos);
+	object->inverse_matrix = m_inverse(object->transformation_matrix);
 	object->shape.cylinder.cap_up = v_add(object->pos, v_scalar(object->shape.cylinder.axis_vector, object->shape.cylinder.height / 2.0));
 	object->shape.cylinder.cap_down = v_add(object->pos, v_scalar(object->shape.cylinder.axis_vector, -object->shape.cylinder.height / 2.0));
 	return (object);

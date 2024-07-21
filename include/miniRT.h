@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/21 14:21:42 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/21 16:03:42 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,7 @@ typedef struct s_object {
     t_vector pos;
     t_color color;
     double **transformation_matrix;
+	double **inverse_matrix;
     union {
         struct
 		{
@@ -334,7 +335,7 @@ t_ray	ray_transform(t_ray *ray, double **matrix);
 void    	plane_intersect(t_object *pl, t_ray *ray, t_intersections *intersection);
 void	sphere_intersect(t_object *sp, t_ray *ray, t_intersections *intersection);
 void	cylinder_intersect(t_object *cy, t_ray *ray, t_intersections *intersection);
-t_intersections	*object_intersection(t_object *objects, t_ray *ray);
+void	object_intersection(t_object *objects, t_ray *ray, t_intersections	*intersection);
 
 
 void	set_intersections_cy(double t1, double t2, t_intersections *intersections);
@@ -352,7 +353,7 @@ void			my_mlx_pixel_put(t_graphics *img, int x, int y, int color);
 t_vector 	l_reflect(t_vector light_in, t_vector normal_vector);
 int	calculate_lighting(t_data *data, t_intersections *intersection, t_vector normal, bool in_shadow);
 t_vector	normal_at(t_intersections *intersection, t_ray *ray);
-bool		shadow_at_intersection(t_data *data, t_vector intersection_point, t_ray *ray);
+bool		shadow_at_intersection(t_data *data, t_intersections *intersection,  t_ray *ray);
 /* Viewport */
 double		pixel_map_x(int x, t_viewport *viewport);
 double		pixel_map_y(int y, t_viewport *viewport);

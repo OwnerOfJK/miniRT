@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 18:19:12 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/07/21 13:25:07 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/21 15:23:38 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,12 @@ void	sphere_intersect(t_object *sp, t_ray *ray, t_intersections *intersection)
 {
 	t_vector sphere_to_ray;
 	double radius;
-	double** inverse_transform;
 	t_ray object_space_ray;
 
 	double a,b,c, t1;
 
-	inverse_transform = m_inverse(sp->transformation_matrix);
-
 	// Transform the ray into object space
-	object_space_ray = ray_transform(ray, inverse_transform);
+	object_space_ray = ray_transform(ray, sp->inverse_matrix);
 
 	radius = (sp->shape.sphere.diameter / 2);
 
@@ -89,5 +86,4 @@ void	sphere_intersect(t_object *sp, t_ray *ray, t_intersections *intersection)
 			intersection->object = sp;
 		}
 	}
-	free_matrix(inverse_transform);
 }
