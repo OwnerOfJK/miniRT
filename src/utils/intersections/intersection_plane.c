@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 18:16:39 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/06/21 15:13:59 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/21 12:17:57 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@ ray is coplanar -> infinite intersections
 ray origin is above the plane
 ray origin is below the plane
 */
-t_intersections	*plane_intersect(t_object *pl, t_ray *ray)
+void    plane_intersect(t_object *pl, t_ray *ray, t_intersections *intersection)
 {
-    t_intersections	*intersections;
     t_vector		o_p;
     double			numerator;
     double			denominator;
@@ -29,13 +28,6 @@ t_intersections	*plane_intersect(t_object *pl, t_ray *ray)
     double**		inverse_transform;
     t_ray			object_space_ray;
     t_vector		transformed_normal;
-
-    intersections = malloc(sizeof(t_intersections));
-    if (!intersections)
-        return (NULL);
-    
-    intersections->count = 0;
-    intersections->hit = 0;
 
     // Inverse transformation matrix
     inverse_transform = m_inverse(pl->transformation_matrix);
@@ -57,16 +49,16 @@ t_intersections	*plane_intersect(t_object *pl, t_ray *ray)
 
         if (t >= 0)
         {
-            intersections->count = 1;
-            intersections->hit = 1;
-            intersections->t1 = t;
-            intersections->color = pl->color;
-			intersections->object = pl;
+			if (t < intersection->t1)
+            {
+                intersection->count = 1;
+                intersection->hit = 1;
+                intersection->t1 = t;
+                intersection->color = pl->color;
+                intersection->object = pl;
+            }
         }
     }
-
     // Free the inverse transformation matrix
     free_matrix(inverse_transform);
-
-    return (intersections);
 }
