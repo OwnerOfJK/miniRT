@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 18:16:39 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/07/21 15:23:33 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/23 13:18:05 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,4 @@ void    plane_intersect(t_object *pl, t_ray *ray, t_intersections *intersection)
             }
         }
     }
-    // Free the inverse transformation matrix
 }
