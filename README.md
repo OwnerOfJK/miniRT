@@ -23,4 +23,4 @@ If you would like to check for faulty inputs you can run any of the maps inside 
 ### Test Scenes
 In order to test the current version of the renderer use the following command:
 
-`./miniRT scenes/test_inputs/sphere_intersection.rt`
+`./miniRT scenes/test_inputs/spheres_intersection.rt`
