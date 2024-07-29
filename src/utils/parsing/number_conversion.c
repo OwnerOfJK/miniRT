@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   number_conversion.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:55:19 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/16 16:45:40 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/29 15:51:18 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ t_vector	parse_vector(char *str)
 	if (token != NULL)
 		vector->z = ft_atod(token);
 	vector->w = 0;
+	*vector = v_normalize(*vector);
 	free(tmp);
 	return (*vector);
 }

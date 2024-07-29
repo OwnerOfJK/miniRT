@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection_cylinder.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:22:54 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/21 16:06:16 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/29 15:40:34 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 // 	a = v_dot(ray->direction, ray->direction) - (v_dot(ray->direction, cy->shape.cylinder.axis_vector) * v_dot(ray->direction, cy->shape.cylinder.axis_vector));
 // 	b = 2 * (v_dot(ray->direction, cylinder_to_ray) - (v_dot(ray->direction, cy->shape.cylinder.axis_vector) * v_dot(cylinder_to_ray, cy->shape.cylinder.axis_vector)));
 // 	c = v_dot(cylinder_to_ray, cylinder_to_ray) - (v_dot(cylinder_to_ray, cy->shape.cylinder.axis_vector) * v_dot(cylinder_to_ray, cy->shape.cylinder.axis_vector)) - (radius * radius);
-// 	t1 = solve_quadratic(a, b, c);
-// 	t2 = solve_quadratic_t2(a, b, c);
+	// t1 = solve_quadratic(a, b, c);
+	// t2 = solve_quadratic_t2(a, b, c);
 // 	if (t1 > EPSILON)
 // 	{
 // 		// y0 = v_dot(ray->direction,cy->shape.cylinder.axis_vector) * v_dot(ray->direction, cy->shape.cylinder.axis_vector) * t1 + v_dot(cylinder_to_ray, cy->shape.cylinder.axis_vector) * v_dot(ray->direction, cy->shape.cylinder.axis_vector);
@@ -164,6 +164,7 @@ double	cylinder_tube(t_object *cy, t_ray *ray)
     c = v_dot(cylinder_to_ray, cylinder_to_ray) - pow(v_dot(cylinder_to_ray, cy->shape.cylinder.axis_vector), 2) - pow(radius, 2);
 
     // Solve the quadratic equation a*t^2 + b*t + c = 0
+
     if (!solve_quadratic_cyy(a, b, c, &t1, &t2)) // Ensure the function returns a bool for two valid roots
         return (-1);
 
@@ -195,7 +196,7 @@ void cylinder_intersect(t_object *cy, t_ray *ray, t_intersections *intersection)
         intersection->hit = 1;
         intersection->color = cy->color;
         intersection->object = cy;
-        
+
         // Calculate intersection point in object space
         intersection->intersection_point = ray_position(&object_space_ray, t_tube);
     }
