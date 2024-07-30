@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:50:43 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/27 18:53:35 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/07/30 17:12:22 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@ void	error_free(t_data *data, char *error_message)
 
 int	clean_exit(t_data *data)
 {
-	mlx_destroy_image(data->display.mlx_ptr, data->display.img);
-	mlx_destroy_window(data->display.mlx_ptr, data->display.win_ptr);
-	mlx_destroy_display(data->display.mlx_ptr);
-	free(data->display.mlx_ptr);
+	// mlx_destroy_image(data->display.mlx_ptr, data->display.img);
+	// mlx_destroy_window(data->display.mlx_ptr, data->display.win_ptr);
+	// mlx_destroy_display(data->display.mlx_ptr);
+	// free(data->display.mlx_ptr);
+	free_data(data);
 	exit(1);
 }

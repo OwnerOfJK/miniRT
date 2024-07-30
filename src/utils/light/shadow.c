@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 12:14:44 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/30 16:00:00 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/30 17:00:32 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ bool	is_shadowed(t_data *data, t_vector point, t_ray *ray)
 		return (false);
 
 	t = shadow_intersection->t1;
-	free(shadow_intersection);
+	// free(shadow_intersection);
 	if (t > 0 && t < distance)
 		return (true);
 	return (false);

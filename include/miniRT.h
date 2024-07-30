@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/30 16:25:35 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/30 17:22:27 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,11 @@ typedef struct s_equat2
 ∗ ambient lighting ratio in range [0.0,1.0]: 0.2
 ∗ R,G,B colors in range [0-255]: 255, 255, 255
 */
-typedef struct s_alightning
+typedef struct s_alight
 {
 	double		ratio;
 	t_color		color;
-}	t_alightning;
+}	t_alight;
 
 /*
 ∗ x,y,z coordinates of the view point: -50.0,0,20
@@ -227,11 +227,11 @@ typedef struct s_intersections
 
 typedef struct s_input
 {
-	t_alightning		*alightning;
-	t_camera			*camera;
-	t_light				*light;
-	t_object			*objects;
-	t_material			*material;
+	t_alight		*alight;
+	t_camera		*camera;
+	t_light			*light;
+	t_object		*objects;
+	t_material		*material;
 }	t_input;
 
 typedef struct s_data //this is our world
@@ -254,7 +254,7 @@ void			render(t_data *data);
 
 /* Parsing */
 t_input			*parse_input(char *file_path);
-t_alightning	*parse_alightning(char **object_configs);
+t_alight	*parse_alight(char **object_configs);
 t_camera		*parse_camera(char **object_configs);
 t_light			*parse_light(char **object_configs);
 t_object		*parse_objects(char	**object_configs);
@@ -263,10 +263,6 @@ t_vector		parse_coordinate(char *str);
 t_vector		parse_vector(char *str);
 
 /* Linked List Parsing*/
-// t_sphere		*ft_lstnew_sphere(char *str);
-// t_plane			*ft_lstnew_plane(char *str);
-// t_cylinder		*ft_lstnew_cylinder(char *str);
-// void			ft_lstadd_back_miniRT(t_base_node **lst, t_base_node *new);
 t_object	*ft_lstnew_object(char *str);
 t_object	*add_sphere(t_object *object, char *save_pointer);
 t_object	*add_plane(t_object *object, char *save_pointer);
@@ -342,8 +338,11 @@ void	set_intersections_cy(double t1, double t2, t_intersections *intersections);
 double	set_intersections(double t1, double t2);
 
 /* Free Memory */
+void		free_data(t_data *data);
 void		free_double_pointer(char **double_pointer);
 void		free_matrix(double **matrix);
+void		free_objects(t_object *objects);
+void		free_input(t_input *input);
 
 /* Rendering */
 void			render_scene(t_data *data);

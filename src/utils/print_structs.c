@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 23:13:40 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/20 15:44:23 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/30 16:46:59 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void print_material(const t_material *material) {
            material->ambient, material->diffuse, material->specular, material->shininess);
 }
 
-// Function to print t_alightning
-void print_alightning(const t_alightning *alight) {
+// Function to print t_alight
+void print_alight(const t_alight *alight) {
     printf("Ambient Lighting: {ratio: %f, color: {r: %f, g: %f, b: %f}}\n", 
            alight->ratio, alight->color.r, alight->color.g, alight->color.b);
 }
@@ -63,8 +63,8 @@ void print_light(const t_light *light) {
 
 void print_input(const t_input *input)
 {
-    if (input->alightning) {
-        print_alightning(input->alightning);
+    if (input->alight) {
+        print_alight(input->alight);
     } else {
         printf("Ambient Lighting: NULL\n");
     }

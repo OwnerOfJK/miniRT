@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 11:53:27 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/09 15:44:54 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/07/30 16:46:59 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,12 @@ int	calculate_lighting(t_data *data, t_intersections *intersection,
 
 	diffuse = set_diffuse(data, normal, intersection);
 	specular = set_specular(data, normal, intersection);
-	final_color.r = data->input->alightning->ratio
-		* data->input->alightning->color.r / 255;
-	final_color.g = data->input->alightning->ratio
-		* data->input->alightning->color.g / 255;
-	final_color.b = data->input->alightning->ratio
-		* data->input->alightning->color.b / 255;
+	final_color.r = data->input->alight->ratio
+		* data->input->alight->color.r / 255;
+	final_color.g = data->input->alight->ratio
+		* data->input->alight->color.g / 255;
+	final_color.b = data->input->alight->ratio
+		* data->input->alight->color.b / 255;
 	if (in_shadow)
 	{
 		diffuse = 0;

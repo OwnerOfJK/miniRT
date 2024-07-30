@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:24:47 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/20 15:36:10 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/30 16:46:59 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,27 +33,27 @@ t_object	*parse_objects(char	**object_configs)
 	return (objects_head);
 }
 
-t_alightning	*parse_alightning(char **object_configs)
+t_alight	*parse_alight(char **object_configs)
 {
-	t_alightning	*alightning;
+	t_alight	*alight;
 	char			*token;
 	char			*tmp;
 	char			*save_pointer;
 
 	if (object_configs == NULL)
 		return (NULL);
-	alightning = malloc(sizeof(t_alightning));
-	if (alightning == NULL)
+	alight = malloc(sizeof(t_alight));
+	if (alight == NULL)
 		error_message("Error: Memory allocation failed.\n");
 	tmp = ft_strdup(*object_configs);
 	token = ft_strtok_r(tmp, " ", &save_pointer);
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
-		alightning->ratio = ft_atod(token);
+		alight->ratio = ft_atod(token);
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
-		alightning->color = parse_color(token);
-	return (alightning);
+		alight->color = parse_color(token);
+	return (alight);
 }
 
 t_camera	*parse_camera(char **object_configs)

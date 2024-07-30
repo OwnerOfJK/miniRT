@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 22:14:18 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/21 15:33:02 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/30 16:46:59 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_input	*configs_to_struct(char	**object_configs)
 	input = ft_calloc(sizeof(t_input), 1);
 	if (input == NULL)
 		error_message("Error: Memory allocation failed.\n");
-	input->alightning = parse_alightning(find_index(object_configs, "A", 1));
+	input->alight = parse_alight(find_index(object_configs, "A", 1));
 	input->camera = parse_camera(find_index(object_configs, "C", 1));
 	input->light = parse_light(find_index(object_configs, "L", 1));
 	input->objects = parse_objects(object_configs);
