@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_information.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 23:01:11 by jkaller           #+#    #+#             */
-/*   Updated: 2024/05/27 21:01:47 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/30 17:32:02 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,4 @@ void	check_information(char **object_configs)
 	//check plane
 	//check square
 	//check cylinder
-	//check triangle
 }
