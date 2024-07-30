@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 20:25:49 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/07/30 17:07:58 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/30 18:10:41 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,7 @@ void	render(t_data *data)
 	}
 	mlx_put_image_to_window(data->display.mlx_ptr,
 		data->display.win_ptr, data->display.img, 0, 0);
+	free(intersection);
+	free(ray);
 	ft_printf("Rendering done\n");
 }

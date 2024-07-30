@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 23:20:40 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/30 17:23:46 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/30 17:55:35 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,36 @@ void	free_mlx(t_graphics display)
 	free(display.mlx_ptr);
 }
 
-void	free_intersections(t_intersections *intersections)
+void	free_input(t_input *input)
 {
-	free(&(intersections->ray));
-	free(&(intersections->color));
-	free(&(intersections->intersection_point));
-	free(&(intersections->normal));
-	intersections->object = NULL;
-	free(intersections);
+	free(input->alight);
+	free(input->camera);
+	free(input->light);
+	free_objects(input->objects);
+	free(input->material);
+	free(input);
+}
+
+void	free_objects(t_object *objects)
+{
+	t_object	*tmp;
+
+	while (objects != NULL)
+	{
+		tmp = objects;
+		objects = objects->next;
+		if (tmp->transformation_matrix != NULL)
+			free_matrix(tmp->transformation_matrix);
+		if (tmp->inverse_matrix != NULL)
+			free_matrix(tmp->inverse_matrix);
+		free(tmp);
+	}
 }
 
 void	free_data(t_data *data)
 {
 	free_mlx(data->display);
-	free_intersections(data->intersections);
+	free(data->intersections);
 	free_input(data->input);
 	free(data->viewport);
 	free(data);

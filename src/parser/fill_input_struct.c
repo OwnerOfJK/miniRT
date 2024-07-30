@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:24:47 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/30 16:46:59 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/30 18:27:10 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_object	*parse_objects(char	**object_configs)
 
 t_alight	*parse_alight(char **object_configs)
 {
-	t_alight	*alight;
+	t_alight		*alight;
 	char			*token;
 	char			*tmp;
 	char			*save_pointer;
@@ -53,6 +53,7 @@ t_alight	*parse_alight(char **object_configs)
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
 		alight->color = parse_color(token);
+	free(tmp);
 	return (alight);
 }
 
@@ -102,5 +103,6 @@ t_light	*parse_light(char **object_configs)
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
 		light->brightness = ft_atod(token);
+	free(tmp);
 	return (light);
 }
