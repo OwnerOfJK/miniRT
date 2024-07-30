@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 19:44:10 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/07/21 13:38:11 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/30 16:26:21 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,24 +35,21 @@ double	pixel_map_y(int y, t_viewport *viewport)
 	viewport_y = normalized_y * (viewport->viewport_height / 2);
 	return (viewport_y);
 }
+
 /*
 Prepares a ray from the camera origin through the specified viewport coordinates
 */
-t_ray	*prepare_ray(t_data *data, double viewport_x, double viewport_y, t_ray *ray)
+void	prepare_ray(t_data *data, double viewport_x,
+	double viewport_y, t_ray *ray)
 {
-	//t_ray		*ray;
-	t_vector	origin;
-	t_vector	direction;
 
 	// Get the camera position as the origin of the ray
-	origin = data->input->camera->pos;
+	ray->origin = data->input->camera->pos;
 	// Create a direction vector from the camera through the viewport coordinates
-	direction = v_init(viewport_x, viewport_y, 1, 0);
+	ray->direction.x = viewport_x;
+	ray->direction.y = viewport_y;
+	ray->direction.z = 1;
+	ray->direction.w = 0;
 	// Normalize the direction vector
-	direction = v_normalize(direction);
-	// Initialize the ray with the origin and direction
-	ray->direction = direction;
-	ray->origin = origin;
-	//ray = ray_init(origin, direction);
-	return (ray);
+	ray->direction = v_normalize(ray->direction);
 }

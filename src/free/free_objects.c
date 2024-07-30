@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_data.c                                        :+:      :+:    :+:   */
+/*   free_objects.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/21 23:20:40 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/30 16:26:44 by jkaller          ###   ########.fr       */
+/*   Created: 2024/07/30 16:08:00 by jkaller           #+#    #+#             */
+/*   Updated: 2024/07/30 16:26:36 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniRT.h"
 
-// void	free_intersections(t_intersections *intersections)
+// void	free_plane(t_vector *normal_vector)
 // {
-// 	free(intersections->t);
-// 	free(intersections->object);
-// 	free(intersections);
+// 	free(normal_vector);
 // }
 
-// void	free_data(t_data *data)
+// void	free_objects(t_object *objects)
 // {
-// 	mlx_destroy_display(&data->display);
-// 	free_intersections(data->intersections);
-// 	free_input(data->input);
-// 	free(data->viewport);
-// 	free(data);
+// 	t_object	*tmp;
+
+// 	while (objects != NULL)
+// 	{
+// 		tmp = objects;
+// 		objects = objects->next;
+// 		if (tmp->type == PLANE)
+// 			free_plane(tmp->shape.plane.normal_vector);
+		
+// 		free(tmp);
+// 	}
 // }

@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 20:43:09 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/21 16:24:22 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/30 15:56:09 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	object_intersection(t_object *objects, t_ray *ray, t_intersections	*interse
 
 	intersection->t1 = DBL_MAX;
 	intersection->count = 0;
-    intersection->hit = 0;
+	intersection->hit = 0;
 	i = 0;
 	while (objects != NULL)
 	{

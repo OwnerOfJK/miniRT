@@ -1,29 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_data.c                                        :+:      :+:    :+:   */
+/*   free_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/21 23:20:40 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/30 16:26:44 by jkaller          ###   ########.fr       */
+/*   Created: 2024/07/30 16:08:26 by jkaller           #+#    #+#             */
+/*   Updated: 2024/07/30 16:08:42 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniRT.h"
 
-// void	free_intersections(t_intersections *intersections)
-// {
-// 	free(intersections->t);
-// 	free(intersections->object);
-// 	free(intersections);
-// }
+void	free_double_pointer(char **double_pointer)
+{
+	int	i;
 
-// void	free_data(t_data *data)
-// {
-// 	mlx_destroy_display(&data->display);
-// 	free_intersections(data->intersections);
-// 	free_input(data->input);
-// 	free(data->viewport);
-// 	free(data);
-// }
+	i = 0;
+	while (double_pointer[i] != NULL)
+	{
+		free(double_pointer[i]);
+		i++;
+	}
+	free(double_pointer);
+}
+
+void	free_matrix(double **matrix)
+{
+	int	i;
+	int	len;
+
+	len = m_len(matrix);
+	i = 0;
+	while (i < len)
+	{
+		free(matrix[i]);
+		i++;
+	}
+	free(matrix);
+}

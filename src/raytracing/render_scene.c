@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 20:25:49 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/07/23 13:15:43 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/30 16:24:08 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ int	set_color(t_data *data, int x, int y, t_ray *ray, t_intersections *intersect
 
 void	render(t_data *data)
 {
-	int		x;
-	int		y;
-	int		color;
-	t_ray	*ray;
-	t_intersections *intersection;
+	int				x;
+	int				y;
+	int				color;
+	t_ray			*ray;
+	t_intersections	*intersection;
 
 	y = -1;
 	ray = ray_init(v_init(0, 0, 0, 0), v_init(0, 0, 0, 0));

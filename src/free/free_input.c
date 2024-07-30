@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_data.c                                        :+:      :+:    :+:   */
+/*   free_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/21 23:20:40 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/30 16:26:44 by jkaller          ###   ########.fr       */
+/*   Created: 2024/07/30 16:07:37 by jkaller           #+#    #+#             */
+/*   Updated: 2024/07/30 16:26:40 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniRT.h"
 
-// void	free_intersections(t_intersections *intersections)
+// void	free_camera(t_camera *camera)
 // {
-// 	free(intersections->t);
-// 	free(intersections->object);
-// 	free(intersections);
+// 	free(&camera->pos);
+// 	free(&camera->orientation_vector);
+// 	free(camera);
 // }
 
-// void	free_data(t_data *data)
+// void	free_light(t_light *light)
 // {
-// 	mlx_destroy_display(&data->display);
-// 	free_intersections(data->intersections);
-// 	free_input(data->input);
-// 	free(data->viewport);
-// 	free(data);
+// 	free(&light->pos);
+// 	free(light);
 // }

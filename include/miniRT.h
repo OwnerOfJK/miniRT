@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/21 16:03:42 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/30 16:25:35 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -357,7 +357,7 @@ bool		shadow_at_intersection(t_data *data, t_intersections *intersection,  t_ray
 /* Viewport */
 double		pixel_map_x(int x, t_viewport *viewport);
 double		pixel_map_y(int y, t_viewport *viewport);
-t_ray		*prepare_ray(t_data *data, double viewport_x, double viewport_y, t_ray *ray);
+void		prepare_ray(t_data *data, double viewport_x, double viewport_y, t_ray *ray);
 
 /* Color Utils */
 t_color_mlx		rgb_to_colour(t_color rgb);
