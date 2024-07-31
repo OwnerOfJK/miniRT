@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   linked_list_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 00:23:57 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/21 15:25:25 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/31 16:48:33 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@ t_object	*ft_lstnew_object(char *str)
 	char		*tmp;
 	char		*save_pointer;
 
+
 	tmp = ft_strdup(str);
 	token = ft_strtok_r(tmp, " ", &save_pointer);
+	// ft_putstr(token);
+	// //printf("token : %s", token);
 	object = NULL;
 	if (ft_strncmp(token, "sp", 2) == 0)
 		object = add_sphere(object, save_pointer);
@@ -38,10 +41,35 @@ t_object	*ft_lstnew_object(char *str)
 	return (object);
 }
 
+static void	check_arg_three(char *save_pointer, int nb)
+{
+	int			arg_count;
+	char		*token;
+	char		*temp;
+
+	temp = ft_strdup(save_pointer);
+	arg_count = 0;
+	token = ft_strtok_r(NULL, " ", &temp);
+	if (token != NULL)
+		arg_count++;
+	token = ft_strtok_r(NULL, " ", &temp);
+	if (token != NULL)
+		arg_count++;
+	token = ft_strtok_r(NULL, " ", &temp);
+	if (token != NULL)
+		arg_count++;
+	token = ft_strtok_r(NULL, " ", &temp);
+	//free(temp); //segfault
+
+	if (arg_count != nb || token != NULL)
+		error_message("Error: Invalid number of arguments for an object.\n");
+}
+
 t_object	*add_sphere(t_object *object, char *save_pointer)
 {
 	char		*token;
 
+	check_arg_three(save_pointer, 3);
 	object = malloc(sizeof(t_object));
 	if (object == NULL)
 		error_message("Error: Memory allocation failed.\n");
@@ -60,10 +88,12 @@ t_object	*add_sphere(t_object *object, char *save_pointer)
 	return (object);
 }
 
+
 t_object	*add_plane(t_object *object, char *save_pointer)
 {
 	char		*token;
 
+	check_arg_three(save_pointer, 3);
 	object = malloc(sizeof(t_object));
 	if (object == NULL)
 		error_message("Error: Memory allocation failed.\n");
@@ -77,6 +107,7 @@ t_object	*add_plane(t_object *object, char *save_pointer)
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
 		object->color = parse_color(token);
+	token = ft_strtok_r(NULL, " ", &save_pointer);
 	object->transformation_matrix = m_translate(object->pos);
 	object->inverse_matrix = m_inverse(object->transformation_matrix);
 	return (object);
@@ -85,7 +116,7 @@ t_object	*add_plane(t_object *object, char *save_pointer)
 t_object	*add_cylinder(t_object *object, char *save_pointer)
 {
 	char		*token;
-
+	check_arg_three(save_pointer, 5);
 	object = malloc(sizeof(t_object));
 	if (object == NULL)
 		error_message("Error: Memory allocation failed.\n");
@@ -107,8 +138,6 @@ t_object	*add_cylinder(t_object *object, char *save_pointer)
 		object->color = parse_color(token);
 	object->transformation_matrix = m_translate(object->pos);
 	object->inverse_matrix = m_inverse(object->transformation_matrix);
-	object->shape.cylinder.cap_up = v_add(object->pos, v_scalar(object->shape.cylinder.axis_vector, object->shape.cylinder.height / 2.0));
-	object->shape.cylinder.cap_down = v_add(object->pos, v_scalar(object->shape.cylinder.axis_vector, -object->shape.cylinder.height / 2.0));
 	return (object);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/21 16:03:42 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/31 16:18:51 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,13 +200,6 @@ typedef struct s_object {
             t_vector axis_vector;
             double diameter;
             double height;
-			t_vector cap_up;
-			t_vector cap_down;
-			// struct
-			// {
-			// 	t_vector normal_vector;
-			// 	t_vector pos;
-			// } top_plane, bottom_plane;
         } cylinder;
     } shape;
     struct s_object *next;
