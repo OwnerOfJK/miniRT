@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/31 18:49:41 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/31 19:16:07 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 #  define HEIGHT 800
 # endif
 
-# define BACKGROUND 0x606060
+# define BACKGROUND 0x000000
 
 typedef int			t_color_mlx;
 
