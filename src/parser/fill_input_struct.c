@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:24:47 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/31 17:51:33 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/07/31 19:06:21 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ t_camera	*parse_camera(char **object_configs)
 
 	if (object_configs == NULL)
 		return (NULL);
-
 	camera = malloc(sizeof(t_camera));
 	if (camera == NULL)
 		error_message("Error: Memory allocation failed.\n");

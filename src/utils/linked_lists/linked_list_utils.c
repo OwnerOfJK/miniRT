@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 00:23:57 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/31 17:01:33 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/07/31 19:06:34 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ t_object	*ft_lstnew_object(char *str)
 		object = add_cylinder(object, save_pointer);
 	else
 	{
-		printf("token: %s\n", token);
 		error_message("Error: Invalid object type.\n");
 	}
 	object->next = NULL;
@@ -44,9 +43,12 @@ void	check_nb_arg(char *save_pointer, int nb)
 	int			arg_count;
 	char		*token;
 	char		*temp;
+	int			i;
 
 	temp = ft_strdup(save_pointer);
 	arg_count = 0;
+	i = 0;
+
 	token = ft_strtok_r(NULL, " ", &temp);
 	if (token != NULL)
 		arg_count++;
@@ -56,12 +58,24 @@ void	check_nb_arg(char *save_pointer, int nb)
 	token = ft_strtok_r(NULL, " ", &temp);
 	if (token != NULL)
 		arg_count++;
-	token = ft_strtok_r(NULL, " ", &temp);
+	if (nb == 5)
+	{
+		while (i <= 2)
+		{
+			token = ft_strtok_r(NULL, " ", &temp);
+			if (token != NULL)
+				arg_count++;
+			i++;
+		}
+	}
+
 	//free(temp); //segfault
 
-	if (arg_count != nb || token != NULL)
+
+	if (arg_count != nb)
 		error_message("Error: Invalid number of arguments of a parameter.\n");
 }
+
 
 t_object	*add_sphere(t_object *object, char *save_pointer)
 {
@@ -111,9 +125,12 @@ t_object	*add_plane(t_object *object, char *save_pointer)
 	return (object);
 }
 
+
 t_object	*add_cylinder(t_object *object, char *save_pointer)
 {
 	char		*token;
+
+
 	check_nb_arg(save_pointer, 5);
 	object = malloc(sizeof(t_object));
 	if (object == NULL)
