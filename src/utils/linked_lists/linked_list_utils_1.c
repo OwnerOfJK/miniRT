@@ -3,19 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   linked_list_utils_1.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/31 18:36:47 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/31 18:54:28 by jkaller          ###   ########.fr       */
+/*   Created: 2024/05/28 00:23:57 by jkaller           #+#    #+#             */
+/*   Updated: 2024/07/31 20:18:17 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/miniRT.h"
 
+t_object	*ft_lstnew_object(char *str)
+{
+	t_object	*object;
+	char		*token;
+	char		*tmp;
+	char		*save_pointer;
+
+	tmp = ft_strdup(str);
+	token = ft_strtok_r(tmp, " ", &save_pointer);
+	object = NULL;
+	if (ft_strncmp(token, "sp", 2) == 0)
+		object = add_sphere(object, save_pointer);
+	else if (ft_strncmp(token, "pl", 2) == 0)
+		object = add_plane(object, save_pointer);
+	else if (ft_strncmp(token, "cy", 2) == 0)
+		object = add_cylinder(object, save_pointer);
+	else
+	{
+		printf("token: %s\n", token);
+		error_message("Error: Invalid object type.\n");
+	}
+	object->next = NULL;
+	free(tmp);
+	return (object);
+}
+
 t_object	*add_sphere(t_object *object, char *save_pointer)
 {
 	char		*token;
 
+	check_nb_arg(save_pointer, 3);
 	object = malloc(sizeof(t_object));
 	if (object == NULL)
 		error_message("Error: Memory allocation failed.\n");
@@ -34,10 +61,12 @@ t_object	*add_sphere(t_object *object, char *save_pointer)
 	return (object);
 }
 
+
 t_object	*add_plane(t_object *object, char *save_pointer)
 {
 	char		*token;
 
+	check_nb_arg(save_pointer, 3);
 	object = malloc(sizeof(t_object));
 	if (object == NULL)
 		error_message("Error: Memory allocation failed.\n");
@@ -51,10 +80,12 @@ t_object	*add_plane(t_object *object, char *save_pointer)
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
 		object->color = parse_color(token);
+	token = ft_strtok_r(NULL, " ", &save_pointer);
 	object->transformation_matrix = m_translate(object->pos);
 	object->inverse_matrix = m_inverse(object->transformation_matrix);
 	return (object);
 }
+
 
 void	compute_cylinder_m(t_object *object)
 {
@@ -77,7 +108,9 @@ void	compute_cylinder_m(t_object *object)
 
 t_object	*add_cylinder(t_object *object, char *save_pointer)
 {
-	char	*token;
+	char		*token;
+
+	check_nb_arg(save_pointer, 5);
 
 	object = malloc(sizeof(t_object));
 	if (object == NULL)

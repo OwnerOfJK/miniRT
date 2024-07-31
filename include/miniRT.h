@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/31 19:16:07 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/31 20:15:11 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,6 +253,7 @@ t_object		*parse_objects(char	**object_configs);
 t_color			parse_color(char *str);
 t_vector		parse_coordinate(char *str);
 t_vector		parse_vector(char *str);
+void			check_nb_arg(char *save_pointer, int nb);
 
 /* Linked List Parsing*/
 t_object	*ft_lstnew_object(char *str);
@@ -299,6 +300,7 @@ void			print_double_pointer(char **double_pointer);
 int				get_config_len(char *file_path);
 char			**find_index(char** object_configs, char *index, int len);
 char			*find_and_extract_double(char *str, int pos);
+
 
 /* Matrix */
 double		**m_init(int m_len);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_structs.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 23:13:40 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/31 18:30:21 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/31 20:18:29 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ void print_color(const char *name, t_color color) {
 
 // Function to print t_material
 void print_material(const t_material *material) {
-    printf("Material: {ambient: %f, diffuse: %f, specular: %f, shininess: %f}\n", 
+    printf("Material: {ambient: %f, diffuse: %f, specular: %f, shininess: %f}\n",
            material->ambient, material->diffuse, material->specular, material->shininess);
 }
 
-// Function to print t_alight
-void print_alight(const t_alight *alight) {
-    printf("Ambient Lighting: {ratio: %f, color: {r: %f, g: %f, b: %f}}\n", 
+// Function to print t_alightning
+void print_alightning(const t_alightning *alight) {
+    printf("Ambient Lighting: {ratio: %f, color: {r: %f, g: %f, b: %f}}\n",
            alight->ratio, alight->color.r, alight->color.g, alight->color.b);
 }
 

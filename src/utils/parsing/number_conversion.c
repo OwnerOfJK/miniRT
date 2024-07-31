@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   number_conversion.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:55:19 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/30 18:23:41 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/31 20:23:24 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ t_color	parse_color(char *str)
 	token = ft_strtok_r(NULL, ",", &save_pointer);
 	if (token != NULL)
 		color.b = ft_atod(token);
+	if (color.r < 0 || color.r > 255 || color.g < 0 || color.g > 255 || color.b < 0 || color.b > 255)
+		error_message("Error: R,G,B colors not in range [0-255].\n");
 	free(tmp);
 	return (color);
 }

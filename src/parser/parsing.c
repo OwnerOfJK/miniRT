@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 22:14:18 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/30 16:46:59 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/31 20:18:22 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_input	*configs_to_struct(char	**object_configs)
 	input->camera = parse_camera(find_index(object_configs, "C", 1));
 	input->light = parse_light(find_index(object_configs, "L", 1));
 	input->objects = parse_objects(object_configs);
+	input->material = material_init();
 	return (input);
 }
 
@@ -34,7 +35,7 @@ t_input	*parse_input(char *file_path)
 	object_configs = NULL;
 	object_configs = check_config(file_path);
 	input = configs_to_struct(object_configs);
-	input->material = material_init();
+	//check info
 	free_double_pointer(object_configs);
 	return (input);
 }
