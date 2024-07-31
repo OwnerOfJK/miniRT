@@ -6,38 +6,45 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 00:23:57 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/31 20:18:17 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/07/31 20:35:27 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/miniRT.h"
 
-t_object	*ft_lstnew_object(char *str)
+void	check_nb_arg(char *save_pointer, int nb)
 {
-	t_object	*object;
+	int			arg_count;
 	char		*token;
-	char		*tmp;
-	char		*save_pointer;
+	char		*temp;
+	int			i;
 
-	tmp = ft_strdup(str);
-	token = ft_strtok_r(tmp, " ", &save_pointer);
-	object = NULL;
-	if (ft_strncmp(token, "sp", 2) == 0)
-		object = add_sphere(object, save_pointer);
-	else if (ft_strncmp(token, "pl", 2) == 0)
-		object = add_plane(object, save_pointer);
-	else if (ft_strncmp(token, "cy", 2) == 0)
-		object = add_cylinder(object, save_pointer);
-	else
+	temp = ft_strdup(save_pointer);
+	arg_count = 0;
+	i = 0;
+
+	token = ft_strtok_r(NULL, " ", &temp);
+	if (token != NULL)
+		arg_count++;
+	token = ft_strtok_r(NULL, " ", &temp);
+	if (token != NULL)
+		arg_count++;
+	token = ft_strtok_r(NULL, " ", &temp);
+	if (token != NULL)
+		arg_count++;
+	if (nb == 5)
 	{
-		printf("token: %s\n", token);
-		error_message("Error: Invalid object type.\n");
+		while (i <= 2)
+		{
+			token = ft_strtok_r(NULL, " ", &temp);
+			if (token != NULL)
+				arg_count++;
+			i++;
+		}
 	}
-	object->next = NULL;
-	free(tmp);
-	return (object);
+	if (arg_count != nb)
+		error_message("Error: Invalid number of arguments of a parameter.\n");
 }
-
 t_object	*add_sphere(t_object *object, char *save_pointer)
 {
 	char		*token;
