@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_input_struct.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:24:47 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/20 15:36:10 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/31 15:54:41 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ t_alightning	*parse_alightning(char **object_configs)
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
 		alightning->ratio = ft_atod(token);
+	if (alightning->ratio < 0 || alightning->ratio > 1)
+		error_message("Error: ambient lighting ratio not in range [0.0,1.0] \n");
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
 		alightning->color = parse_color(token);
@@ -78,6 +80,8 @@ t_camera	*parse_camera(char **object_configs)
 		camera->orientation_vector = parse_vector(token);
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	camera->fov = ft_atod(token);
+	if (camera->fov < 0 || camera->fov > 180)
+		error_message("Error: Horizontal field of view in degrees not in range [0,180]\n");
 	free(tmp);
 	return (camera);
 }
@@ -102,5 +106,7 @@ t_light	*parse_light(char **object_configs)
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
 		light->brightness = ft_atod(token);
+	if (light->brightness < 0 || light->brightness > 1)
+		error_message("Error: light brightness ratio not in range [0.0,1.0]\n");
 	return (light);
 }
