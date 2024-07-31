@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   intersection_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 20:43:09 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/30 15:56:09 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/31 20:50:00 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/miniRT.h"
 
-void	object_intersection(t_object *objects, t_ray *ray, t_intersections	*intersection)
+void	object_intersection(t_object *objects, t_ray *ray,
+	t_intersections	*intersection)
 {
-	int				i;
+	int	i;
 
 	intersection->t1 = DBL_MAX;
 	intersection->count = 0;

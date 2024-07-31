@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   window_mlx.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 12:55:17 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/21 15:21:02 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/31 20:44:01 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniRT.h"
 
-// Initializes the window and starts the rendering process
 void	launch_window(t_data *data)
 {
 	launch_mlx(data);
@@ -21,7 +20,6 @@ void	launch_window(t_data *data)
 	mlx_loop(data->display.mlx_ptr);
 }
 
-// Initializes the mlx library and creates a new window and image for rendering
 void	launch_mlx(t_data *data)
 {
 	data->display.mlx_ptr = mlx_init();

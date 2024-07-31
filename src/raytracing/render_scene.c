@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_scene.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 20:25:49 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/07/31 18:34:20 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/31 20:46:19 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	shading_at_intersection(t_intersections *intersection,
 	return (color);
 }
 
-int	set_color(t_data *data, int x, int y, t_ray *ray, t_intersections *intersection)
+int	set_color(t_data *data, int x, int y, t_ray *ray,
+	t_intersections *intersection)
 {
 	double			viewport_x;
 	double			viewport_y;
@@ -64,7 +65,8 @@ void	render(t_data *data)
 			color = set_color(data, x, y, ray, intersection);
 			my_mlx_pixel_put(&data->display, x, y, color);
 			if ((y * WIDTH + x) % (WIDTH * HEIGHT / 20) == 0)
-				ft_printf("Rendering progress: %d%%\n", ((y * WIDTH + x) * 100) / (WIDTH * HEIGHT));
+				ft_printf("Rendering progress: %d%%\n",
+					((y * WIDTH + x) * 100) / (WIDTH * HEIGHT));
 		}
 	}
 	mlx_put_image_to_window(data->display.mlx_ptr,

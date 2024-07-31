@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 21:33:00 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/21 17:40:08 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/31 20:38:33 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ t_data	*data_init(char **argv)
 	return (data);
 }
 
-// Initializes the viewport based on the camera's field of view
 t_viewport	*viewport_init(t_camera *camera)
 {
 	t_viewport	*viewport;

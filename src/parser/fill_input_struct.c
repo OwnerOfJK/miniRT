@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:24:47 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/31 20:16:21 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/07/31 20:42:35 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ t_object	*parse_objects(char	**object_configs)
 	if (object_configs == NULL)
 		return (NULL);
 	while ((found_index = find_index(object_configs, "sp", 2)) != NULL
-			|| (found_index = find_index(object_configs, "pl", 2)) != NULL
-			|| (found_index = find_index(object_configs, "cy", 2)) != NULL)
+		|| (found_index = find_index(object_configs, "pl", 2)) != NULL
+		|| (found_index = find_index(object_configs, "cy", 2)) != NULL)
 	{
 		new_object = ft_lstnew_object(*found_index);
 		ft_lstadd_back_minirt(&objects_head, new_object);
@@ -67,7 +67,6 @@ t_camera	*parse_camera(char **object_configs)
 	char		*tmp;
 	char		*save_pointer;
 
-
 	if (object_configs == NULL)
 		return (NULL);
 	camera = malloc(sizeof(t_camera));
@@ -85,7 +84,7 @@ t_camera	*parse_camera(char **object_configs)
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	camera->fov = ft_atod(token);
 	if (camera->fov < 0 || camera->fov > 180)
-		error_message("Error: Horizontal field of view in degrees not in range [0,180]\n");
+		error_message("Error: fov not in range [0,180]\n");
 	free(tmp);
 	return (camera);
 }
