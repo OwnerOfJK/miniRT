@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:55:19 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/30 17:47:07 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/07/31 15:31:47 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,8 @@ t_color	parse_color(char *str)
 	token = ft_strtok_r(NULL, ",", &save_pointer);
 	if (token != NULL)
 		color->b = ft_atod(token);
-   if (color->r < 0 || color->r > 255 || color->g < 0 || color->g > 255 || color->b < 0 || color->b > 255) {
-        free(color);
-        error_message("Error: Color values must be between 0 and 255.\n");
-    }
-	// if (color->b > 255 || color->b < 0 || color->r > 255 || color->r < 0 || color->g > 255 || color->g < 0)
-	// {
-	// 	printf("here\n");
-	// 	error_message("Error: wrong rgb format\n");
-	// }
-
+	if (color->r < 0 || color->r > 255 || color->g < 0 || color->g > 255 || color->b < 0 || color->b > 255)
+		error_message("Error: Color values must be between 0 and 255.\n");
 	free(tmp);
 	return (*color);
 }
