@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+         #
+#    By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/20 14:04:55 by jkaller           #+#    #+#              #
-#    Updated: 2024/06/21 15:41:14 by jkaller          ###   ########.fr        #
+#    Updated: 2024/07/31 21:18:07 by ecarlier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,31 +37,28 @@ OBJS = $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	# Build mlx_linux and libft targets
-	make -C ./libs/mlx_linux
-	make -C ./libs/libft
+	@echo "Building mlx_linux and libft targets..."
+	@make -C ./libs/mlx_linux > /dev/null
+	@make -C ./libs/libft > /dev/null
+	@echo "Linking the executable..."
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(MLXFLAGS) -o $(NAME)
+	@echo "Build completed!"
 
-	# Link the executable
-	$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(MLXFLAGS) -o $(NAME)
-
-# Clean intermediate files
 clean:
-	# Clean mlx_linux and libft targets
-	make clean -C ./libs/mlx_linux
-	make clean -C ./libs/libft
-
-	# Remove object files
-	rm -rf $(OBJS)
+	@echo "Cleaning mlx_linux and libft targets..."
+	@make clean -C ./libs/mlx_linux > /dev/null
+	@make clean -C ./libs/libft > /dev/null
+	@echo "Removing object files..."
+	@rm -rf $(OBJS)
 
 # Remove all generated files
 fclean:
-	# Fclean mlx_linux and libft targets
-	make clean -C ./libs/mlx_linux
-	make fclean -C ./libs/libft
-
-	# Remove object files and the target executable
-	rm -rf $(OBJS)
-	rm -rf $(NAME)
+	@echo "Performing full clean on mlx_linux and libft targets..."
+	@make clean -C ./libs/mlx_linux > /dev/null
+	@make fclean -C ./libs/libft > /dev/null
+	@echo "Removing object files and the target executable..."
+	@rm -rf $(OBJS)
+	@rm -rf $(NAME)
 
 # Rebuild the project
 re: fclean all
