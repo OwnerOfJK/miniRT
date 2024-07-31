@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 00:23:57 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/31 20:59:33 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/07/31 21:30:38 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,10 @@ void	check_nb_arg(char *save_pointer, int nb)
 	arg_count = 0;
 	i = 0;
 	token = ft_strtok_r(NULL, " ", &temp);
-	if (token != NULL)
-		arg_count++;
-	token = ft_strtok_r(NULL, " ", &temp);
-	if (token != NULL)
-		arg_count++;
-	token = ft_strtok_r(NULL, " ", &temp);
-	if (token != NULL)
-		arg_count++;
-	if (nb == 5)
+	while (token != NULL && i <= nb)
 	{
-		while (i <= 2)
-		{
-			token = ft_strtok_r(NULL, " ", &temp);
-			if (token != NULL)
-				arg_count++;
-			i++;
-		}
+		arg_count++;
+		token = ft_strtok_r(NULL, " ", &temp);
 	}
 	if (arg_count != nb)
 		error_message("Error: Invalid number of arguments of a parameter.\n");
