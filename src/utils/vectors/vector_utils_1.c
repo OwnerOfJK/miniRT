@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector_utils_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 20:23:55 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/06/21 15:41:37 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/31 21:02:26 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 */
 int	v_compare(t_vector u, t_vector v)
 {
-	if (u.w != v.w)
-		ft_putstr_fd("v_compare: Why are you comparing points with vectors?\n", 2);
 	return (u.x == v.x && u.y == v.y && u.z == v.z);
 }
 
@@ -68,8 +66,5 @@ t_vector	v_neg(t_vector u)
 */
 double	v_length(t_vector v)
 {
-	// if (v.w == 1)
-	// 	ft_putstr_fd("v_length: Why are you \
-	// 	calculating the length of a point?\n", 2);
 	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
 }

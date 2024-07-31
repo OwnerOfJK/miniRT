@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 19:25:21 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/07/09 13:06:56 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/07/31 21:02:37 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ t_vector	v_normalize(t_vector v)
 	double	length;
 
 	length = v_length(v);
-	// if (v.w == 1)
-	// 	ft_putstr_fd("v_normalize: Why are you normalizing a point?\n", 2);
 	if (length)
 	{
 		v.x /= length;
@@ -30,6 +28,7 @@ t_vector	v_normalize(t_vector v)
 	}
 	return (v);
 }
+
 t_vector	neg(t_vector u)
 {
 	return (v_scalar(u, -1.0));

@@ -1,13 +1,12 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersection_plane.c                               :+:      :+:    :+:   */
+/*   intersections_plane.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 18:16:39 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/07/31 20:51:12 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/07/31 20:54:21 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +27,6 @@ void	plane_intersect(t_object *pl, t_ray *ray, t_intersections *intersection)
 	double			t;
 	t_ray			object_space_ray;
 	t_vector		transformed_normal;
-
 
 	object_space_ray = ray_transform(ray, pl->inverse_matrix);
 	transformed_normal = mv_mult(pl->inverse_matrix, pl->shape.plane.normal_vector);

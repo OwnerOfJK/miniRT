@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_utils_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 16:19:46 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/17 15:47:18 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/31 21:00:17 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,4 +114,3 @@ double	m_cofactor(double **u, int row, int column)
 	else
 		return (-minor);
 }
-

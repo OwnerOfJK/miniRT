@@ -6,15 +6,11 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 18:42:22 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/07/09 12:31:07 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/07/31 21:03:44 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniRT.h"
-
-/*
-/!\ NEED TESTING
-*/
 
 double	calc_delta(double a, double b, double c)
 {
@@ -27,18 +23,13 @@ double	calc_delta(double a, double b, double c)
 }
 
 /*
-/!\ NEED TESTING
-
 updates t1 and t2 with intersections values
 
 
 a (x*x) + bx + c = 0
-
 if a is 0 and b > 1 -> it's not a quadratic function
 bx+c=0.
 -> x = -c/b
-
-
 if delta = 0 -> t1 and t2 should be the same
 
 Return value :
@@ -103,4 +94,3 @@ double	solve_quadratic(double a, double b, double c)
 		t1 = -1;
 	return (t1);
 }
-

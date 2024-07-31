@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_utils_0.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 13:20:48 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/17 15:46:27 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/31 21:00:01 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int	m_compare(double **u, double **v)
 	return (1);
 }
 
-double	**m_identity(double **u) //multiply by identity matrix
+double	**m_identity(double **u)
 {
 	int		row;
 	int		column;

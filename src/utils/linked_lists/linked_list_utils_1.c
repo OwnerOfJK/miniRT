@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 00:23:57 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/31 20:35:27 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/07/31 20:59:33 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	check_nb_arg(char *save_pointer, int nb)
 	temp = ft_strdup(save_pointer);
 	arg_count = 0;
 	i = 0;
-
 	token = ft_strtok_r(NULL, " ", &temp);
 	if (token != NULL)
 		arg_count++;
@@ -45,6 +44,7 @@ void	check_nb_arg(char *save_pointer, int nb)
 	if (arg_count != nb)
 		error_message("Error: Invalid number of arguments of a parameter.\n");
 }
+
 t_object	*add_sphere(t_object *object, char *save_pointer)
 {
 	char		*token;
@@ -67,7 +67,6 @@ t_object	*add_sphere(t_object *object, char *save_pointer)
 	object->inverse_matrix = m_inverse(object->transformation_matrix);
 	return (object);
 }
-
 
 t_object	*add_plane(t_object *object, char *save_pointer)
 {
@@ -93,7 +92,6 @@ t_object	*add_plane(t_object *object, char *save_pointer)
 	return (object);
 }
 
-
 void	compute_cylinder_m(t_object *object)
 {
 	t_vector	y_axis;
@@ -118,7 +116,6 @@ t_object	*add_cylinder(t_object *object, char *save_pointer)
 	char		*token;
 
 	check_nb_arg(save_pointer, 5);
-
 	object = malloc(sizeof(t_object));
 	if (object == NULL)
 		error_message("Error: Memory allocation failed.\n");

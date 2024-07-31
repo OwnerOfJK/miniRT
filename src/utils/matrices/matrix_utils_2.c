@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_utils_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 14:26:51 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/16 22:48:10 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/31 21:00:31 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ double	**m_inverse(double **matrix)
 	return (inverse);
 }
 
-double	**m_translate(t_vector translation) // translate 2D vector to 3D matrix
+double	**m_translate(t_vector translation)
 {
 	double	**translation_matrix;
 
@@ -67,7 +67,7 @@ double	**m_translate(t_vector translation) // translate 2D vector to 3D matrix
 	return (translation_matrix);
 }
 
-double	**m_scale(t_vector scale) // scale 2D vector to 3D matrix
+double	**m_scale(t_vector scale)
 {
 	double	**scale_matrix;
 

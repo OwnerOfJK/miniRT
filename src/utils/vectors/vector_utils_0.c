@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 18:46:59 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/07/09 15:32:27 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/07/31 21:01:47 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ t_vector	v_add(t_vector u, t_vector v)
 	w.y = u.y + v.y;
 	w.z = u.z + v.z;
 	w.w = u.w + v.w;
-	//if (w.w > 1)
-		//ft_putstr_fd("Warning: w value is greater than 1\n", 2);
 	return (w);
 }
 
@@ -41,8 +39,6 @@ t_vector	v_sub(t_vector u, t_vector v)
 	w.y = u.y - v.y;
 	w.z = u.z - v.z;
 	w.w = u.w - v.w;
-	// if (w.w < 0)
-	// 	ft_putstr_fd("Warning: w value is lower than 0\n", 2);
 	return (w);
 }
 
@@ -68,8 +64,6 @@ t_vector	v_mult(t_vector u, t_vector v)
 */
 double	v_dot(t_vector u, t_vector v)
 {
-	// if (u.w == 1 || v.w == 1)
-	// 	ft_putstr_fd("v_dot: Why are you dot multiplying points?\n", 2);
 	return (u.x * v.x + u.y * v.y + u.z * v.z);
 }
 
@@ -82,7 +76,5 @@ t_vector	v_scalar(t_vector u, double t)
 	u.x *= t;
 	u.y *= t;
 	u.z *= t;
-	// if (u.w == 1)
-	// 	ft_putstr_fd("v_scalar: Why are you multiplying a point?\n", 2);
 	return (u);
 }

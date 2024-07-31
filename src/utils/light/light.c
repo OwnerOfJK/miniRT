@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 11:53:27 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/31 16:28:39 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/31 20:55:49 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ double	set_diffuse(t_data *data, t_vector normal, t_intersections *intersect)
 	view_direction = v_normalize(v_sub(data->input->camera->pos,
 				intersect->intersection_point));
 	diffuse = fmax(0, v_dot(normal, light_direction))
-						* data->input->material->diffuse
-						* data->input->light->brightness;
+		* data->input->material->diffuse
+		* data->input->light->brightness;
 	return (diffuse);
 }
 
