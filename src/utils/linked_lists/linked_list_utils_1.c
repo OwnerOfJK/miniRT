@@ -1,42 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   linked_list_utils.c                                :+:      :+:    :+:   */
+/*   linked_list_utils_1.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/28 00:23:57 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/21 15:25:25 by jkaller          ###   ########.fr       */
+/*   Created: 2024/07/31 18:36:47 by jkaller           #+#    #+#             */
+/*   Updated: 2024/07/31 18:54:28 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/miniRT.h"
-
-t_object	*ft_lstnew_object(char *str)
-{
-	t_object	*object;
-	char		*token;
-	char		*tmp;
-	char		*save_pointer;
-
-	tmp = ft_strdup(str);
-	token = ft_strtok_r(tmp, " ", &save_pointer);
-	object = NULL;
-	if (ft_strncmp(token, "sp", 2) == 0)
-		object = add_sphere(object, save_pointer);
-	else if (ft_strncmp(token, "pl", 2) == 0)
-		object = add_plane(object, save_pointer);
-	else if (ft_strncmp(token, "cy", 2) == 0)
-		object = add_cylinder(object, save_pointer);
-	else
-	{
-		printf("token: %s\n", token);
-		error_message("Error: Invalid object type.\n");
-	}
-	object->next = NULL;
-	free(tmp);
-	return (object);
-}
 
 t_object	*add_sphere(t_object *object, char *save_pointer)
 {
@@ -82,9 +56,28 @@ t_object	*add_plane(t_object *object, char *save_pointer)
 	return (object);
 }
 
+void	compute_cylinder_m(t_object *object)
+{
+	t_vector	y_axis;
+	t_vector	rotation_axis;
+	double		**rotation_matrix;
+	double		**translation_matrix;
+	double		rotation_angle;
+
+	y_axis = v_init(0, 1, 0, 0);
+	rotation_axis = v_cross(y_axis, object->shape.cylinder.axis_vector);
+	rotation_angle = acos(v_dot(y_axis, object->shape.cylinder.axis_vector));
+	rotation_matrix = m_rotation(rotation_axis, rotation_angle);
+	translation_matrix = m_translate(object->pos);
+	object->transformation_matrix = m_mult(translation_matrix, rotation_matrix);
+	object->inverse_matrix = m_inverse(object->transformation_matrix);
+	free_matrix(rotation_matrix);
+	free_matrix(translation_matrix);
+}
+
 t_object	*add_cylinder(t_object *object, char *save_pointer)
 {
-	char		*token;
+	char	*token;
 
 	object = malloc(sizeof(t_object));
 	if (object == NULL)
@@ -95,7 +88,7 @@ t_object	*add_cylinder(t_object *object, char *save_pointer)
 		object->pos = parse_coordinate(token);
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
-		object->shape.cylinder.axis_vector = parse_vector(token);
+		object->shape.cylinder.axis_vector = v_normalize(parse_vector(token));
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
 		object->shape.cylinder.diameter = ft_atod(token);
@@ -105,24 +98,6 @@ t_object	*add_cylinder(t_object *object, char *save_pointer)
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
 		object->color = parse_color(token);
-	object->transformation_matrix = m_translate(object->pos);
-	object->inverse_matrix = m_inverse(object->transformation_matrix);
-	object->shape.cylinder.cap_up = v_add(object->pos, v_scalar(object->shape.cylinder.axis_vector, object->shape.cylinder.height / 2.0));
-	object->shape.cylinder.cap_down = v_add(object->pos, v_scalar(object->shape.cylinder.axis_vector, -object->shape.cylinder.height / 2.0));
+	compute_cylinder_m(object);
 	return (object);
-}
-
-void	ft_lstadd_back_miniRT(t_object **lst, t_object *new)
-{
-	t_object	*last;
-
-	if (*lst == NULL)
-	{
-		*lst = new;
-		return ;
-	}
-	last = *lst;
-	while (last->next != NULL)
-		last = last->next;
-	last->next = new;
 }

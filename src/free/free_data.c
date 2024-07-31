@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 23:20:40 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/30 17:55:35 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/31 14:49:21 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	free_objects(t_object *objects)
 void	free_data(t_data *data)
 {
 	free_mlx(data->display);
-	free(data->intersections);
 	free_input(data->input);
 	free(data->viewport);
 	free(data);

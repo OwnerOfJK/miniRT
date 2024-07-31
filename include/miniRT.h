@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/30 17:22:27 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/31 18:49:41 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@
 #  define HEIGHT 800
 # endif
 
-# define EPSILON 0.0001
 # define BACKGROUND 0x606060
 
 typedef int			t_color_mlx;
@@ -200,13 +199,6 @@ typedef struct s_object {
             t_vector axis_vector;
             double diameter;
             double height;
-			t_vector cap_up;
-			t_vector cap_down;
-			// struct
-			// {
-			// 	t_vector normal_vector;
-			// 	t_vector pos;
-			// } top_plane, bottom_plane;
         } cylinder;
     } shape;
     struct s_object *next;
@@ -267,7 +259,7 @@ t_object	*ft_lstnew_object(char *str);
 t_object	*add_sphere(t_object *object, char *save_pointer);
 t_object	*add_plane(t_object *object, char *save_pointer);
 t_object	*add_cylinder(t_object *object, char *save_pointer);
-void		ft_lstadd_back_miniRT(t_object **lst, t_object *new);
+void		ft_lstadd_back_minirt(t_object **lst, t_object *new);
 
 
 /*init*/
@@ -280,7 +272,6 @@ void			error_message(char *error_message);
 void			error_free(t_data *data, char *error_message);
 char			**check_config(char *file_path);
 void			check_information(char **object_configs);
-//void			malloc_error(void);
 int				clean_exit(t_data *data);
 
 /*math utils*/
@@ -299,9 +290,9 @@ double			calc_delta(double a, double b, double c);
 t_vector		neg(t_vector u);
 
 double			solve_quadratic_cy(t_equat2 *eq);
-double	solve_quadratic(double a, double b, double c);
-double	solve_quadratic_t2(double a, double b, double c);
-double	set_intersections_t2(double t1, double t2);
+double			solve_quadratic(double a, double b, double c);
+double			solve_quadratic_t2(double a, double b, double c);
+double			set_intersections_t2(double t1, double t2);
 
 /* Utils */
 void			print_double_pointer(char **double_pointer);
@@ -323,6 +314,7 @@ double		m_cofactor(double **u, int row, int column);
 double		**m_inverse(double **matrix);
 double		**m_translate(t_vector translation);
 double		**m_scale(t_vector scale);
+double		**m_rotation(t_vector axis, double angle);
 t_vector	m_reflect(t_vector normal);
 
 /* Intersections */
@@ -353,6 +345,7 @@ t_vector 	l_reflect(t_vector light_in, t_vector normal_vector);
 int	calculate_lighting(t_data *data, t_intersections *intersection, t_vector normal, bool in_shadow);
 t_vector	normal_at(t_intersections *intersection, t_ray *ray);
 bool		shadow_at_intersection(t_data *data, t_intersections *intersection,  t_ray *ray);
+
 /* Viewport */
 double		pixel_map_x(int x, t_viewport *viewport);
 double		pixel_map_y(int y, t_viewport *viewport);

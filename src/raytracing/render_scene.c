@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 20:25:49 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/07/30 18:10:41 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/31 18:34:20 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,4 @@ void	render(t_data *data)
 		data->display.win_ptr, data->display.img, 0, 0);
 	free(intersection);
 	free(ray);
-	ft_printf("Rendering done\n");
 }

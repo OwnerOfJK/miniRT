@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 11:53:27 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/30 16:46:59 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/31 16:28:39 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	calculate_lighting(t_data *data, t_intersections *intersection,
 		* data->input->alight->color.b / 255;
 	if (in_shadow)
 	{
-		diffuse = 0;
+		diffuse *= 0.2;
 		specular = 0;
 	}
 	final_color.r = fmin(1.0, fmax(0.0, (final_color.r

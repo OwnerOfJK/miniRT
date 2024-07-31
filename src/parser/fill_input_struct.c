@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:24:47 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/30 18:27:10 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/07/31 18:50:21 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_object	*parse_objects(char	**object_configs)
 			|| (found_index = find_index(object_configs, "cy", 2)) != NULL)
 	{
 		new_object = ft_lstnew_object(*found_index);
-		ft_lstadd_back_miniRT(&objects_head, new_object);
+		ft_lstadd_back_minirt(&objects_head, new_object);
 		object_configs = found_index + 1;
 	}
 	return (objects_head);
