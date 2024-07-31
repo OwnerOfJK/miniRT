@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/31 16:18:51 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/07/31 16:56:38 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,6 +254,7 @@ t_object		*parse_objects(char	**object_configs);
 t_color			parse_color(char *str);
 t_vector		parse_coordinate(char *str);
 t_vector		parse_vector(char *str);
+void			check_nb_arg(char *save_pointer, int nb);
 
 /* Linked List Parsing*/
 // t_sphere		*ft_lstnew_sphere(char *str);
@@ -305,6 +306,7 @@ void			print_double_pointer(char **double_pointer);
 int				get_config_len(char *file_path);
 char			**find_index(char** object_configs, char *index, int len);
 char			*find_and_extract_double(char *str, int pos);
+
 
 /* Matrix */
 double		**m_init(int m_len);

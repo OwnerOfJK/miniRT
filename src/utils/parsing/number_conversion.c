@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:55:19 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/31 15:49:25 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/07/31 17:47:54 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_color	parse_color(char *str)
 	char	*tmp;
 	char	*save_pointer;
 
+	check_nb_arg(str, 3);
 	color = malloc(sizeof(t_color));
 	if (color == NULL)
 		error_message("Error: Memory allocation failed.\n");
