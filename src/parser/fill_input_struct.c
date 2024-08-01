@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:24:47 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/31 21:45:42 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/08/01 12:12:37 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_alight	*parse_alight(char **object_configs)
 		error_message("Error: Memory allocation failed.\n");
 	tmp = ft_strdup(*object_configs);
 	token = ft_strtok_r(tmp, " ", &save_pointer);
-
+	check_nb_arg(save_pointer, 2);
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
 		alight->ratio = ft_atod(token);
@@ -55,7 +55,6 @@ t_alight	*parse_alight(char **object_configs)
 	if (token != NULL)
 		alight->color = parse_color(token);
 
-	check_nb_arg(save_pointer, 2);
 	free(tmp);
 	if (alight->ratio < 0 || alight->ratio > 1)
 		error_message("Error: ambient lighting ratio not in range [0.0,1.0] \n");

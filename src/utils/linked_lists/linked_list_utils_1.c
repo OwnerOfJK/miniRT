@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 00:23:57 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/31 21:37:31 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/08/01 12:11:34 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,57 @@ void	check_nb_arg(char *save_pointer, int nb)
 	int			arg_count;
 	char		*token;
 	char		*temp;
-	char		*tofree;
 	int			i;
 
 	temp = ft_strdup(save_pointer);
-	tofree = temp;
 	arg_count = 0;
 	i = 0;
 	token = ft_strtok_r(NULL, " ", &temp);
-	while (token != NULL && i <= nb)
-	{
+	if (token != NULL)
 		arg_count++;
-		token = ft_strtok_r(NULL, " ", &temp);
+	token = ft_strtok_r(NULL, " ", &temp);
+	if (token != NULL)
+		arg_count++;
+	token = ft_strtok_r(NULL, " ", &temp);
+	if (token != NULL)
+		arg_count++;
+	if (nb == 5)
+	{
+		while (i <= 2)
+		{
+			token = ft_strtok_r(NULL, " ", &temp);
+			if (token != NULL)
+				arg_count++;
+			i++;
+		}
 	}
-	// if (temp)
-	// 	free(temp);
-	free(tofree);
 	if (arg_count != nb)
 		error_message("Error: Invalid number of arguments of a parameter.\n");
 }
+
+// void	check_nb_arg(char *save_pointer, int nb)
+// {
+// 	int			arg_count;
+// 	char		*token;
+// 	char		*temp;
+// 	char		*tofree;
+// 	int			i;
+
+// 	printf("nb : %i", nb);
+// 	temp = ft_strdup(save_pointer);
+// 	tofree = temp;
+// 	arg_count = 0;
+// 	i = 0;
+// 	token = ft_strtok_r(NULL, " ", &temp);
+// 	while (token != NULL && i <= nb)
+// 	{
+// 		arg_count++;
+// 		token = ft_strtok_r(NULL, " ", &temp);
+// 	}
+// 	free(tofree);
+// 	if (arg_count != nb)
+// 		error_message("Error: Invalid number of arguments of a parameter.\n");
+// }
 
 t_object	*add_sphere(t_object *object, char *save_pointer)
 {
