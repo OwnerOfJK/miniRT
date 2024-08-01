@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:24:47 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/01 12:12:37 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/08/01 14:28:16 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ t_alight	*parse_alight(char **object_configs)
 	if (token != NULL)
 		alight->color = parse_color(token);
 
+
 	free(tmp);
 	if (alight->ratio < 0 || alight->ratio > 1)
 		error_message("Error: ambient lighting ratio not in range [0.0,1.0] \n");
@@ -67,6 +68,7 @@ t_camera	*parse_camera(char **object_configs)
 	char		*token;
 	char		*tmp;
 	char		*save_pointer;
+
 
 	if (object_configs == NULL)
 		return (NULL);
