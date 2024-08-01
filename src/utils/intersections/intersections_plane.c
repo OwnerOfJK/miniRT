@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 18:16:39 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/07/31 20:54:21 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/08/01 14:14:11 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,22 @@ ray is coplanar -> infinite intersections
 ray origin is above the plane
 ray origin is below the plane
 */
-void	plane_intersect(t_object *pl, t_ray *ray, t_intersections *intersection)
+void	plane_intersect(t_object *pl, t_ray *ray, t_intersections *intersection,
+	double num_denom[2])
 {
 	t_vector		o_p;
-	double			numerator;
-	double			denominator;
 	double			t;
 	t_ray			object_space_ray;
-	t_vector		transformed_normal;
+	t_vector		t_normal;
 
 	object_space_ray = ray_transform(ray, pl->inverse_matrix);
-	transformed_normal = mv_mult(pl->inverse_matrix, pl->shape.plane.normal_vector);
+	t_normal = mv_mult(pl->inverse_matrix, pl->shape.plane.normal_vector);
 	o_p = v_sub(object_space_ray.origin, pl->pos);
-	denominator = v_dot(object_space_ray.direction, transformed_normal);
-	if (denominator != 0)
+	num_denom[1] = v_dot(object_space_ray.direction, t_normal);
+	if (num_denom[1] != 0)
 	{
-		numerator = -v_dot(o_p, transformed_normal);
-		t = numerator / denominator;
+		num_denom[0] = -v_dot(o_p, t_normal);
+		t = num_denom[0] / num_denom[1];
 		if (t >= 0)
 		{
 			if (t < intersection->t1)
@@ -49,4 +48,3 @@ void	plane_intersect(t_object *pl, t_ray *ray, t_intersections *intersection)
 		}
 	}
 }
-
