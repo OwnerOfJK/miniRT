@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   fill_input_struct.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:24:47 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/01 12:12:37 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/08/01 18:43:22 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniRT.h"
+
+void print_double_pointer(char **array) {
+    // Ensure the array is not NULL
+    if (array == NULL) {
+        printf("Array is NULL\n");
+        return;
+    }
+
+    // Iterate through the array until we find a NULL pointer
+    int i = 0;
+    while (array[i] != NULL) {
+        printf("%s\n", array[i]);
+        i++;
+    }
+}
 
 t_object	*parse_objects(char	**object_configs)
 {
@@ -22,10 +37,12 @@ t_object	*parse_objects(char	**object_configs)
 	found_index = NULL;
 	if (object_configs == NULL)
 		return (NULL);
+	print_double_pointer(object_configs);
 	while ((found_index = find_index(object_configs, "sp", 2)) != NULL
 		|| (found_index = find_index(object_configs, "pl", 2)) != NULL
 		|| (found_index = find_index(object_configs, "cy", 2)) != NULL)
 	{
+		ft_printf("found_index: %s\n", *found_index);
 		new_object = ft_lstnew_object(*found_index);
 		ft_lstadd_back_minirt(&objects_head, new_object);
 		object_configs = found_index + 1;
@@ -54,7 +71,6 @@ t_alight	*parse_alight(char **object_configs)
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
 		alight->color = parse_color(token);
-
 	free(tmp);
 	if (alight->ratio < 0 || alight->ratio > 1)
 		error_message("Error: ambient lighting ratio not in range [0.0,1.0] \n");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 20:43:09 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/31 20:55:10 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/08/01 15:17:19 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,10 @@
 void	object_intersection(t_object *objects, t_ray *ray,
 	t_intersections	*intersection)
 {
-	int	i;
-
 	intersection->t1 = DBL_MAX;
 	intersection->count = 0;
 	intersection->hit = 0;
-	i = 0;
+	intersection->object = NULL;
 	while (objects != NULL)
 	{
 		if (objects->type == PLANE)
