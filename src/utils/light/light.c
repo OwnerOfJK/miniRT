@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 11:53:27 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/31 20:55:49 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/08/01 12:34:23 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	calculate_lighting(t_data *data, t_intersections *intersection,
 		* data->input->alight->color.b / 255;
 	if (in_shadow)
 	{
-		diffuse *= 0.2;
+		diffuse *= 0.5;
 		specular = 0;
 	}
 	final_color.r = fmin(1.0, fmax(0.0, (final_color.r
