@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/31 20:15:11 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/08/01 12:25:21 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -364,11 +364,5 @@ void			color_print(t_color color);
 void		 print_input(const t_input *input);
 void 			print_matrix(double **matrix);
 
-/* Testing */
-void		test_vectors(void);
-int			test_matrices();
-int			test_intersections(t_input	*input);
-void		test_plane_intersect();
-void    test_shadows();
 
 #endif
