@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:50:43 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/30 17:12:22 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/08/01 20:45:32 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,22 @@
 
 //this function should also free whatever needs to be freed
 
-void	error_message(char *error_message)
+void	error_free_data(t_data *data, char *error_message)
 {
-	//free stuff
+	if (data != NULL)
+		free_data(data);
 	ft_putstr_fd(error_message, 2);
 	exit(EXIT_FAILURE);
 }
 
-void	error_free(t_data *data, char *error_message)
-{
-	(void)data;
-	//destroy_mlx(t_data **data)
-	if (error_message)
-		ft_putstr_fd(error_message, 2);
-	exit(EXIT_FAILURE);
-}
-
-
 int	clean_exit(t_data *data)
 {
-	// mlx_destroy_image(data->display.mlx_ptr, data->display.img);
-	// mlx_destroy_window(data->display.mlx_ptr, data->display.win_ptr);
-	// mlx_destroy_display(data->display.mlx_ptr);
-	// free(data->display.mlx_ptr);
 	free_data(data);
-	exit(1);
+	exit(EXIT_SUCCESS);
+}
+
+int	error_free_nothing(char *error_message)
+{
+	ft_putstr_fd(error_message, 2);
+	exit(EXIT_SUCCESS);
 }

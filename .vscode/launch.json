@@ -5,7 +5,7 @@
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
       "request": "launch",
-      "args": ["scenes/test_inputs/multiple_spheres.rt"],
+      "args": ["./miniRT scenes/test_inputs/sphere.rt"],
       "stopAtEntry": false,
       "externalConsole": false,
       // "cwd": "/home/ecarlier/Documents/ring4/miniRT",

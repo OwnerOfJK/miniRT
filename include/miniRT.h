@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/01 14:12:09 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/08/01 21:25:01 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,6 +224,7 @@ typedef struct s_input
 	t_light			*light;
 	t_object		*objects;
 	t_material		*material;
+	t_viewport		*viewport;
 }	t_input;
 
 typedef struct s_data //this is our world
@@ -231,13 +232,13 @@ typedef struct s_data //this is our world
 	t_graphics		display;
 	t_intersections	*intersections;
 	t_input			*input;
-	t_viewport		*viewport;
+	char			**object_configs;
 }	t_data;
 
 /* Init */
-t_material		*material_init(void);
+t_material		*material_init(t_data *data);
 t_ray			*ray_init(t_vector origin, t_vector direction);
-t_viewport		*viewport_init(t_camera *camera);
+t_viewport		*viewport_init(t_data *data, t_camera *camera);
 
 /* Rendering */
 void			launch_window(t_data *data);
@@ -245,21 +246,21 @@ void    		launch_mlx(t_data *data);
 void			render(t_data *data);
 
 /* Parsing */
-t_input			*parse_input(char *file_path);
-t_alight	*parse_alight(char **object_configs);
-t_camera		*parse_camera(char **object_configs);
-t_light			*parse_light(char **object_configs);
-t_object		*parse_objects(char	**object_configs);
-t_color			parse_color(char *str);
+t_input			*parse_input(t_data *data, char *file_path);
+t_alight		*parse_alight(t_data *data, char **object_configs);
+t_camera		*parse_camera(t_data *data, char **object_configs);
+t_light			*parse_light(t_data *data, char **object_configs);
+t_object		*parse_objects(t_data *data);
+t_color			parse_color(t_data *data, char *str);
 t_vector		parse_coordinate(char *str);
 t_vector		parse_vector(char *str);
-void			check_nb_arg(char *save_pointer, int nb);
+void			check_nb_arg(t_data *data, char *save_pointer, int nb);
 
 /* Linked List Parsing*/
-t_object	*ft_lstnew_object(char *str);
-t_object	*add_sphere(t_object *object, char *save_pointer);
-t_object	*add_plane(t_object *object, char *save_pointer);
-t_object	*add_cylinder(t_object *object, char *save_pointer);
+t_object	*ft_lstnew_object(t_data *data, char *str);
+t_object	*add_sphere(t_data *data, t_object *object, char *save_pointer);
+t_object	*add_plane(t_data *data, t_object *object, char *save_pointer);
+t_object	*add_cylinder(t_data *data, t_object *object, char *save_pointer);
 void		ft_lstadd_back_minirt(t_object **lst, t_object *new);
 
 
@@ -269,11 +270,11 @@ void			event_init(t_data *data);
 t_data			*data_init(char **argv);
 
 /* Error Handling */
-void			error_message(char *error_message);
-void			error_free(t_data *data, char *error_message);
-char			**check_config(char *file_path);
-void			check_information(char **object_configs);
+void			error_free_data(t_data *data, char *error_message);
+void			check_config(t_data *data, char *file_path, int config_len);
+void			check_information(t_data *data, char **object_configs);
 int				clean_exit(t_data *data);
+int				error_free_nothing(char *error_message);
 
 /*math utils*/
 t_vector		v_add(t_vector u, t_vector v);
@@ -296,8 +297,7 @@ double			solve_quadratic_t2(double a, double b, double c);
 double			set_intersections_t2(double t1, double t2);
 
 /* Utils */
-void			print_double_pointer(char **double_pointer);
-int				get_config_len(char *file_path);
+int				get_config_len(t_data *data, char *file_path);
 char			**find_index(char** object_configs, char *index, int len);
 char			*find_and_extract_double(char *str, int pos);
 

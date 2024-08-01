@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_config.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 23:03:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/31 20:41:33 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/08/01 20:55:45 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*remove_spaces(char *line)
 	return (line);
 }
 
-char	**parse_to_double_pointer(int fd, int config_len)
+char	**parse_to_double_pointer(t_data *data, int fd, int config_len)
 {
 	char	*line;
 	char	**object_configs;
@@ -48,7 +48,7 @@ char	**parse_to_double_pointer(int fd, int config_len)
 	line_count = 0;
 	object_configs = malloc(sizeof(char *) * (config_len + 1));
 	if (object_configs == NULL)
-		error_message("Error: Memory allocation failed.\n");
+		error_free_data(data, "Error: Memory allocation failed.\n");
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -66,7 +66,7 @@ char	**parse_to_double_pointer(int fd, int config_len)
 	return (object_configs);
 }
 
-void	check_file_type(char *file_path)
+void	check_file_type(t_data *data, char *file_path)
 {
 	int	i;
 	int	path_len;
@@ -76,28 +76,23 @@ void	check_file_type(char *file_path)
 	while (i != 0 && file_path[i] != '.')
 		i--;
 	if (ft_strncmp(&file_path[i], ".rt", 3) != 0)
-		error_message("Error: Wrong file type.\n");
+		error_free_data(data, "Error: Wrong file type.\n");
 }
 
-char	**check_config(char *file_path)
+void	check_config(t_data *data, char *file_path, int config_len)
 {
 	int		fd;
-	char	**object_configs;
-	int		config_len;
 
-	object_configs = NULL;
 	fd = open(file_path, O_RDONLY);
 	if (fd == -1)
-		error_message("Error: File does not exist.\n");
-	check_file_type(file_path);
-	config_len = get_config_len(file_path);
-	object_configs = parse_to_double_pointer(fd, config_len);
-	check_information(object_configs);
+		error_free_data(data, "Error: File does not exist.\n");
+	check_file_type(data, file_path);
+	data->object_configs = parse_to_double_pointer(data, fd, config_len);
 	close(fd);
-	return (object_configs);
+	check_information(data, data->object_configs);
 }
 
-void	check_information(char **object_configs)
+void	check_information(t_data *data, char **object_configs)
 {
 	int	i;
 	int	variable_count;
@@ -112,5 +107,6 @@ void	check_information(char **object_configs)
 		i++;
 	}
 	if (variable_count != 3)
-		error_message("Error: Missing or too many A, C or L elements.\n");
+		error_free_data(data, "Error: Missing or too many A, \
+			C or L elements.\n");
 }

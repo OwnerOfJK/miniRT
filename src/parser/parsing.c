@@ -3,38 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 22:14:18 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/01 15:31:35 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/08/01 21:41:30 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniRT.h"
 
-t_input	*configs_to_struct(char	**object_configs)
+t_input	*configs_to_struct(t_data *data)
 {
 	t_input	*input;
 
 	input = ft_calloc(sizeof(t_input), 1);
 	if (input == NULL)
-		error_message("Error: Memory allocation failed.\n");
-	input->alight = parse_alight(find_index(object_configs, "A", 1));
-	input->camera = parse_camera(find_index(object_configs, "C", 1));
-	input->light = parse_light(find_index(object_configs, "L", 1));
-	input->objects = parse_objects(object_configs);
-	input->material = material_init();
+		error_free_data(data, "Error: Memory allocation failed.\n");
+	data->input = input;
+	input->alight = parse_alight(data,
+			find_index(data->object_configs, "A", 1));
+	input->camera = parse_camera(data, 
+			find_index(data->object_configs, "C", 1));
+	input->light = parse_light(data, find_index(data->object_configs, "L", 1));
+	input->objects = parse_objects(data);
+	input->material = material_init(data);
+	input->viewport = viewport_init(data, input->camera);
 	return (input);
 }
 
-t_input	*parse_input(char *file_path)
+t_input	*parse_input(t_data *data, char *file_path)
 {
-	char	**object_configs;
+	int		config_len;
 	t_input	*input;
 
-	object_configs = NULL;
-	object_configs = check_config(file_path);
-	input = configs_to_struct(object_configs);
-	free_double_pointer(object_configs);
+	config_len = get_config_len(data, file_path);
+	check_config(data, file_path, config_len);
+	input = configs_to_struct(data);
 	return (input);
 }

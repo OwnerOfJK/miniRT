@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 23:20:40 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/31 14:49:21 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/08/01 21:02:53 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,18 @@ void	free_mlx(t_graphics display)
 
 void	free_input(t_input *input)
 {
-	free(input->alight);
-	free(input->camera);
-	free(input->light);
-	free_objects(input->objects);
-	free(input->material);
+	if (input->alight != NULL)
+		free(input->alight);
+	if (input->camera != NULL)
+		free(input->camera);
+	if (input->light != NULL)
+		free(input->light);
+	if (input->objects != NULL)
+		free_objects(input->objects);
+	if (input->material != NULL)
+		free(input->material);
+	if (input->viewport != NULL)
+		free(input->viewport);
 	free(input);
 }
 
@@ -48,8 +55,11 @@ void	free_objects(t_object *objects)
 
 void	free_data(t_data *data)
 {
-	free_mlx(data->display);
-	free_input(data->input);
-	free(data->viewport);
+	if (data->object_configs != NULL)
+		free_double_pointer(data->object_configs);
+	if (data->input != NULL)
+		free_input(data->input);
+	if (data->display.mlx_ptr != NULL)
+		free_mlx(data->display);
 	free(data);
 }

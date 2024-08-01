@@ -6,13 +6,13 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 23:20:16 by jkaller           #+#    #+#             */
-/*   Updated: 2024/06/21 15:17:31 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/08/01 20:34:54 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/miniRT.h"
 
-int	get_config_len(char *file_path)
+int	get_config_len(t_data *data, char *file_path)
 {
 	int		fd;
 	int		config_len;
@@ -21,7 +21,7 @@ int	get_config_len(char *file_path)
 	config_len = 0;
 	fd = open(file_path, O_RDONLY);
 	if (fd < 0)
-		error_message("Error: File not found.\n");
+		error_free_data(data, "Error: File not found.\n");
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -32,7 +32,7 @@ int	get_config_len(char *file_path)
 		free(line);
 	}
 	if (config_len == 0)
-		error_message("Error: Empty file.\n");
+		error_free_data(data, "Error: Empty file.\n");
 	close(fd);
 	return (config_len);
 }
