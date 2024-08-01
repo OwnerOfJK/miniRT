@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 23:03:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/01 20:55:45 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/08/01 22:25:45 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ char	**parse_to_double_pointer(t_data *data, int fd, int config_len)
 			break ;
 		if (ft_strcmp(line, "\n") != 0 && line[0] != '#')
 		{
-			line[ft_strlen(line) - 1] = '\0';
+			if (ft_strlen(line) > 0 && line[ft_strlen(line) - 1] == '\n')
+				line[ft_strlen(line) - 1] = '\0';
 			object_configs[line_count++] = remove_spaces(line);
 		}
 		else
