@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/05 19:38:36 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/08/05 19:39:30 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -275,8 +275,13 @@ t_light			*parse_light(t_data *data, char **object_configs);
 t_object		*parse_objects(t_data *data);
 t_color			parse_color(char *str);
 t_vector		parse_coordinate(char *str);
+void			parse_light_attributes(t_light *light, char *save_pointer);
+void			parse_cam_attributes(t_camera *camera, char *save_pointer);
+void			parse_alight_attributes(t_alight *alight, char *save_pointer);
 t_vector		parse_vector(char *str);
 bool			check_nb_arg(char *save_pointer, int nb);
+void			check_arg(t_data *data, t_input *input);
+
 /* Linked List Parsing*/
 t_object		*ft_lstnew_object(t_data *data, char *str, t_object	*objects_head);
 t_object		*add_sphere(t_context *ctx, t_object *object, char *save_pointer);
