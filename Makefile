@@ -6,7 +6,7 @@
 #    By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/20 14:04:55 by jkaller           #+#    #+#              #
-#    Updated: 2024/07/31 21:18:07 by ecarlier         ###   ########.fr        #
+#    Updated: 2024/08/05 14:51:31 by ecarlier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,14 +32,16 @@ SRCS = src/main.c $(wildcard src/error/*.c) $(wildcard src/parser/*.c) $(wildcar
 
 # Object files
 OBJS = $(SRCS:.c=.o)
+%.o: %.c
+		@${CC} ${CFLAGS} -c $< -o $@
 
 # Build the target executable
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	@echo "Building mlx_linux and libft targets..."
-	@make -C ./libs/mlx_linux > /dev/null
-	@make -C ./libs/libft > /dev/null
+	@make -s -C ./libs/mlx_linux 2> /dev/null > /dev/null
+	@make -s -C ./libs/libft > /dev/null
 	@echo "Linking the executable..."
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(MLXFLAGS) -o $(NAME)
 	@echo "Build completed!"
@@ -54,8 +56,8 @@ clean:
 # Remove all generated files
 fclean:
 	@echo "Performing full clean on mlx_linux and libft targets..."
-	@make clean -C ./libs/mlx_linux > /dev/null
-	@make fclean -C ./libs/libft > /dev/null
+	@make clean -C  ./libs/mlx_linux > /dev/null
+	@make fclean -C  ./libs/libft > /dev/null
 	@echo "Removing object files and the target executable..."
 	@rm -rf $(OBJS)
 	@rm -rf $(NAME)
