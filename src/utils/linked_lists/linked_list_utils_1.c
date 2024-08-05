@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 00:23:57 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/05 16:53:11 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/08/05 17:39:58 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,14 @@ bool	check_nb_arg(t_data *data, char *save_pointer, int nb)
 	int			i;
 	char		*to_free;
 
-
 	(void)data;
 	temp = ft_strdup(save_pointer);
 	arg_count = 0;
 	i = 0;
 	to_free = temp;
+	token = ft_strtok_r(NULL, " ", &temp);
+	if (token != NULL)
+		arg_count++;
 	token = ft_strtok_r(NULL, " ", &temp);
 	if (token != NULL)
 		arg_count++;
@@ -84,14 +86,13 @@ t_object	*add_plane(t_data *data, t_object *object, char *save_pointer, char *tm
 {
 	char		*token;
 
-	//check_nb_arg(data, save_pointer, 3);
+
 	object = malloc(sizeof(t_object));
 	if (object == NULL)
 		error_free_data(data, "Error: Memory allocation failed.\n");
 	object->type = PLANE;
 	if (check_nb_arg(data, save_pointer, 3))
 	{
-
 		free(object);
 		free(tmp);
 		error_free_data(data, "Error: Invalid number of arguments of a plane.\n");
