@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/05 19:42:30 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/08/05 19:46:57 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,28 +194,28 @@ CYLINDER
 */
 
 typedef struct s_object {
-    t_obj_type type;
-    t_vector pos;
-    t_color color;
-    double **transformation_matrix;
-	double **inverse_matrix;
-    union {
-        struct
+	t_obj_type	type;
+	t_vector	pos;
+	t_color		color;
+	double		**transformation_matrix;
+	double		**inverse_matrix;
+	union {
+		struct
 		{
-            double diameter;
-        } sphere;
-        struct
+			double diameter;
+		} sphere;
+		struct
 		{
-            t_vector normal_vector;
-        } plane;
-        struct
+			t_vector normal_vector;
+		} plane;
+		struct
 		{
-            t_vector axis_vector;
-            double diameter;
-            double height;
-        } cylinder;
-    } shape;
-    struct s_object *next;
+			t_vector axis_vector;
+			double diameter;
+			double height;
+		} cylinder;
+	} shape;
+	struct s_object *next;
 }	t_object;
 
 typedef struct s_intersections
@@ -251,10 +251,10 @@ typedef struct s_data //this is our world
 }	t_data;
 
 typedef struct s_context {
-    t_data *data;
-    t_object *objects_head;
-    char *save_pointer;
-    char *tmp;
+	t_data		*data;
+	t_object	*objects_head;
+	char		*save_pointer;
+	char		*tmp;
 } t_context;
 
 /* Init */
@@ -332,66 +332,53 @@ char			*find_and_extract_double(char *str, int pos);
 
 
 /* Matrix */
-double		**m_init(int m_len);
-int			m_len(double **matrix);
-double		**m_mult(double **u, double **v);
-t_vector	mv_mult(double **u, t_vector v);
-int			m_compare(double **u, double **v);
-double		**m_identity(double **u);
-double		**m_transpose(double **u);
-double		m_determinant(double **u);
-double		m_minor(double **u, int row, int column);
-double		m_cofactor(double **u, int row, int column);
-double		**m_inverse(double **matrix);
-double		**m_translate(t_vector translation);
-double		**m_scale(t_vector scale);
-double		**m_rotation(t_vector axis, double angle);
-t_vector	m_reflect(t_vector normal);
+double			**m_init(int m_len);
+int				m_len(double **matrix);
+double			**m_mult(double **u, double **v);
+t_vector		mv_mult(double **u, t_vector v);
+int				m_compare(double **u, double **v);
+double			**m_identity(double **u);
+double			**m_transpose(double **u);
+double			m_determinant(double **u);
+double			m_minor(double **u, int row, int column);
+double			m_cofactor(double **u, int row, int column);
+double			**m_inverse(double **matrix);
+double			**m_translate(t_vector translation);
+double			**m_scale(t_vector scale);
+double			**m_rotation(t_vector axis, double angle);
+t_vector		m_reflect(t_vector normal);
 
 /* Intersections */
-t_vector	ray_position(t_ray *ray, double t);
-t_ray	ray_transform(t_ray *ray, double **matrix);
-void	plane_intersect(t_object *pl, t_ray *ray, t_intersections *intersection, double num_denom[2]);
-void	sphere_intersect(t_object *sp, t_ray *ray, t_intersections *intersection);
-void	cylinder_intersect(t_object *cy, t_ray *ray, t_intersections *intersection);
-void	object_intersection(t_object *objects, t_ray *ray, t_intersections	*intersection);
-
-
-void	set_intersections_cy(double t1, double t2, t_intersections *intersections);
-double	set_intersections(double t1, double t2);
+t_vector		ray_position(t_ray *ray, double t);
+t_ray			ray_transform(t_ray *ray, double **matrix);
+void			plane_intersect(t_object *pl, t_ray *ray, t_intersections *intersection, double num_denom[2]);
+void			sphere_intersect(t_object *sp, t_ray *ray, t_intersections *intersection);
+void			cylinder_intersect(t_object *cy, t_ray *ray, t_intersections *intersection);
+void			object_intersection(t_object *objects, t_ray *ray, t_intersections	*intersection);
+double			set_intersections(double t1, double t2);
 
 /* Free Memory */
-void		free_data(t_data *data);
-void		free_double_pointer(char **double_pointer);
-void		free_matrix(double **matrix);
-void		free_objects(t_object *objects);
-void		free_input(t_input *input);
+void			free_data(t_data *data);
+void			free_double_pointer(char **double_pointer);
+void			free_matrix(double **matrix);
+void			free_objects(t_object *objects);
+void			free_input(t_input *input);
 
 /* Rendering */
-void			render_scene(t_data *data);
 void			my_mlx_pixel_put(t_graphics *img, int x, int y, int color);
 
 /* Light */
-t_vector 	l_reflect(t_vector light_in, t_vector normal_vector);
-int	calculate_lighting(t_data *data, t_intersections *intersection, t_vector normal, bool in_shadow);
-t_vector	normal_at(t_intersections *intersection, t_ray *ray);
-bool		shadow_at_intersection(t_data *data, t_intersections *intersection,  t_ray *ray);
+t_vector		l_reflect(t_vector light_in, t_vector normal_vector);
+int				calculate_lighting(t_data *data, t_intersections *intersection, t_vector normal, bool in_shadow);
+t_vector		normal_at(t_intersections *intersection, t_ray *ray);
+bool			shadow_at_intersection(t_data *data, t_intersections *intersection,  t_ray *ray);
 
 /* Viewport */
-double		pixel_map_x(int x, t_viewport *viewport);
-double		pixel_map_y(int y, t_viewport *viewport);
-void		prepare_ray(t_data *data, double viewport_x, double viewport_y, t_ray *ray);
+double			pixel_map_x(int x, t_viewport *viewport);
+double			pixel_map_y(int y, t_viewport *viewport);
+void			prepare_ray(t_data *data, double viewport_x, double viewport_y, t_ray *ray);
 
 /* Color Utils */
 t_color_mlx		rgb_to_colour(t_color rgb);
-
-
-/*debug utils*/
-//need to delete later
-void			vec_print(t_vector vec);
-void			color_print(t_color color);
-void		 print_input(const t_input *input);
-void 			print_matrix(double **matrix);
-
 
 #endif
