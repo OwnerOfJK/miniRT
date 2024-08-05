@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:24:47 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/05 15:32:57 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/08/05 16:41:40 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,13 @@ t_alight	*parse_alight(t_data *data, char **object_configs)
 		error_free_data(data, "Error: Memory allocation failed.\n");
 	tmp = ft_strdup(*object_configs);
 	token = ft_strtok_r(tmp, " ", &save_pointer);
-	check_nb_arg(data, save_pointer, 2);
+	if (check_nb_arg(data, save_pointer, 2))
+	{
+		free(alight);
+		free(tmp);
+		error_free_data(data, "Error: Invalid number of arguments of ambient light.\n");
+	}
+
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
 		alight->ratio = ft_atod(token);
@@ -80,7 +86,13 @@ t_camera	*parse_camera(t_data *data, char **object_configs)
 		error_free_data(data, "Error: Memory allocation failed.\n");
 	tmp = ft_strdup(*object_configs);
 	token = ft_strtok_r(tmp, " ", &save_pointer);
-	check_nb_arg(data, save_pointer, 3);
+
+	if (check_nb_arg(data, save_pointer, 3))
+	{
+		free(camera);
+		free(tmp);
+		error_free_data(data, "Error: Invalid number of arguments of camera.\n");
+	}
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
 		camera->pos = parse_coordinate(token);
@@ -112,7 +124,12 @@ t_light	*parse_light(t_data *data, char **object_configs)
 		error_free_data(data, "Error: Memory allocation failed.\n");
 	tmp = ft_strdup(*object_configs);
 	token = ft_strtok_r(tmp, " ", &save_pointer);
-	check_nb_arg(data, save_pointer, 3);
+	if (check_nb_arg(data, save_pointer, 3))
+	{
+		free(light);
+		free(tmp);
+		error_free_data(data, "Error: Invalid number of arguments of light.\n");
+	}
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
 		light->pos = parse_coordinate(token);
