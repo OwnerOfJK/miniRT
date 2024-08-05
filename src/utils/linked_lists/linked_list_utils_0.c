@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 00:23:57 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/05 18:49:01 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/08/05 22:42:30 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ void	compute_cylinder_m(t_object *object)
 	double		rotation_angle;
 
 	y_axis = v_init(0, 1, 0, 0);
-	rotation_axis = v_cross(y_axis, object->shape.cylinder.axis_vector);
-	rotation_angle = acos(v_dot(y_axis, object->shape.cylinder.axis_vector));
+	rotation_axis = v_cross(y_axis, object->u_shape.s_cylinder.axis_vector);
+	rotation_angle = acos(v_dot(y_axis, object->u_shape.s_cylinder.axis_vector));
 	rotation_matrix = m_rotation(rotation_axis, rotation_angle);
 	translation_matrix = m_translate(object->pos);
 	object->transformation_matrix = m_mult(translation_matrix, rotation_matrix);

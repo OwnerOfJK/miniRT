@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   normal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 11:53:17 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/05 22:10:42 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/08/05 22:44:28 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ t_vector	compute_sphere(t_object	*object, t_vector world_point)
 
 t_vector	compute_plane(t_object	*object, t_ray *ray)
 {
-	if (v_dot(ray->direction, object->shape.plane.normal_vector) > 0)
-		return (neg(object->shape.plane.normal_vector));
+	if (v_dot(ray->direction, object->u_shape.s_plane.normal_vector) > 0)
+		return (neg(object->u_shape.s_plane.normal_vector));
 	else
-		return (object->shape.plane.normal_vector);
+		return (object->u_shape.s_plane.normal_vector);
 }
 
 t_vector	compute_cylinder(t_object *object, t_vector world_point)
@@ -46,8 +46,8 @@ t_vector	compute_cylinder(t_object *object, t_vector world_point)
 	double		**inverse_transpose;
 
 	pc = v_sub(mv_mult(object->inverse_matrix, world_point), object->pos);
-	projection = v_scalar(object->shape.cylinder.axis_vector,
-			v_dot(pc, object->shape.cylinder.axis_vector));
+	projection = v_scalar(object->u_shape.s_cylinder.axis_vector,
+			v_dot(pc, object->u_shape.s_cylinder.axis_vector));
 	normal = v_sub(pc, projection);
 	normal = v_normalize(normal);
 	inverse_transpose = m_transpose(object->inverse_matrix);

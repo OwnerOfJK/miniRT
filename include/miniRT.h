@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/05 22:38:17 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/08/05 22:39:21 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,18 +206,18 @@ typedef struct s_object
 		struct
 		{
 			double	diameter;
-		}	sphere;
+		}	s_sphere;
 		struct
 		{
 			t_vector	normal_vector;
-		}	plane;
+		}	s_plane;
 		struct
 		{
 			t_vector	axis_vector;
 			double		diameter;
 			double		height;
-		}	cylinder;
-	}	shape;
+		}	s_cylinder;
+	}	u_shape;
 	struct s_object		*next;
 }	t_object;
 

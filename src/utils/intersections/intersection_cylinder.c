@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:22:54 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/01 12:42:04 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/08/05 22:42:30 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ double static	cylinder_tube(t_object *cy, t_ray *ray, double radius)
 	double			y[2];
 	t_vector		axis;
 
-	axis = cy->shape.cylinder.axis_vector;
+	axis = cy->u_shape.s_cylinder.axis_vector;
 	cr = v_sub(ray->origin, cy->pos);
 	abc[0] = v_dot(ray->direction, ray->direction)
 		- pow(v_dot(ray->direction, axis), 2);
@@ -51,11 +51,11 @@ double static	cylinder_tube(t_object *cy, t_ray *ray, double radius)
 		return (-1);
 	y[0] = v_dot(ray->direction, axis) * roots[0] + v_dot(cr, axis);
 	y[1] = v_dot(ray->direction, axis) * roots[1] + v_dot(cr, axis);
-	if (roots[0] > EPSILON && y[0] >= -cy->shape.cylinder.height / 2 && y[0]
-		<= cy->shape.cylinder.height / 2)
+	if (roots[0] > EPSILON && y[0] >= -cy->u_shape.s_cylinder.height / 2 && y[0]
+		<= cy->u_shape.s_cylinder.height / 2)
 		return (roots[0]);
-	else if (roots[1] > EPSILON && y[1] >= -cy->shape.cylinder.height / 2
-		&& y[1] <= cy->shape.cylinder.height / 2)
+	else if (roots[1] > EPSILON && y[1] >= -cy->u_shape.s_cylinder.height / 2
+		&& y[1] <= cy->u_shape.s_cylinder.height / 2)
 		return (roots[1]);
 	else
 		return (-1);
@@ -69,7 +69,7 @@ void	cylinder_intersect(t_object *cy, t_ray *ray,
 	double	radius;
 
 	object_space_ray = ray_transform(ray, cy->inverse_matrix);
-	radius = cy->shape.cylinder.diameter / 2;
+	radius = cy->u_shape.s_cylinder.diameter / 2;
 	t_tube = cylinder_tube(cy, &object_space_ray, radius);
 	if (t_tube > EPSILON && t_tube < intersection->t1)
 	{
