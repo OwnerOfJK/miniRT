@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   linked_list_utils_1.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 00:23:57 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/01 20:51:38 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/08/05 16:53:11 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/miniRT.h"
 
-void	check_nb_arg(t_data *data, char *save_pointer, int nb)
+bool	check_nb_arg(t_data *data, char *save_pointer, int nb)
 {
 	int			arg_count;
 	char		*token;
@@ -20,6 +20,8 @@ void	check_nb_arg(t_data *data, char *save_pointer, int nb)
 	int			i;
 	char		*to_free;
 
+
+	(void)data;
 	temp = ft_strdup(save_pointer);
 	arg_count = 0;
 	i = 0;
@@ -45,18 +47,25 @@ void	check_nb_arg(t_data *data, char *save_pointer, int nb)
 	}
 	free(to_free);
 	if (arg_count != nb)
-		error_free_data(data, "Error: Invalid number of arguments of a parameter.\n");
+		return (true);
+	else
+		return (false);
 }
 
-t_object	*add_sphere(t_data *data, t_object *object, char *save_pointer)
+t_object	*add_sphere(t_data *data, t_object *object, char *save_pointer, char *tmp)
 {
 	char		*token;
 
-	check_nb_arg(data, save_pointer, 3);
 	object = malloc(sizeof(t_object));
 	if (object == NULL)
 		error_free_data(data, "Error: Memory allocation failed.\n");
 	object->type = SPHERE;
+	if (check_nb_arg(data, save_pointer, 3))
+	{
+		free(object);
+		free(tmp);
+		error_free_data(data, "Error: Invalid number of arguments of a sphere.\n");
+	}
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
 		object->pos = parse_coordinate(token);
@@ -65,21 +74,28 @@ t_object	*add_sphere(t_data *data, t_object *object, char *save_pointer)
 		object->shape.sphere.diameter = ft_atod(token);
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
-		object->color = parse_color(data, token);
+		object->color = parse_color(token);
 	object->transformation_matrix = m_translate(object->pos);
 	object->inverse_matrix = m_inverse(object->transformation_matrix);
 	return (object);
 }
 
-t_object	*add_plane(t_data *data, t_object *object, char *save_pointer)
+t_object	*add_plane(t_data *data, t_object *object, char *save_pointer, char *tmp)
 {
 	char		*token;
 
-	check_nb_arg(data, save_pointer, 3);
+	//check_nb_arg(data, save_pointer, 3);
 	object = malloc(sizeof(t_object));
 	if (object == NULL)
 		error_free_data(data, "Error: Memory allocation failed.\n");
 	object->type = PLANE;
+	if (check_nb_arg(data, save_pointer, 3))
+	{
+
+		free(object);
+		free(tmp);
+		error_free_data(data, "Error: Invalid number of arguments of a plane.\n");
+	}
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
 		object->pos = parse_coordinate(token);
@@ -88,7 +104,7 @@ t_object	*add_plane(t_data *data, t_object *object, char *save_pointer)
 		object->shape.plane.normal_vector = parse_vector(token);
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
-		object->color = parse_color(data, token);
+		object->color = parse_color(token);
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	object->transformation_matrix = m_translate(object->pos);
 	object->inverse_matrix = m_inverse(object->transformation_matrix);
@@ -114,15 +130,20 @@ void	compute_cylinder_m(t_object *object)
 	free_matrix(translation_matrix);
 }
 
-t_object	*add_cylinder(t_data *data, t_object *object, char *save_pointer)
+t_object	*add_cylinder(t_data *data, t_object *object, char *save_pointer, char *tmp)
 {
 	char		*token;
 
-	check_nb_arg(data, save_pointer, 5);
 	object = malloc(sizeof(t_object));
 	if (object == NULL)
 		error_free_data(data, "Error: Memory allocation failed.\n");
 	object->type = CYLINDER;
+	if (check_nb_arg(data, save_pointer, 5))
+	{
+		free(object);
+		free(tmp);
+		error_free_data(data, "Error: Invalid number of arguments of a cylinder.\n");
+	}
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
 		object->pos = parse_coordinate(token);
@@ -137,7 +158,7 @@ t_object	*add_cylinder(t_data *data, t_object *object, char *save_pointer)
 		object->shape.cylinder.height = ft_atod(token);
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
-		object->color = parse_color(data, token);
+		object->color = parse_color(token);
 	compute_cylinder_m(object);
 	return (object);
 }

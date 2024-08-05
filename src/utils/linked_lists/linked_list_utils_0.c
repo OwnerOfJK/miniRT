@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   linked_list_utils_0.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 00:23:57 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/01 20:51:25 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/08/05 16:44:33 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ t_object	*ft_lstnew_object(t_data *data, char *str)
 	token = ft_strtok_r(tmp, " ", &save_pointer);
 	object = NULL;
 	if (ft_strncmp(token, "sp", 2) == 0)
-		object = add_sphere(data, object, save_pointer);
+		object = add_sphere(data, object, save_pointer, tmp);
 	else if (ft_strncmp(token, "pl", 2) == 0)
-		object = add_plane(data, object, save_pointer);
+		object = add_plane(data, object, save_pointer, tmp);
 	else if (ft_strncmp(token, "cy", 2) == 0)
-		object = add_cylinder(data, object, save_pointer);
+		object = add_cylinder(data, object, save_pointer, tmp);
 	else
 		error_free_data(data, "Error: Invalid object type.\n");
 	object->next = NULL;
