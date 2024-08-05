@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/05 22:52:22 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/08/05 22:56:02 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # endif
 
 # ifndef WIDTH
-#  define WIDTH 1280
+#  define WIDTH 800
 # endif
 
 # ifndef EPSILON
@@ -39,7 +39,7 @@
 # endif
 
 # ifndef HEIGHT
-#  define HEIGHT 720
+#  define HEIGHT 800
 # endif
 
 # define BACKGROUND 0x000000
