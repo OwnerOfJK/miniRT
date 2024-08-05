@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:24:47 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/05 16:41:40 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/08/05 16:50:27 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ t_alight	*parse_alight(t_data *data, char **object_configs)
 		free(tmp);
 		error_free_data(data, "Error: Invalid number of arguments of ambient light.\n");
 	}
-
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
 		alight->ratio = ft_atod(token);
@@ -62,13 +61,6 @@ t_alight	*parse_alight(t_data *data, char **object_configs)
 	if (token != NULL)
 		alight->color = parse_color(token);
 	free(tmp);
-	// if (alight->ratio < 0 || alight->ratio > 1)
-	// {
-	// 	free(alight);
-	// 	free(tmp);
-	// 	error_free_data(data, "Error: ambient lighting \
-	// 		ratio not in range [0.0,1.0] \n");
-	// }
 	return (alight);
 }
 
