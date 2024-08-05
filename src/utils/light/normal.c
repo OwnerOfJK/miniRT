@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 11:53:17 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/05 16:53:36 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/08/05 21:48:34 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,29 +37,23 @@ t_vector	compute_plane(t_object	*object, t_ray *ray)
 		return (object->shape.plane.normal_vector);
 }
 
+
 t_vector	compute_cylinder(t_object *object, t_vector local_point)
 {
 	t_vector	pc;
 	t_vector	normal;
 	t_vector	projection;
-	double		**inverse_transpose;
 
 	pc = v_sub(local_point, object->pos);
 	projection = v_scalar(object->shape.cylinder.axis_vector,
 			v_dot(pc, object->shape.cylinder.axis_vector));
 	normal = v_sub(pc, projection);
-	inverse_transpose = (m_transpose(object->inverse_matrix));
-	normal = mv_mult(inverse_transpose, normal);
-	normal.w = 0;
-	normal = v_normalize(normal);
-	free_matrix(inverse_transpose);
 	return (normal);
 }
 
 t_vector	normal_at(t_intersections *intersection, t_ray *ray)
 {
 	double		t;
-	t_vector	local_point;
 	t_vector	normal_vector;
 	t_vector	world_point;
 
@@ -73,10 +67,6 @@ t_vector	normal_at(t_intersections *intersection, t_ray *ray)
 	else if (intersection->object->type == PLANE)
 		normal_vector = compute_plane(intersection->object, &intersection->ray);
 	else if (intersection->object->type == CYLINDER)
-	{
-		local_point = mv_mult(intersection->object->inverse_matrix,
-				world_point);
-		normal_vector = compute_cylinder(intersection->object, local_point);
-	}
+		normal_vector = compute_cylinder(intersection->object, world_point);
 	return (normal_vector);
 }

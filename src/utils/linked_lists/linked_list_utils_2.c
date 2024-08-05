@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   linked_list_utils_2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 18:53:39 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/08/05 19:34:30 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/08/05 21:51:51 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	parse_cylinder_attributes(t_object *object, char *save_pointer)
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
 		object->color = parse_color(token);
+	object->transformation_matrix = m_translate(object->pos);
+	object->inverse_matrix = m_inverse(object->transformation_matrix);
 }
 
 void	parse_sphere_attributes(t_object *object, char *save_pointer)
