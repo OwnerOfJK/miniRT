@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   linked_list_utils_0.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 00:23:57 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/05 17:57:39 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/08/05 18:32:59 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ t_object	*ft_lstnew_object(t_data *data, char *str, t_object	*objects_head)
 {
 	t_object	*object;
 	char		*token;
-	// char		*tmp;
 	char		*save_pointer;
 	t_context	ctx;
 
