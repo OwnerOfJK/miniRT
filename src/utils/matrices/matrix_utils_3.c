@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:24:34 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/31 18:35:23 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/08/05 19:20:25 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,27 @@ double	**m_rotation(t_vector axis, double angle)
 	matrix[3][2] = 0;
 	matrix[3][3] = 1;
 	return (matrix);
+}
+
+double	**m_transpose(double **u)
+{
+	double	**transpose;
+	int		row;
+	int		column;
+	int		len;
+
+	transpose = m_init(4);
+	row = 0;
+	len = m_len(u);
+	while (row < len)
+	{
+		column = 0;
+		while (column < len)
+		{
+			transpose[row][column] = u[column][row];
+			column++;
+		}
+		row++;
+	}
+	return (transpose);
 }

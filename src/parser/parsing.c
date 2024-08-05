@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 22:14:18 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/05 15:33:34 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/08/05 18:46:22 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ t_input	*configs_to_struct(t_data *data)
 	if (check_rgb(input))
 		error_free_data(data, "Error: R,G,B colors not in range [0-255].\n");
 	if (check_ambient_light(input))
-		error_free_data(data, "Error: ambient lighting ratio not in range [0.0,1.0] \n");
+		error_free_data(data, "Error: ambient \
+			lighting ratio not in range [0.0,1.0] \n");
 	return (input);
 }
 

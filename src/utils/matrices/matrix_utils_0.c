@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_utils_0.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 13:20:48 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/31 21:00:01 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/08/05 18:52:03 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,18 @@ double	**m_mult(double **u, double **v)
 	int		column;
 	int		k;
 	double	**result;
-	int		len;
 
 	k = 0;
 	row = 0;
 	result = m_init(4);
-	len = m_len(u);
-	while (row < len)
+	while (row < 4)
 	{
 		column = 0;
-		while (column < len)
+		while (column < 4)
 		{
 			result[row][column] = 0;
 			k = 0;
-			while (k < len)
+			while (k < 4)
 			{
 				result[row][column] += u[row][k] * v[k][column];
 				k++;
