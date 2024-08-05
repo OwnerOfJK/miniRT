@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_input_struct.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:24:47 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/05 17:51:59 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/08/05 18:28:57 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_alight	*parse_alight(t_data *data, char **object_configs)
 		error_free_data(data, "Error: Memory allocation failed.\n");
 	tmp = ft_strdup(*object_configs);
 	token = ft_strtok_r(tmp, " ", &save_pointer);
-	if (check_nb_arg(data, save_pointer, 2))
+	if (check_nb_arg(save_pointer, 2))
 	{
 		free(alight);
 		free(tmp);
@@ -79,7 +79,7 @@ t_camera	*parse_camera(t_data *data, char **object_configs)
 	tmp = ft_strdup(*object_configs);
 	token = ft_strtok_r(tmp, " ", &save_pointer);
 
-	if (check_nb_arg(data, save_pointer, 3))
+	if (check_nb_arg(save_pointer, 3))
 	{
 		free(camera);
 		free(tmp);
@@ -116,7 +116,7 @@ t_light	*parse_light(t_data *data, char **object_configs)
 		error_free_data(data, "Error: Memory allocation failed.\n");
 	tmp = ft_strdup(*object_configs);
 	token = ft_strtok_r(tmp, " ", &save_pointer);
-	if (check_nb_arg(data, save_pointer, 3))
+	if (check_nb_arg(save_pointer, 3))
 	{
 		free(light);
 		free(tmp);

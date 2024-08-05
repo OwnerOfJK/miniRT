@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/05 18:27:19 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/08/05 18:42:34 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,7 +233,7 @@ typedef struct s_data //this is our world
 	t_intersections	*intersections;
 	t_input			*input;
 	char			**object_configs;
-	
+
 }	t_data;
 
 typedef struct s_context {
@@ -267,12 +267,9 @@ t_object		*parse_objects(t_data *data);
 t_color			parse_color(char *str);
 t_vector		parse_coordinate(char *str);
 t_vector		parse_vector(char *str);
-bool			check_nb_arg(t_data *data, char *save_pointer, int nb);
+bool			check_nb_arg(char *save_pointer, int nb);
 /* Linked List Parsing*/
 t_object		*ft_lstnew_object(t_data *data, char *str, t_object	*objects_head);
-// t_object	*add_sphere(t_data *data, t_object *object, char *save_pointer);
-// t_object	*add_plane(t_data *data, t_object *object, char *save_pointer);
-// t_object	*add_cylinder(t_data *data, t_object *object, char *save_pointer);
 t_object		*add_sphere(t_context *ctx, t_object *object, char *save_pointer);
 t_object		*add_plane(t_context *ctx, t_object *object, char *save_pointer);
 t_object		*add_cylinder(t_context *ctx, t_object *object, char *save_pointer);
