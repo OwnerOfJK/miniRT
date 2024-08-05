@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/05 22:56:02 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/08/05 23:19:28 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,15 +197,15 @@ CYLINDER
 
 typedef struct s_object
 {
-	t_obj_type	type;
-	t_vector	pos;
-	t_color		color;
-	double		**transformation_matrix;
-	double		**inverse_matrix;
+	t_obj_type			type;
+	t_vector			pos;
+	t_color				color;
+	double				**transformation_matrix;
+	double				**inverse_matrix;
 	union {
 		struct
 		{
-			double	diameter;
+			double		diameter;
 		}	s_sphere;
 		struct
 		{
@@ -219,7 +219,7 @@ typedef struct s_object
 		}	s_cylinder;
 	}	u_shape;
 	struct s_object		*next;
-}	t_object;
+}			t_object;
 
 typedef struct s_intersections
 {
