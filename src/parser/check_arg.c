@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:01:57 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/08/05 19:31:26 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/08/05 19:41:19 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,6 @@ void	check_arg(t_data *data, t_input *input)
 	if (check_fov_cam(input))
 		error_free_data(data, "Error: fov not in range [0,180]\n");
 	if (check_bright_light(input))
-		error_free_data(data, "Error: light brightness \
-				ratio not in range [0.0,1.0]\n");
+		error_free_data(data,
+			"Error: light brightness ratio not in range [0.0,1.0]\n");
 }
