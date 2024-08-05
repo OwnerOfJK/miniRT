@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   linked_list_utils_1.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 00:23:57 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/05 17:39:58 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/08/05 18:02:53 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,20 @@ bool	check_nb_arg(t_data *data, char *save_pointer, int nb)
 		return (false);
 }
 
-t_object	*add_sphere(t_data *data, t_object *object, char *save_pointer, char *tmp)
+t_object	*add_sphere(t_context *ctx, t_object *object, char *save_pointer)
 {
 	char		*token;
 
 	object = malloc(sizeof(t_object));
 	if (object == NULL)
-		error_free_data(data, "Error: Memory allocation failed.\n");
+		error_free_data(ctx->data, "Error: Memory allocation failed.\n");
 	object->type = SPHERE;
-	if (check_nb_arg(data, save_pointer, 3))
+	if (check_nb_arg(ctx->data, save_pointer, 3))
 	{
 		free(object);
-		free(tmp);
-		error_free_data(data, "Error: Invalid number of arguments of a sphere.\n");
+		free(ctx->tmp);
+		free_objects(ctx->objects_head);
+		error_free_data(ctx->data, "Error: Invalid number of arguments of a sphere.\n");
 	}
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
@@ -82,20 +83,21 @@ t_object	*add_sphere(t_data *data, t_object *object, char *save_pointer, char *t
 	return (object);
 }
 
-t_object	*add_plane(t_data *data, t_object *object, char *save_pointer, char *tmp)
+t_object	*add_plane(t_context *ctx, t_object *object, char *save_pointer)
 {
 	char		*token;
 
 
 	object = malloc(sizeof(t_object));
 	if (object == NULL)
-		error_free_data(data, "Error: Memory allocation failed.\n");
+		error_free_data(ctx->data, "Error: Memory allocation failed.\n");
 	object->type = PLANE;
-	if (check_nb_arg(data, save_pointer, 3))
+	if (check_nb_arg(ctx->data, save_pointer, 3))
 	{
 		free(object);
-		free(tmp);
-		error_free_data(data, "Error: Invalid number of arguments of a plane.\n");
+		free(ctx->tmp);
+		free_objects(ctx->objects_head);
+		error_free_data(ctx->data, "Error: Invalid number of arguments of a plane.\n");
 	}
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
@@ -131,19 +133,20 @@ void	compute_cylinder_m(t_object *object)
 	free_matrix(translation_matrix);
 }
 
-t_object	*add_cylinder(t_data *data, t_object *object, char *save_pointer, char *tmp)
+t_object	*add_cylinder(t_context *ctx, t_object *object, char *save_pointer)
 {
 	char		*token;
 
 	object = malloc(sizeof(t_object));
 	if (object == NULL)
-		error_free_data(data, "Error: Memory allocation failed.\n");
+		error_free_data(ctx->data, "Error: Memory allocation failed.\n");
 	object->type = CYLINDER;
-	if (check_nb_arg(data, save_pointer, 5))
+	if (check_nb_arg(ctx->data, save_pointer, 5))
 	{
 		free(object);
-		free(tmp);
-		error_free_data(data, "Error: Invalid number of arguments of a cylinder.\n");
+		free(ctx->tmp);
+		free_objects(ctx->objects_head);
+		error_free_data(ctx->data, "Error: Invalid number of arguments of a cylinder.\n");
 	}
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)

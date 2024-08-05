@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_input_struct.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:24:47 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/05 16:50:27 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/08/05 17:51:59 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_object	*parse_objects(t_data *data)
 			|| ft_strncmp(*current_config, "pl", 2) == 0
 			|| ft_strncmp(*current_config, "cy", 2) == 0)
 		{
-			new_object = ft_lstnew_object(data, *current_config);
+			new_object = ft_lstnew_object(data, *current_config, objects_head);
 			ft_lstadd_back_minirt(&objects_head, new_object);
 		}
 		current_config++;
