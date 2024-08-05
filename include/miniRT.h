@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/05 18:42:34 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/08/05 18:57:39 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,7 +274,10 @@ t_object		*add_sphere(t_context *ctx, t_object *object, char *save_pointer);
 t_object		*add_plane(t_context *ctx, t_object *object, char *save_pointer);
 t_object		*add_cylinder(t_context *ctx, t_object *object, char *save_pointer);
 void			ft_lstadd_back_minirt(t_object **lst, t_object *new);
-
+void			compute_cylinder_m(t_object *object);
+void			parse_cylinder_attributes(t_object *object, char *save_pointer);
+void			parse_plane_attributes(t_object *object, char *save_pointer);
+void			parse_sphere_attributes(t_object *object, char *save_pointer);
 
 /*init*/
 int				key_handler(int keysym, t_data *data);
