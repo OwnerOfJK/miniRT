@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_config.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 23:03:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/01 22:25:45 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/08/05 18:31:04 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,6 @@ void	check_information(t_data *data, char **object_configs)
 		i++;
 	}
 	if (variable_count != 3)
-		error_free_data(data, "Error: Missing or too many A, \
-			C or L elements.\n");
+		error_free_data(data,
+			"Error: wrong number of A, C or L elements.\n");
 }
