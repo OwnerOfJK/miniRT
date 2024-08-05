@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/05 18:57:39 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/08/05 19:38:36 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,20 @@ typedef struct s_vector
 	double	z;
 	double	w;
 }	t_vector;
+
+typedef struct s_coordinates {
+	int	x;
+	int	y;
+} t_coordinates;
+
+typedef struct s_submatrix {
+	int 	i;
+	int 	j;
+	int 	x;
+	int 	y;
+	int 	len;
+	double **submatrix;
+} t_submatrix;
 
 typedef struct s_material
 {
@@ -242,11 +256,6 @@ typedef struct s_context {
     char *save_pointer;
     char *tmp;
 } t_context;
-
-typedef struct s_coordinates {
-	int	x;
-	int	y;
-} t_coordinates;
 
 /* Init */
 t_material		*material_init(t_data *data);
