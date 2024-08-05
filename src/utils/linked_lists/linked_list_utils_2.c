@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 18:53:39 by ecarlier          #+#    #+#             */
-/*   Updated: 2024/08/05 22:44:33 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/08/05 22:47:42 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void	parse_cylinder_attributes(t_object *object, char *save_pointer)
 		object->pos = parse_coordinate(token);
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
-		object->u_shape.s_cylinder.axis_vector = v_normalize(parse_vector(token));
+		object->u_shape.s_cylinder.axis_vector
+			= v_normalize(parse_vector(token));
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
 		object->u_shape.s_cylinder.diameter = ft_atod(token);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   linked_list_utils_1.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 00:23:57 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/05 21:52:03 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/08/05 22:47:53 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,5 @@ t_object	*add_cylinder(t_context *ctx, t_object *object, char *save_pointer)
 			"Error: Invalid number of arguments of a cylinder.\n");
 	}
 	parse_cylinder_attributes(object, save_pointer);
-	// compute_cylinder_m(object);
 	return (object);
 }
