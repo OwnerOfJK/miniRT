@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 22:14:18 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/05 15:24:12 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/08/05 15:33:34 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,19 @@ bool static	check_rgb(t_input *input)
 		|| alight->color.g < 0 || alight->color.g > 255
 		|| alight->color.b < 0 || alight->color.b > 255)
 		return (true);
-
 	return (false);
 }
 
+bool static	check_ambient_light(t_input *input)
+{
+	t_alight	*alight;
 
+	alight = input->alight;
+	if (alight->ratio < 0 || alight->ratio > 1)
+		return (true);
+	else
+		return (false);
+}
 
 t_input	*configs_to_struct(t_data *data)
 {
@@ -55,6 +63,8 @@ t_input	*configs_to_struct(t_data *data)
 	input->viewport = viewport_init(data, input->camera);
 	if (check_rgb(input))
 		error_free_data(data, "Error: R,G,B colors not in range [0-255].\n");
+	if (check_ambient_light(input))
+		error_free_data(data, "Error: ambient lighting ratio not in range [0.0,1.0] \n");
 	return (input);
 }
 

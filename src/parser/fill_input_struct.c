@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:24:47 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/05 15:13:22 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/08/05 15:32:57 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,13 @@ t_alight	*parse_alight(t_data *data, char **object_configs)
 	if (token != NULL)
 		alight->color = parse_color(token);
 	free(tmp);
-	if (alight->ratio < 0 || alight->ratio > 1)
-	{
-		free(alight);
-		error_free_data(data, "Error: ambient lighting \
-			ratio not in range [0.0,1.0] \n");
-	}
+	// if (alight->ratio < 0 || alight->ratio > 1)
+	// {
+	// 	free(alight);
+	// 	free(tmp);
+	// 	error_free_data(data, "Error: ambient lighting \
+	// 		ratio not in range [0.0,1.0] \n");
+	// }
 	return (alight);
 }
 
