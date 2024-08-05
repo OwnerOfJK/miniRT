@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   normal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 11:53:17 by jkaller           #+#    #+#             */
-/*   Updated: 2024/07/31 20:58:26 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/08/05 16:53:36 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,17 @@ t_vector	compute_cylinder(t_object *object, t_vector local_point)
 	t_vector	pc;
 	t_vector	normal;
 	t_vector	projection;
+	double		**inverse_transpose;
 
 	pc = v_sub(local_point, object->pos);
 	projection = v_scalar(object->shape.cylinder.axis_vector,
 			v_dot(pc, object->shape.cylinder.axis_vector));
 	normal = v_sub(pc, projection);
-	normal = mv_mult(m_transpose(object->inverse_matrix), normal);
+	inverse_transpose = (m_transpose(object->inverse_matrix));
+	normal = mv_mult(inverse_transpose, normal);
 	normal.w = 0;
 	normal = v_normalize(normal);
+	free_matrix(inverse_transpose);
 	return (normal);
 }
 
