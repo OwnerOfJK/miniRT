@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 11:53:17 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/05 21:48:34 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/08/05 22:10:42 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,24 @@ t_vector	compute_plane(t_object	*object, t_ray *ray)
 		return (object->shape.plane.normal_vector);
 }
 
-
-t_vector	compute_cylinder(t_object *object, t_vector local_point)
+t_vector	compute_cylinder(t_object *object, t_vector world_point)
 {
 	t_vector	pc;
 	t_vector	normal;
 	t_vector	projection;
+	t_vector	world_normal;
+	double		**inverse_transpose;
 
-	pc = v_sub(local_point, object->pos);
+	pc = v_sub(mv_mult(object->inverse_matrix, world_point), object->pos);
 	projection = v_scalar(object->shape.cylinder.axis_vector,
 			v_dot(pc, object->shape.cylinder.axis_vector));
 	normal = v_sub(pc, projection);
-	return (normal);
+	normal = v_normalize(normal);
+	inverse_transpose = m_transpose(object->inverse_matrix);
+	world_normal = mv_mult(inverse_transpose, normal);
+	world_normal = v_normalize(world_normal);
+	free_matrix(inverse_transpose);
+	return (world_normal);
 }
 
 t_vector	normal_at(t_intersections *intersection, t_ray *ray)
