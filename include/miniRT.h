@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/05 22:39:21 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/08/05 22:52:22 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,12 +164,12 @@ typedef struct s_viewport
 	double	viewport_width;
 }	t_viewport;
 
-typedef enum
+typedef enum s_obj_type
 {
 	SPHERE,
 	PLANE,
 	CYLINDER
-} t_obj_type;
+}	t_obj_type;
 
 /*
 SPHERE
