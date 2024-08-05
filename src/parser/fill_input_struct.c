@@ -6,7 +6,7 @@
 /*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:24:47 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/05 18:28:57 by ecarlier         ###   ########.fr       */
+/*   Updated: 2024/08/05 19:37:21 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,24 @@ t_alight	*parse_alight(t_data *data, char **object_configs)
 	{
 		free(alight);
 		free(tmp);
-		error_free_data(data, "Error: Invalid number of arguments of ambient light.\n");
+		error_free_data(data,
+			"Error: Invalid number of arguments of ambient light.\n");
 	}
+	parse_alight_attributes(alight, save_pointer);
+	free(tmp);
+	return (alight);
+}
+
+void	parse_alight_attributes(t_alight *alight, char *save_pointer)
+{
+	char	*token;
+
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
 		alight->ratio = ft_atod(token);
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
 		alight->color = parse_color(token);
-	free(tmp);
-	return (alight);
 }
 
 t_camera	*parse_camera(t_data *data, char **object_configs)
@@ -78,27 +86,14 @@ t_camera	*parse_camera(t_data *data, char **object_configs)
 		error_free_data(data, "Error: Memory allocation failed.\n");
 	tmp = ft_strdup(*object_configs);
 	token = ft_strtok_r(tmp, " ", &save_pointer);
-
 	if (check_nb_arg(save_pointer, 3))
 	{
 		free(camera);
 		free(tmp);
 		error_free_data(data, "Error: Invalid number of arguments of camera.\n");
 	}
-	token = ft_strtok_r(NULL, " ", &save_pointer);
-	if (token != NULL)
-		camera->pos = parse_coordinate(token);
-	token = ft_strtok_r(NULL, " ", &save_pointer);
-	if (token != NULL)
-		camera->orientation_vector = parse_vector(token);
-	token = ft_strtok_r(NULL, " ", &save_pointer);
-	camera->fov = ft_atod(token);
+	parse_cam_attributes(camera, save_pointer);
 	free(tmp);
-	if (camera->fov < 0 || camera->fov > 180)
-	{
-		free(camera);
-		error_free_data(data, "Error: fov not in range [0,180]\n");
-	}
 	return (camera);
 }
 
@@ -122,18 +117,7 @@ t_light	*parse_light(t_data *data, char **object_configs)
 		free(tmp);
 		error_free_data(data, "Error: Invalid number of arguments of light.\n");
 	}
-	token = ft_strtok_r(NULL, " ", &save_pointer);
-	if (token != NULL)
-		light->pos = parse_coordinate(token);
-	token = ft_strtok_r(NULL, " ", &save_pointer);
-	if (token != NULL)
-		light->brightness = ft_atod(token);
+	parse_light_attributes(light, save_pointer);
 	free(tmp);
-	if (light->brightness < 0 || light->brightness > 1)
-	{
-		free(light);
-		error_free_data(data, "Error: light brightness \
-				ratio not in range [0.0,1.0]\n");
-	}
 	return (light);
 }
