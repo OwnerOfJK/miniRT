@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_input_struct.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:24:47 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/01 21:42:58 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/08/05 15:13:22 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_alight	*parse_alight(t_data *data, char **object_configs)
 		alight->ratio = ft_atod(token);
 	token = ft_strtok_r(NULL, " ", &save_pointer);
 	if (token != NULL)
-		alight->color = parse_color(data, token);
+		alight->color = parse_color(token);
 	free(tmp);
 	if (alight->ratio < 0 || alight->ratio > 1)
 	{

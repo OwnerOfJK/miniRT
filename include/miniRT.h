@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/01 21:25:01 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/08/05 15:13:08 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,7 +251,7 @@ t_alight		*parse_alight(t_data *data, char **object_configs);
 t_camera		*parse_camera(t_data *data, char **object_configs);
 t_light			*parse_light(t_data *data, char **object_configs);
 t_object		*parse_objects(t_data *data);
-t_color			parse_color(t_data *data, char *str);
+t_color			parse_color(char *str);
 t_vector		parse_coordinate(char *str);
 t_vector		parse_vector(char *str);
 void			check_nb_arg(t_data *data, char *save_pointer, int nb);
