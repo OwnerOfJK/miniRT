@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/05 22:07:44 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/08/05 22:38:17 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define MINIRT_H
 
 /* External Libraries */
-#include <float.h>
 # include <math.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -24,6 +23,8 @@
 /* Internal Libraries */
 # include "../libs/libft/libft.h"
 # include "../libs/mlx_linux/mlx.h"
+
+# define LARGE_DOUBLE 1.0e+300
 
 # ifndef PI
 #  define PI 3.14159265358979323846
@@ -64,16 +65,16 @@ typedef struct s_vector
 typedef struct s_coordinates {
 	int	x;
 	int	y;
-} t_coordinates;
+}	t_coordinates;
 
 typedef struct s_submatrix {
-	int 	i;
-	int 	j;
-	int 	x;
-	int 	y;
-	int 	len;
-	double **submatrix;
-} t_submatrix;
+	int		i;
+	int		j;
+	int		x;
+	int		y;
+	int		len;
+	double	**submatrix;
+}	t_submatrix;
 
 typedef struct s_material
 {
@@ -163,10 +164,11 @@ typedef struct s_viewport
 	double	viewport_width;
 }	t_viewport;
 
-typedef enum {
-    SPHERE,
-    PLANE,
-    CYLINDER
+typedef enum
+{
+	SPHERE,
+	PLANE,
+	CYLINDER
 } t_obj_type;
 
 /*
@@ -193,7 +195,8 @@ CYLINDER
 ∗ R,G,B colors in range [0,255]: 10, 0, 255
 */
 
-typedef struct s_object {
+typedef struct s_object
+{
 	t_obj_type	type;
 	t_vector	pos;
 	t_color		color;
@@ -202,20 +205,20 @@ typedef struct s_object {
 	union {
 		struct
 		{
-			double diameter;
-		} sphere;
+			double	diameter;
+		}	sphere;
 		struct
 		{
-			t_vector normal_vector;
-		} plane;
+			t_vector	normal_vector;
+		}	plane;
 		struct
 		{
-			t_vector axis_vector;
-			double diameter;
-			double height;
-		} cylinder;
-	} shape;
-	struct s_object *next;
+			t_vector	axis_vector;
+			double		diameter;
+			double		height;
+		}	cylinder;
+	}	shape;
+	struct s_object		*next;
 }	t_object;
 
 typedef struct s_intersections
@@ -241,7 +244,7 @@ typedef struct s_input
 	t_viewport		*viewport;
 }	t_input;
 
-typedef struct s_data //this is our world
+typedef struct s_data
 {
 	t_graphics		display;
 	t_intersections	*intersections;
@@ -255,7 +258,7 @@ typedef struct s_context {
 	t_object	*objects_head;
 	char		*save_pointer;
 	char		*tmp;
-} t_context;
+}	t_context;
 
 /* Init */
 t_material		*material_init(t_data *data);
@@ -264,7 +267,7 @@ t_viewport		*viewport_init(t_data *data, t_camera *camera);
 
 /* Rendering */
 void			launch_window(t_data *data);
-void    		launch_mlx(t_data *data);
+void			launch_mlx(t_data *data);
 void			render(t_data *data);
 
 /* Parsing */
@@ -283,10 +286,14 @@ bool			check_nb_arg(char *save_pointer, int nb);
 void			check_arg(t_data *data, t_input *input);
 
 /* Linked List Parsing*/
-t_object		*ft_lstnew_object(t_data *data, char *str, t_object	*objects_head);
-t_object		*add_sphere(t_context *ctx, t_object *object, char *save_pointer);
-t_object		*add_plane(t_context *ctx, t_object *object, char *save_pointer);
-t_object		*add_cylinder(t_context *ctx, t_object *object, char *save_pointer);
+t_object		*ft_lstnew_object(t_data *data, char *str,
+					t_object	*objects_head);
+t_object		*add_sphere(t_context *ctx, t_object *object,
+					char *save_pointer);
+t_object		*add_plane(t_context *ctx, t_object *object,
+					char *save_pointer);
+t_object		*add_cylinder(t_context *ctx, t_object *object,
+					char *save_pointer);
 void			ft_lstadd_back_minirt(t_object **lst, t_object *new);
 void			compute_cylinder_m(t_object *object);
 void			parse_cylinder_attributes(t_object *object, char *save_pointer);
@@ -327,9 +334,8 @@ double			set_intersections_t2(double t1, double t2);
 
 /* Utils */
 int				get_config_len(t_data *data, char *file_path);
-char			**find_index(char** object_configs, char *index, int len);
+char			**find_index(char **object_configs, char *index, int len);
 char			*find_and_extract_double(char *str, int pos);
-
 
 /* Matrix */
 double			**m_init(int m_len);
@@ -351,10 +357,14 @@ t_vector		m_reflect(t_vector normal);
 /* Intersections */
 t_vector		ray_position(t_ray *ray, double t);
 t_ray			ray_transform(t_ray *ray, double **matrix);
-void			plane_intersect(t_object *pl, t_ray *ray, t_intersections *intersection, double num_denom[2]);
-void			sphere_intersect(t_object *sp, t_ray *ray, t_intersections *intersection);
-void			cylinder_intersect(t_object *cy, t_ray *ray, t_intersections *intersection);
-void			object_intersection(t_object *objects, t_ray *ray, t_intersections	*intersection);
+void			plane_intersect(t_object *pl, t_ray *ray,
+					t_intersections *intersection, double num_denom[2]);
+void			sphere_intersect(t_object *sp, t_ray *ray,
+					t_intersections *intersection);
+void			cylinder_intersect(t_object *cy, t_ray *ray,
+					t_intersections *intersection);
+void			object_intersection(t_object *objects, t_ray *ray,
+					t_intersections	*intersection);
 double			set_intersections(double t1, double t2);
 
 /* Free Memory */
@@ -369,14 +379,17 @@ void			my_mlx_pixel_put(t_graphics *img, int x, int y, int color);
 
 /* Light */
 t_vector		l_reflect(t_vector light_in, t_vector normal_vector);
-int				calculate_lighting(t_data *data, t_intersections *intersection, t_vector normal, bool in_shadow);
+int				calculate_lighting(t_data *data, t_intersections *intersection,
+					t_vector normal, bool in_shadow);
 t_vector		normal_at(t_intersections *intersection, t_ray *ray);
-bool			shadow_at_intersection(t_data *data, t_intersections *intersection,  t_ray *ray);
+bool			shadow_at_intersection(t_data *data,
+					t_intersections *intersection, t_ray *ray);
 
 /* Viewport */
 double			pixel_map_x(int x, t_viewport *viewport);
 double			pixel_map_y(int y, t_viewport *viewport);
-void			prepare_ray(t_data *data, double viewport_x, double viewport_y, t_ray *ray);
+void			prepare_ray(t_data *data, double viewport_x,
+					double viewport_y, t_ray *ray);
 
 /* Color Utils */
 t_color_mlx		rgb_to_colour(t_color rgb);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shadow.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 12:14:44 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/01 19:11:54 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/08/05 22:34:56 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ bool	is_shadowed(t_data *data, t_vector point, t_ray *ray)
 	ray->origin = point;
 	ray->direction = direction;
 	shadow_intersection = (t_intersections *)malloc(sizeof(t_intersections));
-	shadow_intersection->t1 = DBL_MAX;
+	shadow_intersection->t1 = LARGE_DOUBLE;
 	shadow_intersection->count = 0;
 	shadow_intersection->hit = 0;
 	object_intersection(data->input->objects, ray, shadow_intersection);

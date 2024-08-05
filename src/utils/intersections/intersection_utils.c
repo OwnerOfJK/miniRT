@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ecarlier <ecarlier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 20:43:09 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/01 18:48:26 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/08/05 22:34:53 by ecarlier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	object_intersection(t_object *objects, t_ray *ray,
 
 	num_denom[0] = 0;
 	num_denom[1] = 0;
-	intersection->t1 = DBL_MAX;
+	intersection->t1 = LARGE_DOUBLE;
 	intersection->count = 0;
 	intersection->hit = 0;
 	intersection->object = NULL;
