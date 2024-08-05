@@ -6,7 +6,7 @@
 /*   By: jkaller <jkaller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:48:02 by jkaller           #+#    #+#             */
-/*   Updated: 2024/08/05 17:59:17 by jkaller          ###   ########.fr       */
+/*   Updated: 2024/08/05 18:27:19 by jkaller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,6 +242,11 @@ typedef struct s_context {
     char *save_pointer;
     char *tmp;
 } t_context;
+
+typedef struct s_coordinates {
+	int	x;
+	int	y;
+} t_coordinates;
 
 /* Init */
 t_material		*material_init(t_data *data);
